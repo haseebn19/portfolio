@@ -1,7 +1,7 @@
 // Importing React
 import React from 'react';
 // Importing the image
-import profilePic from './logo.jpg';
+import profilePic from '../assets/images/logo.jpg';
 // Importing font awesome
 import 'font-awesome/css/font-awesome.min.css';
 
