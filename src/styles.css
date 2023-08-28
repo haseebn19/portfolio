@@ -1,16 +1,12 @@
-/* Global styles */
+html {
+    overflow-y: scroll;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-}
-
-/* Container for the app */
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 0 20px;
 }
 
 h1 {
@@ -26,7 +22,6 @@ ul {
 }
 
 li ul {
-    margin-top: 0.5rem;
     padding-left: 1rem;
 }
 
@@ -36,7 +31,7 @@ li ul li {
 
 img {
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px #ccc;
 }
 
 a {
@@ -44,7 +39,7 @@ a {
     background-color: #333;
     color: white;
     padding: 0.5rem;
-    border-radius: 8px;
+    border-radius: 5px;
     text-decoration: none;
 }
 
@@ -52,39 +47,31 @@ a:hover {
     background-color: #555;
 }
 
-/* Styles for buttons */
 button {
     background-color: #333;
     color: white;
     padding: 0.5rem;
     border-radius: 8px;
     cursor: pointer;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     width: 100%;
 }
 
-button:hover {
-    background-color: #555;
-}
-
-/* Styles for project frame */
 .project-frame {
     padding: 1rem;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px #ccc;
     margin-top: 1rem;
     border: 1px solid #ccc;
 }
 
-.contact-button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 5px;
-    text-decoration: none;
-    margin: 5px;
+.container {
+    max-width: 80%;
+    margin: auto;
+
 }
 
-.contact-button i {
-    margin-right: 5px;
+nav ul {
+    display: flex;
+    gap: 5px;
 }

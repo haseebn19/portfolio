@@ -1,20 +1,32 @@
-// Importing React and Projects component
 import React from 'react';
-import Projects from './Projects';
+import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
 import AboutMe from './AboutMe';
-import './styles.css';
+import Projects from './Projects';
 
-// App component
 function App() {
-  // JSX for App component
   return (
-    <div className="container">
-      <h1>Haseeb Niazi - Portfolio</h1>
-      <AboutMe />
-      <Projects />
-    </div>
+    <Router>
+      <div className="container">
+        <h1>Haseeb Niazi</h1>
+        <nav>
+          <ul>
+            <li>
+              <Link className="nav-link" to="/">Home</Link>
+            </li>
+            <li>
+              <Link className="nav-link" to="/projects">Projects</Link>
+            </li>
+          </ul>
+        </nav>
+        <div className="frame">
+          <Routes>
+            <Route path="/" element={<AboutMe />} />
+            <Route path="/projects" element={<Projects />} />
+          </Routes>
+        </div>
+      </div>
+    </Router>
   );
 }
 
-// Exporting App component
 export default App;

@@ -14,8 +14,9 @@ function AboutMe() {
             <h2>About Me</h2>
             <img src={profilePic} alt="Haseeb Niazi" style={{width: '150px', borderRadius: '50%'}} />
             <p>
-                Hello there! 👋 I'm Haseeb Niazi, a Software Engineer with a passion for coding and problem-solving.
-                I enjoy creating Discord bots and exploring game development. My expertise lies in languages like Python, Java, Lua, C, and HTML.
+                I'm Haseeb Niazi, a Software Engineer with a passion for coding and problem-solving.
+                I enjoy creating Discord bots and exploring game development.
+                My expertise lies in languages like Python, Java, Lua, C, and HTML.
             </p>
             <h3>🛠️ Technologies & Tools</h3>
             <p>Languages: Python, Java, JavaScript, Lua, C, HTML & CSS, React</p>
@@ -33,13 +34,16 @@ function AboutMe() {
                 <li>Discord Bots: Love creating and experimenting with Discord bots.</li>
                 <li>Game Development: Enjoy working on game development projects.</li>
             </ul>
-            <h3>📫 How to reach me:</h3>
+            <h3>📫 Contact & Info:</h3>
             <p>
-                <a href="https://www.linkedin.com/in/haseebn/" target="_blank" rel="noopener noreferrer" className="contact-button">
+                <a href="https://www.linkedin.com/in/haseebn/" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-linkedin"></i> LinkedIn
                 </a> |&nbsp;
-                <a href="mailto:haseebniazi19@outlook.com" target="_blank" rel="noopener noreferrer" className="contact-button">
+                <a href="mailto:haseebniazi19@outlook.com" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-envelope"></i> Email
+                </a> |&nbsp;
+                <a href="https://github.com/haseebn19" target="_blank" rel="noopener noreferrer">
+                    <i className="fa fa-github"></i> GitHub
                 </a>
             </p>
         </div>

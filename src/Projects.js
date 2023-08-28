@@ -68,18 +68,18 @@ function Projects() {
                   ))}
                 </ul>
                 <p><strong>Tech Stack:</strong> {project.techStack.join(', ')}</p>
-                <a href={project.githubLink} target="_blank" rel="noopener noreferrer">View on GitHub</a>
+                <a href={project.githubLink} target="_blank" rel="noopener noreferrer"><i className="fa fa-github"></i> Repository</a>
               </div>
             )}
           </li>
         ))}
       </ul>
       <p>
-        Check out my
-        <a href="https://github.com/haseebn19" target="_blank" rel="noopener noreferrer" className="contact-button">
+        Check out my &nbsp;
+        <a href="https://github.com/haseebn19" target="_blank" rel="noopener noreferrer">
           <i className="fa fa-github"></i> GitHub
         </a>
-        profile for more details on my projects.
+        &nbsp; profile for more details on my projects.
       </p>
     </div>
   );
