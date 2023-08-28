@@ -1,5 +1,7 @@
+// Importing React and useState hook
 import React, { useState } from 'react';
 
+// Project data
 const projects = [
   { 
     name: 'Discord Calendar Bot', 
@@ -31,9 +33,13 @@ const projects = [
   },
 ];
 
+
+// Projects component
 function Projects() {
+  // State for expanded project
   const [expandedProject, setExpandedProject] = useState(null);
 
+  // Function to toggle project expansion
   const toggleProject = (index) => {
     if (expandedProject === index) {
       setExpandedProject(null);
@@ -42,14 +48,9 @@ function Projects() {
     }
   };
 
+  // JSX for Projects component
   return (
     <div>
-      <h2>About Me</h2>
-      <p>I'm Haseeb Niazi, a Software Engineer with a passion for coding and problem-solving. I enjoy exploring software development.</p>
-      <h3>Technologies & Tools</h3>
-      <p>Languages: Python, Java, JavaScript, Lua, C, HTML & CSS, React</p>
-      <p>Tools: Visual Studio, GitHub, Docker, Slack, Trello</p>
-      
       <h2>My Projects</h2>
       <ul>
         {projects.map((project, index) => (
@@ -73,9 +74,10 @@ function Projects() {
           </li>
         ))}
       </ul>
-      <p>Check out my <a href="https://github.com/haseebn19" target="_blank" rel="noopener noreferrer">GitHub profile</a> to view all my projects.</p>
+      <p>Check out my <a href="https://github.com/haseebn19" target="_blank" rel="noopener noreferrer">GitHub profile</a> for more details on my projects.</p>
     </div>
   );
 }
 
+// Exporting Projects component
 export default Projects;
