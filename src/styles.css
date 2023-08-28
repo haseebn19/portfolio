@@ -33,7 +33,6 @@ li ul li {
 }
 
 img {
-
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
@@ -58,7 +57,7 @@ button {
     border-radius: 8px;
     cursor: pointer;
     margin-top: 1rem;
-    width: 30%;
+    width: 100%;
 }
 
 button:hover {
@@ -70,4 +69,5 @@ button:hover {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 1rem;
+    border: 1px solid #ccc;
 }
