@@ -1,28 +1,45 @@
+:root {
+    --scroll-behavior: scroll;
+    --font-family: Arial, sans-serif;
+    --dark-bg: #121212;
+    --light-text: #ffffff;
+    --dark-element-bg: #333;
+    --list-padding: 0;
+    --nested-list-padding: 1rem;
+    --border-radius: 8px;
+    --shadow: 0 0 10px #ccc;
+    --padding-half-rem: 0.5rem;
+    --container-width: 80%;
+    --nav-gap: 5px;
+}
+
 html {
-    overflow-y: scroll;
+    overflow-y: var(--scroll-behavior);
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-family);
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
 }
 
 h1 {
-    background-color: #333;
-    color: white;
+    background-color: var(--dark-element-bg);
+    color: var(--light-text);
     text-align: left;
     padding: 1rem;
+    border-radius: var(--border-radius);
 }
 
 ul {
     list-style: none;
-    padding: 0;
+    padding: var(--list-padding);
 }
 
 li ul {
-    padding-left: 1rem;
+    padding-left: var(--nested-list-padding);
 }
 
 li ul li {
@@ -30,16 +47,16 @@ li ul li {
 }
 
 img {
-    border-radius: 8px;
-    box-shadow: 0 0 10px #ccc;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 
 a {
     display: inline-block;
-    background-color: #333;
-    color: white;
-    padding: 0.5rem;
-    border-radius: 5px;
+    background-color: var(--dark-element-bg);
+    color: var(--light-text);
+    padding: var(--padding-half-rem);
+    border-radius: var(--border-radius);
     text-decoration: none;
 }
 
@@ -48,30 +65,29 @@ a:hover {
 }
 
 button {
-    background-color: #333;
-    color: white;
-    padding: 0.5rem;
-    border-radius: 8px;
+    background-color: var(--dark-element-bg);
+    color: var(--light-text);
+    padding: var(--padding-half-rem);
+    border-radius: var(--border-radius);
     cursor: pointer;
-    margin-top: 0.5rem;
+    margin-top: var(--padding-half-rem);
     width: 100%;
 }
 
 .project-frame {
     padding: 1rem;
-    border-radius: 8px;
-    box-shadow: 0 0 10px #ccc;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
     margin-top: 1rem;
     border: 1px solid #ccc;
 }
 
 .container {
-    max-width: 80%;
+    max-width: var(--container-width);
     margin: auto;
-
 }
 
 nav ul {
     display: flex;
-    gap: 5px;
+    gap: var(--nav-gap);
 }
