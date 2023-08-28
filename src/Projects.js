@@ -1,10 +1,10 @@
 // Importing React and useState hook
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
 // Project data
 const projects = [
-  { 
-    name: 'Discord Calendar Bot', 
+  {
+    name: 'Discord Calendar Bot',
     description: 'The Calendar Bot enhances event management and organization among Discord server members. It allows users to manage their events and timezones directly within Discord, simplifying the process of checking availability and planning events.',
     features: [
       'Personalized Timezone Management',
@@ -16,8 +16,8 @@ const projects = [
     techStack: ['Python', 'Pycord API'],
     image: 'https://github.com/haseebn19/calendar-bot/raw/main/logo.png'
   },
-  { 
-    name: 'SSH Key Generator', 
+  {
+    name: 'SSH Key Generator',
     description: 'SSH Key Generator simplifies the process of generating SSH keys. Built with Python and Tkinter, it provides a user-friendly interface for generating SSH keys with different algorithms and key lengths.',
     features: [
       'Algorithm Selection',
@@ -74,7 +74,13 @@ function Projects() {
           </li>
         ))}
       </ul>
-      <p>Check out my <a href="https://github.com/haseebn19" target="_blank" rel="noopener noreferrer">GitHub profile</a> for more details on my projects.</p>
+      <p>
+        Check out my
+        <a href="https://github.com/haseebn19" target="_blank" rel="noopener noreferrer" className="contact-button">
+          <i className="fa fa-github"></i> GitHub
+        </a>
+        profile for more details on my projects.
+      </p>
     </div>
   );
 }

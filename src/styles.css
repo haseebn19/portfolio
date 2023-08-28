@@ -75,3 +75,16 @@ button:hover {
     margin-top: 1rem;
     border: 1px solid #ccc;
 }
+
+.contact-button {
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+    margin: 5px;
+}
+
+.contact-button i {
+    margin-right: 5px;
+}
