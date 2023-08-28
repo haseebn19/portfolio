@@ -15,8 +15,7 @@ function AboutMe() {
             <img src={profilePic} alt="Haseeb Niazi" style={{width: '150px', borderRadius: '50%'}} />
             <p>
                 I'm Haseeb Niazi, a Software Engineer with a passion for coding and problem-solving.
-                I enjoy creating Discord bots and exploring game development.
-                My expertise lies in languages like Python, Java, Lua, C, and HTML.
+                I enjoy creating Discord bots and exploring software development.
             </p>
             <h3>🛠️ Technologies & Tools</h3>
             <p>Languages: Python, Java, JavaScript, Lua, C, HTML & CSS, React</p>
