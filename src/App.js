@@ -1,6 +1,6 @@
 // Import React library and various components from react-router-dom
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom'; 
+import {HashRouter as Router, Route, Link, Routes} from 'react-router-dom';
 
 // Import custom components for AboutMe and Projects
 import AboutMe from './components/AboutMe';
@@ -20,12 +20,12 @@ function App() {
           <ul>
             {/* Link to the Home page */}
             <li>
-              <Link className="nav-link" to={process.env.PUBLIC_URL + "/home"}>Home</Link>
+              <Link className="nav-link" to="/home">Home</Link>
             </li>
 
             {/* Link to the Projects page */}
             <li>
-              <Link className="nav-link" to={process.env.PUBLIC_URL + "/projects"}>Projects</Link>
+              <Link className="nav-link" to="/projects">Projects</Link>
             </li>
           </ul>
         </nav>
@@ -35,10 +35,10 @@ function App() {
           {/* Define routes for different pages */}
           <Routes>
             {/* Route for the Home page, renders the AboutMe component */}
-            <Route path={process.env.PUBLIC_URL + "/"} element={<AboutMe />} />
+            <Route path="/home" element={<AboutMe />} />
 
             {/* Route for the Projects page, renders the Projects component */}
-            <Route path={process.env.PUBLIC_URL + "/projects"} element={<Projects />} />
+            <Route path="/projects" element={<Projects />} />
           </Routes>
         </div>
       </div>
@@ -46,4 +46,5 @@ function App() {
   );
 }
 
+// Export the App component to be used in other parts of the app
 export default App;
