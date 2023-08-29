@@ -1,6 +1,6 @@
-// Import React library and various components from react-router-dom
-import React from 'react';
-import {HashRouter as Router, Route, Link, Routes} from 'react-router-dom';
+// Import React library, useEffect hook, and various components from react-router-dom
+import React, {useEffect} from 'react';
+import {BrowserRouter as Router, Route, Link, Routes, useNavigate, useLocation} from 'react-router-dom';
 
 // Import custom components for AboutMe and Projects
 import AboutMe from './components/AboutMe';
@@ -8,6 +8,21 @@ import Projects from './components/Projects';
 
 // Define the App component
 function App() {
+  // Get the navigate function from useNavigate hook
+  const navigate = useNavigate();
+
+  // Get the current location from useLocation hook
+  const location = useLocation();
+
+  // Use useEffect to navigate based on the current URL
+  useEffect(() => {
+    if (location.pathname === '/projects') {
+      navigate('/projects');
+    } else {
+      navigate('/home');
+    }
+  }, [navigate, location.pathname]);
+
   return (
     // Use Router to enable client-side routing
     <Router>
@@ -46,4 +61,5 @@ function App() {
   );
 }
 
+// Export the App component to be used in other parts of the app
 export default App;
