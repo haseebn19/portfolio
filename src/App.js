@@ -1,6 +1,6 @@
 // Import React library and various components from react-router-dom
 import React from 'react';
-import {HashRouter as Router, Route, Link, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom'; // Switch back to BrowserRouter
 
 // Import custom components for AboutMe and Projects
 import AboutMe from './components/AboutMe';
@@ -20,12 +20,12 @@ function App() {
           <ul>
             {/* Link to the Home page */}
             <li>
-              <Link className="nav-link" to="/">Home</Link>
+              <Link className="nav-link" to={process.env.PUBLIC_URL + "/home"}>Home</Link>
             </li>
 
             {/* Link to the Projects page */}
             <li>
-              <Link className="nav-link" to="/projects">Projects</Link>
+              <Link className="nav-link" to={process.env.PUBLIC_URL + "/projects"}>Projects</Link>
             </li>
           </ul>
         </nav>
@@ -35,10 +35,10 @@ function App() {
           {/* Define routes for different pages */}
           <Routes>
             {/* Route for the Home page, renders the AboutMe component */}
-            <Route path="/" element={<AboutMe />} />
+            <Route path={process.env.PUBLIC_URL + "/"} element={<AboutMe />} />
 
             {/* Route for the Projects page, renders the Projects component */}
-            <Route path="/projects" element={<Projects />} />
+            <Route path={process.env.PUBLIC_URL + "/projects"} element={<Projects />} />
           </Routes>
         </div>
       </div>
