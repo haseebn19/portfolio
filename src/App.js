@@ -1,6 +1,6 @@
 // Import React library and various components from react-router-dom
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
+import {HashRouter as Router, Route, Link, Routes} from 'react-router-dom';
 
 // Import custom components for AboutMe and Projects
 import AboutMe from './components/AboutMe';
