@@ -20,8 +20,7 @@ function App() {
         </nav>
         <div className="frame">
           <Routes>
-            <Route index element={<Navigate to="/" />} />
-            <Route path="/aboutme" element={<AboutMe />} />
+            <Route path="/" element={<AboutMe />} />
             <Route path="/projects" element={<Projects />} />
           </Routes>
         </div>
