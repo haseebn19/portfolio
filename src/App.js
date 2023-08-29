@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Route, Link, Routes, Navigate} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Link, Routes} from 'react-router-dom';
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
 
@@ -11,7 +11,7 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link className="nav-link" to="/home">Home</Link>
+              <Link className="nav-link" to="/">Home</Link>
             </li>
             <li>
               <Link className="nav-link" to="/projects">Projects</Link>
