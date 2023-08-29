@@ -11,7 +11,7 @@ function App() {
         <nav>
           <ul>
             <li>
-              <Link className="nav-link" to="/">Home</Link>
+              <Link className="nav-link" to="/home">Home</Link>
             </li>
             <li>
               <Link className="nav-link" to="/projects">Projects</Link>
