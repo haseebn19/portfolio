@@ -23,7 +23,6 @@ function App() {
             <Route index element={<Navigate to="/aboutme" />} />
             <Route path="/aboutme" element={<AboutMe />} />
             <Route path="/projects" element={<Projects />} />
-            {/* Add a 404 page here if needed */}
           </Routes>
         </div>
       </div>
