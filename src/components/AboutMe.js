@@ -18,7 +18,7 @@ function AboutMe() {
                 I enjoy creating Discord bots and exploring software development.
             </p>
             <h3>🛠️ Technologies & Tools</h3>
-            <p>Languages: Python, Java, JavaScript, Lua, C, HTML & CSS, React</p>
+            <p>Languages & Libraries: Python, Java, JavaScript, React.js, Lua, C, HTML & CSS</p>
             <p>Tools: Visual Studio, GitHub, Docker, Slack, Trello</p>
             <h3>🌱 Current Learning Goals</h3>
             <ul>
