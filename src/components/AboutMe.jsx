@@ -29,7 +29,7 @@ function AboutMe() {
                 <li>Software Development: I love learning about and experimenting with software development. </li>
                 <li>GUI Scripting: I'm very interested in learning about and programming user interfaces. </li>
                 <li>Discord Bots: I love creating and experimenting with Discord bots. </li>
-                <li>Game Developmen:  I enjoy working on game development projects. </li>
+                <li>Game Development:  I enjoy working on game development projects. </li>
             </ul>
             <h2>📫 Contact & Info:</h2>
             <p>
