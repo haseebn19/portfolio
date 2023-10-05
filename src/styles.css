@@ -1,7 +1,5 @@
-/* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap');
 
-/* Root Variables */
 :root {
     --font-family: 'Nanum Gothic Coding', Arial, sans-serif;
     --dark-bg: #121212;
@@ -12,7 +10,6 @@
     --padding-half-rem: 0.5rem;
 }
 
-/* Global Styles */
 html {
     overflow-y: scroll;
 }
@@ -23,42 +20,38 @@ body {
     padding: 0;
     background-color: var(--dark-bg);
     color: var(--light-text);
-    font-size: calc(0.3em + 0.8vw);
 }
 
-/* Headers */
 h1 {
     font-family: var(--font-family);
     background-color: var(--dark-element-bg);
     color: var(--light-text);
     text-align: left;
-    padding: 0.5em;
+    padding: 1rem;
     border-radius: var(--border-radius);
-    font-size: 2em;
+    font-size: 3rem;
 }
 
-/* Lists */
 ul {
     list-style: none;
     padding: 0;
-    font-size: 0.9em;
+    font-size: large;
 }
 
 li ul {
-    padding-left: 1em;
+    padding-left: 1rem;
+
 }
 
 li ul li {
     list-style: disc;
 }
 
-/* Media */
 img {
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
 }
 
-/* Links */
 a {
     display: inline-block;
     background-color: var(--dark-element-bg);
@@ -66,21 +59,18 @@ a {
     padding: var(--padding-half-rem);
     border-radius: var(--border-radius);
     text-decoration: none;
-    font-size: 1em;
+    font-size: large;
 }
 
-/* Text */
 p {
-    font-size: 1em;
+    font-size: large;
 }
 
-/* Interactions */
 a:hover,
 .nav-link.active {
     background-color: #555;
 }
 
-/* Buttons */
 button {
     background-color: var(--dark-element-bg);
     color: var(--light-text);
@@ -89,10 +79,8 @@ button {
     cursor: pointer;
     margin-top: var(--padding-half-rem);
     width: 100%;
-    font-size: 1em;
 }
 
-/* Project Specific */
 .project-button {
     font-size: 100%;
     font-family: var(--font-family);
@@ -106,66 +94,44 @@ button {
     border: 1px solid #ccc;
 }
 
-/* Container */
 .container {
     max-width: 80%;
     margin: auto;
 }
 
-/* Navigation */
 nav ul {
     display: flex;
-    gap: 0.5%;
+    gap: 5px;
 }
 
-/* Skill Blocks */
 .skill-block {
-    margin: 20px;
+    margin: 1rem;
     padding: 0;
-    border: 2px solid #ccc;
+    border: 0.13rem solid #ccc;
     border-radius: 10%;
-    width: 150px;
-    height: 150px;
+    width: 6.25rem;
+    height: 6.25rem;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.3s ease;
 }
 
-/* Media Queries */
-@media (min-width: 2560px) {
-    .skill-block {
-        width: 200px;
-        height: 200px;
-    }
-}
-
-@media (min-width: 3840px) {
-    .skill-block {
-        width: 350px;
-        height: 350px;
-    }
-}
-
-/* Skill Block Container */
 .skill-block-container {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
 }
 
-/* Skill Names */
 .skill-name {
-    font-size: 1em;
+    font-size: 1rem;
     text-align: center;
 }
 
-/* Skill Block Hover */
 .skill-block:hover {
     transform: scale(1.1);
 }
 
-/* Skill Block SVG */
 .skill-block svg {
     max-width: 80%;
     max-height: 80%;
