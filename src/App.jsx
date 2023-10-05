@@ -1,10 +1,31 @@
 // Import React library and various components from react-router-dom
 import React from 'react';
-import {HashRouter as Router, Route, Link, Routes} from 'react-router-dom';
+import {HashRouter as Router, Route, Link, Routes, useLocation} from 'react-router-dom';
 
 // Import custom components for AboutMe and Projects
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
+import Skills from './components/Skills';
+
+// Navigation component
+function Navigation() {
+  const location = useLocation();
+  return (
+    <nav>
+      <ul>
+        <li>
+          <Link className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} to="/">Home</Link>
+        </li>
+        <li>
+          <Link className={`nav-link ${location.pathname === '/projects' ? 'active' : ''}`} to="/projects">Projects</Link>
+        </li>
+        <li> {/*navigation link for Skills*/}
+          <Link className={`nav-link ${location.pathname === '/skills' ? 'active' : ''}`} to="/skills">Skills</Link>
+        </li>
+      </ul>
+    </nav>
+  );
+}
 
 // Define the App component
 function App() {
@@ -16,19 +37,7 @@ function App() {
         <h1>Haseeb Niazi</h1>
 
         {/* Navigation menu */}
-        <nav>
-          <ul>
-            {/* Link to the Home page */}
-            <li>
-              <Link className="nav-link" to="/">Home</Link>
-            </li>
-
-            {/* Link to the Projects page */}
-            <li>
-              <Link className="nav-link" to="/projects">Projects</Link>
-            </li>
-          </ul>
-        </nav>
+        <Navigation />
 
         {/* Main content frame */}
         <div className="frame">
@@ -39,6 +48,9 @@ function App() {
 
             {/* Route for the Projects page, renders the Projects component */}
             <Route path="/projects" element={<Projects />} />
+
+            {/* Route for the Skills page, renders the Skills component */}
+            <Route path="/skills" element={<Skills />} />
           </Routes>
         </div>
       </div>

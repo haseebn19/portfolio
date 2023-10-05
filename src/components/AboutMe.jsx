@@ -11,29 +11,27 @@ function AboutMe() {
     // JSX for AboutMe component
     return (
         <div>
+            <img src={profilePic} alt="Haseeb Niazi" style={{width: '9em', borderRadius: '50%'}} />
             <h2>About Me</h2>
-            <img src={profilePic} alt="Haseeb Niazi" style={{width: '150px', borderRadius: '50%'}} />
             <p>
-                I'm Haseeb Niazi, a Software Engineer with a passion for coding and problem-solving.
-                I enjoy creating Discord bots and exploring software development.
+                I'm Haseeb Niazi, a Software Engineer with a passion for coding and problem-solving. <br></br>
+                I enjoy exploring software development and learning new technologies.
             </p>
-            <h3>🛠️ Technologies & Tools</h3>
-            <p>Languages & Libraries: Python, Java, JavaScript, React.js, Lua, C, C#, HTML & CSS</p>
-            <p>Tools: Visual Studio, GitHub, Docker, Slack, Trello</p>
-            <h3>🌱 Current Learning Goals</h3>
+            <h2>🌱 Current Learning Goals</h2>
             <ul>
                 <li>Databases: Diving deep into the world of databases.</li>
                 <li>Machine Learning: Exploring machine learning algorithms.</li>
                 <li>Software Development: Refining software development skills.</li>
                 <li>Frameworks: Experimenting with various frameworks.</li>
             </ul>
-            <h3>⚡ Hobbies & Interests</h3>
+            <h2>⚡ Hobbies & Interests</h2>
             <ul>
-                <li>GUI Scripting: Interested in programming user interfaces.</li>
-                <li>Discord Bots: Love creating and experimenting with Discord bots.</li>
-                <li>Game Development: Enjoy working on game development projects.</li>
+                <li>Software Development: I love learning about and experimenting with software development. </li>
+                <li>GUI Scripting: I'm very interested in learning about and programming user interfaces. </li>
+                <li>Discord Bots: I love creating and experimenting with Discord bots. </li>
+                <li>Game Developmen:  I enjoy working on game development projects. </li>
             </ul>
-            <h3>📫 Contact & Info:</h3>
+            <h2>📫 Contact & Info:</h2>
             <p>
                 <a href="https://www.linkedin.com/in/haseebn/" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-linkedin"></i> LinkedIn
