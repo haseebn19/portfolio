@@ -32,9 +32,8 @@ function Skills() {
                 {renderSkillBlock('html5', 'HTML5')}
                 {renderSkillBlock('css3-alt', 'CSS3')}
                 {renderSkillBlock('c', 'C', 'fas')}
-                {renderSkillBlock('hashtag', 'C#', 'fas')}
-
-
+                {renderSkillBlock('database', 'SQL', 'fas')}
+                {renderSkillBlock('code', 'C#', 'fas')}
                 {renderSkillBlock('code', 'Lua', 'fas')}
 
             </div>
