@@ -41,6 +41,7 @@ function Skills() {
             <div style={{display: 'flex', flexWrap: 'wrap'}}>
                 {renderSkillBlock('git', 'Git')}
                 {renderSkillBlock('github', 'GitHub')}
+                {renderSkillBlock('figma', 'Figma')}
                 {renderSkillBlock('slack', 'Slack')}
                 {renderSkillBlock('trello', 'Trello')}
                 {renderSkillBlock('docker', 'Docker')}
