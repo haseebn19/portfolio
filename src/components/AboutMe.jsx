@@ -36,7 +36,7 @@ function AboutMe() {
                 <a href="https://www.linkedin.com/in/haseebn/" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-linkedin"></i> LinkedIn
                 </a> |&nbsp;
-                <a href="mailto:haseebniazi19@outlook.com" target="_blank" rel="noopener noreferrer">
+                <a href="mailto:haseeb.kn@outlook.com" target="_blank" rel="noopener noreferrer">
                     <i className="fa fa-envelope"></i> Email
                 </a> |&nbsp;
                 <a href="https://github.com/haseebn19" target="_blank" rel="noopener noreferrer">
