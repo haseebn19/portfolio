@@ -1,60 +1,139 @@
-// Import React library and various components from react-router-dom
-import React from 'react';
-import {HashRouter as Router, Route, Link, Routes, useLocation} from 'react-router-dom';
-
-// Import custom components for AboutMe and Projects
+import React, {useState, useEffect} from 'react';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {
+  faHome, faCode, faCog, faBars, faTimes, faArrowUp
+} from '@fortawesome/free-solid-svg-icons';
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 
-// Navigation component
-function Navigation() {
-  const location = useLocation();
+function Navigation({activeSection, onSectionChange}) {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const navItems = [
+    {id: 'home', label: 'About', icon: faHome},
+    {id: 'projects', label: 'Projects', icon: faCode},
+    {id: 'skills', label: 'Skills', icon: faCog}
+  ];
+
+  const scrollToSection = (sectionId) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({behavior: 'smooth'});
+      setIsMenuOpen(false);
+      onSectionChange(sectionId);
+    }
+  };
+
   return (
-    <nav>
-      <ul>
-        <li>
-          <Link className={`nav-link ${location.pathname === '/' ? 'active' : ''}`} to="/">Home</Link>
-        </li>
-        <li>
-          <Link className={`nav-link ${location.pathname === '/projects' ? 'active' : ''}`} to="/projects">Projects</Link>
-        </li>
-        <li> {/*navigation link for Skills*/}
-          <Link className={`nav-link ${location.pathname === '/skills' ? 'active' : ''}`} to="/skills">Skills</Link>
-        </li>
+    <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="nav-brand">
+        <h2>Haseeb Niazi</h2>
+        <span className="nav-subtitle">Software Engineer</span>
+      </div>
+
+      <button className="mobile-menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+        <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+      </button>
+
+      <ul className={`nav-menu ${isMenuOpen ? 'nav-menu-open' : ''}`}>
+        {navItems.map(({id, label, icon}) => (
+          <li key={id}>
+            <button
+              className={`nav-link ${activeSection === id ? 'active' : ''}`}
+              onClick={() => scrollToSection(id)}
+            >
+              <FontAwesomeIcon icon={icon} />
+              <span>{label}</span>
+            </button>
+          </li>
+        ))}
       </ul>
     </nav>
   );
 }
 
-// Define the App component
-function App() {
+function BackToTop() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
   return (
-    // Use Router to enable client-side routing
-    <Router>
-      <div className="container">
-        {/* Display the main title */}
-        <h1>Haseeb Niazi</h1>
+    <button
+      className={`back-to-top ${isVisible ? 'visible' : ''}`}
+      onClick={scrollToTop}
+      aria-label="Back to top"
+    >
+      <FontAwesomeIcon icon={faArrowUp} />
+    </button>
+  );
+}
 
-        {/* Navigation menu */}
-        <Navigation />
+function App() {
+  const [activeSection, setActiveSection] = useState('home');
 
-        {/* Main content frame */}
-        <div className="frame">
-          {/* Define routes for different pages */}
-          <Routes>
-            {/* Route for the Home page, renders the AboutMe component */}
-            <Route path="/" element={<AboutMe />} />
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    }, {threshold: 0.5});
 
-            {/* Route for the Projects page, renders the Projects component */}
-            <Route path="/projects" element={<Projects />} />
+    const sections = document.querySelectorAll('section[id]');
+    sections.forEach(section => observer.observe(section));
 
-            {/* Route for the Skills page, renders the Skills component */}
-            <Route path="/skills" element={<Skills />} />
-          </Routes>
-        </div>
-      </div>
-    </Router>
+    return () => sections.forEach(section => observer.unobserve(section));
+  }, []);
+
+  return (
+    <div className="app">
+      <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
+
+      <main>
+        <section id="home" className="section hero-section">
+          <AboutMe />
+        </section>
+
+        <section id="projects" className="section projects-section">
+          <Projects />
+        </section>
+
+        <section id="skills" className="section skills-section">
+          <Skills />
+        </section>
+      </main>
+
+      <BackToTop />
+    </div>
   );
 }
 

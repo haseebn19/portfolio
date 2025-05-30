@@ -1,51 +1,96 @@
-// Importing React
 import React from 'react';
-// Importing the image
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faLinkedin, faGithub} from '@fortawesome/free-brands-svg-icons';
+import {faEnvelope, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import profilePic from '../assets/images/picture.jpg';
-// Importing font awesome
-import 'font-awesome/css/font-awesome.min.css';
 
-
-// AboutMe component
 function AboutMe() {
-    // JSX for AboutMe component
+    const isAvailableForHire = true;
+
+    const openContactForm = () => {
+        const contactSection = document.querySelector('.contact-info');
+        contactSection?.scrollIntoView({behavior: 'smooth', block: 'center'});
+    };
+
     return (
-        <div>
-            <img src={profilePic} alt="Haseeb Niazi" style={{width: '9em', borderRadius: '50%'}} />
-            <h2>About Me</h2>
-            <p>
-                I'm Haseeb Niazi, a Software Engineer with a passion for coding and problem-solving. <br></br>
-                I enjoy exploring software development and learning new technologies.
-            </p>
-            <h2>🌱 Current Learning Goals</h2>
-            <ul>
-                <li>Databases: Diving deep into the world of databases.</li>
-                <li>Machine Learning: Exploring machine learning algorithms.</li>
-                <li>Software Development: Refining software development skills.</li>
-                <li>Frameworks: Experimenting with various frameworks.</li>
-            </ul>
-            <h2>⚡ Hobbies & Interests</h2>
-            <ul>
-                <li>Software Development: I love learning about and experimenting with software development. </li>
-                <li>GUI Scripting: I'm very interested in learning about and programming user interfaces. </li>
-                <li>Discord Bots: I love creating and experimenting with Discord bots. </li>
-                <li>Game Development:  I enjoy working on game development projects. </li>
-            </ul>
-            <h2>📫 Contact & Info:</h2>
-            <p>
-                <a href="https://www.linkedin.com/in/haseebn/" target="_blank" rel="noopener noreferrer">
-                    <i className="fa fa-linkedin"></i> LinkedIn
-                </a> |&nbsp;
-                <a href="mailto:haseeb.kn@outlook.com" target="_blank" rel="noopener noreferrer">
-                    <i className="fa fa-envelope"></i> Email
-                </a> |&nbsp;
-                <a href="https://github.com/haseebn19" target="_blank" rel="noopener noreferrer">
-                    <i className="fa fa-github"></i> GitHub
-                </a>
-            </p>
+        <div className="about-container">
+            <div className="hero-grid">
+                <div className="hero-content">
+                    <h1 className="glowing-text">
+                        <span className="gradient-text">Hello, I'm Haseeb</span>
+                    </h1>
+
+                    <h2 className="hero-subtitle">
+                        Software Engineer
+                        <span className="hero-location">
+                            <FontAwesomeIcon icon={faMapMarkerAlt} />
+                            Ontario, Canada
+                        </span>
+                    </h2>
+
+                    <p className="hero-text">
+                        Passionate software engineer with expertise in full-stack development,
+                        problem-solving, and creating innovative solutions. I love exploring
+                        new technologies and building applications that make a difference.
+                    </p>
+
+                    <div className="status-container">
+                        <button
+                            className={`status-badge ${isAvailableForHire ? 'available' : ''}`}
+                            onClick={openContactForm}
+                            title="Click to view contact information"
+                        >
+                            <span className="status-dot"></span>
+                            {isAvailableForHire ? 'Available for hire' : 'Currently employed'}
+                        </button>
+                    </div>
+
+                    <div className="hero-actions">
+                        <a
+                            href="https://github.com/haseebn19"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="social-link github"
+                        >
+                            <FontAwesomeIcon icon={faGithub} />
+                            <span>GitHub</span>
+                        </a>
+                        <a
+                            href="https://www.linkedin.com/in/haseebn/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="social-link linkedin"
+                        >
+                            <FontAwesomeIcon icon={faLinkedin} />
+                            <span>LinkedIn</span>
+                        </a>
+                        <a
+                            href="mailto:haseebniazi2019@gmail.com"
+                            className="social-link email"
+                        >
+                            <FontAwesomeIcon icon={faEnvelope} />
+                            <span>Email</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div className="hero-image">
+                    <div className="image-container">
+                        <img src={profilePic} alt="Haseeb Niazi" />
+                    </div>
+                    <div className="background-pattern"></div>
+                    <div className="background-glow"></div>
+                </div>
+            </div>
+
+            <div className="scroll-indicator">
+                <div className="mouse">
+                    <div className="wheel"></div>
+                </div>
+                <div className="arrow"></div>
+            </div>
         </div>
     );
 }
 
-// Exporting AboutMe component
 export default AboutMe;
