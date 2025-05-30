@@ -65,7 +65,7 @@ function AboutMe() {
                             <span>LinkedIn</span>
                         </a>
                         <a
-                            href="mailto:haseebniazi2019@gmail.com"
+                            href="mailto:haseeb.kn@outlook.com"
                             className="social-link email"
                         >
                             <FontAwesomeIcon icon={faEnvelope} />
