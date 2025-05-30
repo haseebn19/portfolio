@@ -3,10 +3,11 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faLinkedin, faGithub} from '@fortawesome/free-brands-svg-icons';
 import {faEnvelope, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import profilePic from '../assets/images/picture.jpg';
+import {SOCIAL_LINKS, EXTERNAL_LINK_PROPS} from '../utils/constants';
 
 function AboutMe() {
     const isAvailableForHire = true; const openContactForm = () => {
-        window.open('https://www.linkedin.com/in/haseebn/', '_blank', 'noopener,noreferrer');
+        window.open(SOCIAL_LINKS.linkedin, '_blank', 'noopener,noreferrer');
     };
 
     return (
@@ -40,29 +41,25 @@ function AboutMe() {
                             <span className="status-dot"></span>
                             {isAvailableForHire ? 'Available for hire' : 'Currently employed'}
                         </button>
-                    </div>
-
-                    <div className="hero-actions">
+                    </div>                    <div className="hero-actions">
                         <a
-                            href="https://github.com/haseebn19"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href={SOCIAL_LINKS.github}
+                            {...EXTERNAL_LINK_PROPS}
                             className="social-link github"
                         >
                             <FontAwesomeIcon icon={faGithub} />
                             <span>GitHub</span>
                         </a>
                         <a
-                            href="https://www.linkedin.com/in/haseebn/"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href={SOCIAL_LINKS.linkedin}
+                            {...EXTERNAL_LINK_PROPS}
                             className="social-link linkedin"
                         >
                             <FontAwesomeIcon icon={faLinkedin} />
                             <span>LinkedIn</span>
                         </a>
                         <a
-                            href="mailto:haseeb.kn@outlook.com"
+                            href={SOCIAL_LINKS.email}
                             className="social-link email"
                         >
                             <FontAwesomeIcon icon={faEnvelope} />

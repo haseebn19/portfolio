@@ -3,35 +3,25 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   faHome, faCode, faCog, faBars, faTimes, faArrowUp
 } from '@fortawesome/free-solid-svg-icons';
+import {scrollToSection} from './utils/constants';
+import {useScrollPosition, useBackToTop} from './utils/hooks';
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 
 function Navigation({activeSection, onSectionChange}) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const {isScrolled} = useScrollPosition();
 
   const navItems = [
     {id: 'home', label: 'About', icon: faHome},
     {id: 'projects', label: 'Projects', icon: faCode},
     {id: 'skills', label: 'Skills', icon: faCog}
   ];
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({behavior: 'smooth'});
-      setIsMenuOpen(false);
-      onSectionChange(sectionId);
-    }
+  const handleSectionChange = (sectionId) => {
+    scrollToSection(sectionId);
+    setIsMenuOpen(false);
+    onSectionChange(sectionId);
   };
 
   return (
@@ -47,14 +37,13 @@ function Navigation({activeSection, onSectionChange}) {
 
       <ul className={`nav-menu ${isMenuOpen ? 'nav-menu-open' : ''}`}>
         {navItems.map(({id, label, icon}) => (
-          <li key={id}>
-            <button
-              className={`nav-link ${activeSection === id ? 'active' : ''}`}
-              onClick={() => scrollToSection(id)}
-            >
-              <FontAwesomeIcon icon={icon} />
-              <span>{label}</span>
-            </button>
+          <li key={id}>            <button
+            className={`nav-link ${activeSection === id ? 'active' : ''}`}
+            onClick={() => handleSectionChange(id)}
+          >
+            <FontAwesomeIcon icon={icon} />
+            <span>{label}</span>
+          </button>
           </li>
         ))}
       </ul>
@@ -63,27 +52,7 @@ function Navigation({activeSection, onSectionChange}) {
 }
 
 function BackToTop() {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
-    };
-
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
-  }, []);
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
-  };
+  const {isVisible, scrollToTop} = useBackToTop();
 
   return (
     <button
