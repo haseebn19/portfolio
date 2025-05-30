@@ -5,11 +5,8 @@ import {faEnvelope, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
 import profilePic from '../assets/images/picture.jpg';
 
 function AboutMe() {
-    const isAvailableForHire = true;
-
-    const openContactForm = () => {
-        const contactSection = document.querySelector('.contact-info');
-        contactSection?.scrollIntoView({behavior: 'smooth', block: 'center'});
+    const isAvailableForHire = true; const openContactForm = () => {
+        window.open('https://www.linkedin.com/in/haseebn/', '_blank', 'noopener,noreferrer');
     };
 
     return (
