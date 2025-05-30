@@ -10,7 +10,7 @@ import {
 
 function SkillCard({title, skills, icon}) {
     return (
-        <div className="skill-category">
+        <div className="skill-category card-base">
             <div className="category-header">
                 <FontAwesomeIcon icon={icon} className="category-icon" />
                 <h3>{title}</h3>
@@ -51,15 +51,15 @@ function Skills() {
                 {name: "CSS3", icon: faCss3Alt},
                 {name: "Node.js", icon: faNode}
             ]
-        },
-        {
+        }, {
             title: "Tools & Platforms",
             icon: faTools, skills: [
                 {name: "Git", icon: faGit},
                 {name: "GitHub", icon: faGithub},
                 {name: "Docker", icon: faDocker},
                 {name: "Visual Studio", icon: faMicrosoft},
-                {name: "Roblox Studio", icon: faGamepad}
+                {name: "Roblox Studio", icon: faGamepad},
+                {name: "Discord API", icon: faDiscord}
             ]
         }, {
             title: "Collaboration",
@@ -67,8 +67,7 @@ function Skills() {
             skills: [
                 {name: "Figma", icon: faFigma},
                 {name: "Slack", icon: faSlack},
-                {name: "Trello", icon: faTrello},
-                {name: "Discord API", icon: faDiscord}
+                {name: "Trello", icon: faTrello}
             ]
         }
     ];

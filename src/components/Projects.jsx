@@ -1,18 +1,18 @@
 import React, {useState, useEffect} from 'react';
 import {createPortal} from 'react-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faGithub} from '@fortawesome/free-brands-svg-icons';
 import {
-  faGlobe, faPuzzlePiece, faPlay, faPause, faExpand,
+  faPlay, faPause, faExpand,
   faCode, faDatabase, faGamepad, faCloud, faMobile, faRocket,
-  faCalendarAlt, faLock, faKey, faUser
+  faCalendarAlt, faLock, faKey, faUser, faSearch
 } from '@fortawesome/free-solid-svg-icons';
 import {projects, featuredProjectIds} from '../data/projects';
+import {ProjectLink} from './ProjectLink';
 
 // Simple icon mapping
 const icons = {
   faCode, faDatabase, faGamepad, faCloud, faMobile, faRocket,
-  faCalendarAlt, faLock, faKey, faUser, faPuzzlePiece
+  faCalendarAlt, faLock, faKey, faUser, faSearch
 };
 
 function ProjectMedia({media}) {
@@ -155,67 +155,40 @@ function ProjectMedia({media}) {
 function ProjectCard({project}) {
   const [isHovered, setIsHovered] = useState(false);
 
-  return (
-    <div
-      className={`project-card ${isHovered ? 'hovered' : ''}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div className="project-header">
-        {project.icon ? (
-          <img src={project.icon} alt="" className="project-icon" />
-        ) : (
-          <div className="project-icon">
-            <FontAwesomeIcon icon={icons[project.faIcon] || faPuzzlePiece} />
-          </div>
-        )}
-        <h3 className="project-title">{project.title}</h3>
-      </div>
-
-      {project.media && <ProjectMedia media={project.media} />}
-
-      <p className="project-description">{project.description}</p>
-
-      <div className="project-features">
-        {project.features.map((feature, index) => (
-          <div key={index} className="feature-item">
-            <FontAwesomeIcon icon={faPuzzlePiece} className="feature-icon" />
-            <span>{feature}</span>
-          </div>
-        ))}
-      </div>
-
-      <div className="tech-stack">
-        {project.techStack.map((tech, index) => (
-          <span key={index} className="tech-tag">{tech}</span>
-        ))}
-      </div>
-
-      <div className="project-links">
-        {project.githubUrl && (
-          <a
-            href={project.githubUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-link github"
-          >
-            <FontAwesomeIcon icon={faGithub} />
-            <span>Repository</span>
-          </a>
-        )}
-        {project.liveUrl && (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="project-link demo"
-          >
-            <FontAwesomeIcon icon={faGlobe} />
-            <span>Live Demo</span>
-          </a>
-        )}
-      </div>
+  return (<div
+    className={`project-card card-base ${isHovered ? 'hovered' : ''}`}
+    onMouseEnter={() => setIsHovered(true)}
+    onMouseLeave={() => setIsHovered(false)}
+  >
+    <div className="project-header">
+      {project.icon ? (
+        <img src={project.icon} alt="" className="project-icon" />) : (
+        <div className="project-icon">
+          <FontAwesomeIcon icon={icons[project.faIcon] || faCode} />
+        </div>
+      )}
+      <h3 className="project-title">{project.title}</h3>
     </div>
+
+    {project.media && <ProjectMedia media={project.media} />}
+
+    <p className="project-description">{project.description}</p>      <div className="project-features">
+      {project.features.map((feature, index) => (
+        <div key={index} className="feature-item">
+          <span>{feature}</span>
+        </div>
+      ))}
+    </div>
+
+    <div className="tech-stack">
+      {project.techStack.map((tech, index) => (
+        <span key={index} className="tech-tag">{tech}</span>
+      ))}
+    </div>      <div className="project-links">
+      <ProjectLink url={project.githubUrl} type="github" />
+      <ProjectLink url={project.liveUrl} type="demo" />
+    </div>
+  </div>
   );
 }
 
