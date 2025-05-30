@@ -221,11 +221,25 @@ function ProjectCard({project}) {
 
 function Projects() {
   const [showAll, setShowAll] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   // Get featured projects or all projects based on state
   const displayProjects = showAll
     ? projects
     : projects.filter(project => featuredProjectIds.includes(project.id));
+
+  const handleToggle = () => {
+    setIsTransitioning(true);
+
+    // Wait for fade out animation
+    setTimeout(() => {
+      setShowAll(!showAll);
+      // Wait a bit more then fade in
+      setTimeout(() => {
+        setIsTransitioning(false);
+      }, 50);
+    }, 300);
+  };
 
   return (
     <div className="projects-container">
@@ -241,7 +255,7 @@ function Projects() {
         }
       </p>
 
-      <div className="projects-grid">
+      <div className={`projects-grid ${isTransitioning ? 'transitioning' : ''}`}>
         {displayProjects.map((project) => (
           <ProjectCard key={project.id} project={project} />
         ))}
@@ -250,7 +264,8 @@ function Projects() {
       <div className="projects-actions">
         <button
           className="view-toggle-button"
-          onClick={() => setShowAll(!showAll)}
+          onClick={handleToggle}
+          disabled={isTransitioning}
         >
           {showAll ? 'Show Featured Only' : `View All Projects (${projects.length})`}
         </button>
