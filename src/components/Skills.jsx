@@ -1,59 +1,99 @@
-// Importing React
 import React from 'react';
-// Importing Font Awesome
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {library, findIconDefinition} from '@fortawesome/fontawesome-svg-core';
-import {fab} from '@fortawesome/free-brands-svg-icons';
-import {fas} from '@fortawesome/free-solid-svg-icons';
+import {
+    faGithub, faPython, faJava, faJs, faReact, faHtml5, faCss3Alt,
+    faGit, faFigma, faSlack, faTrello, faDocker, faDiscord, faNode, faMicrosoft
+} from '@fortawesome/free-brands-svg-icons';
+import {
+    faDatabase, faCode, faTools, faTerminal, faGamepad, faUsers, faMicrochip
+} from '@fortawesome/free-solid-svg-icons';
 
-library.add(fab, fas);
-
-// Skills component
-function Skills() {
-    // Function to render skill block
-    const renderSkillBlock = (iconName, title, prefix = 'fab') => (
-        <div className="skill-block-container">
-            <div className="skill-block" title={title}>
-                <FontAwesomeIcon icon={findIconDefinition({prefix, iconName})} />
-            </div>
-            <span className="skill-name">{title}</span>
-        </div>
-    );
-
-    // JSX for Skills component
+function SkillCard({title, skills, icon}) {
     return (
-        <div style={{marginBottom: '2%'}}>
-            <h2>Languages & Libraries</h2>
-            <div style={{display: 'flex', flexWrap: 'wrap'}}>
-                {renderSkillBlock('python', 'Python')}
-                {renderSkillBlock('java', 'Java')}
-                {renderSkillBlock('js', 'JavaScript')}
-                {renderSkillBlock('react', 'React.js')}
-                {renderSkillBlock('html5', 'HTML5')}
-                {renderSkillBlock('css3-alt', 'CSS3')}
-                {renderSkillBlock('c', 'C', 'fas')}
-                {renderSkillBlock('database', 'SQL', 'fas')}
-                {renderSkillBlock('code', 'C#', 'fas')}
-                {renderSkillBlock('code', 'Lua', 'fas')}
-
+        <div className="skill-category">
+            <div className="category-header">
+                <FontAwesomeIcon icon={icon} className="category-icon" />
+                <h3>{title}</h3>
             </div>
-            <h2>Tools</h2>
-            <div style={{display: 'flex', flexWrap: 'wrap'}}>
-                {renderSkillBlock('git', 'Git')}
-                {renderSkillBlock('github', 'GitHub')}
-                {renderSkillBlock('figma', 'Figma')}
-                {renderSkillBlock('slack', 'Slack')}
-                {renderSkillBlock('trello', 'Trello')}
-                {renderSkillBlock('docker', 'Docker')}
-                {renderSkillBlock('discord', 'Developer Portal',)}
-                {renderSkillBlock('code', 'Visual Studio', 'fas')}
-                {renderSkillBlock('code', 'Roblox Studio', 'fas')}
-                {renderSkillBlock('r-project', 'R')}
+            <div className="skills-list">
+                {skills.map((skill, index) => (
+                    <div key={index} className="skill-item">                        <div className="skill-icon">
+                        <FontAwesomeIcon icon={skill.icon || faCode} />
+                    </div>
+                        <span className="skill-name">{skill.name}</span>
+                    </div>
+                ))}
             </div>
         </div>
     );
 }
 
+function Skills() {
+    const skillCategories = [
+        {
+            title: "Programming Languages",
+            icon: faCode, skills: [
+                {name: "Python", icon: faPython},
+                {name: "JavaScript", icon: faJs},
+                {name: "Java", icon: faJava},
+                {name: "C", icon: faMicrochip},
+                {name: "C#", icon: faMicrosoft},
+                {name: "SQL", icon: faDatabase},
+                {name: "Lua", icon: faTerminal}
+            ]
+        },
+        {
+            title: "Web Technologies",
+            icon: faReact,
+            skills: [
+                {name: "React.js", icon: faReact},
+                {name: "HTML5", icon: faHtml5},
+                {name: "CSS3", icon: faCss3Alt},
+                {name: "Node.js", icon: faNode}
+            ]
+        },
+        {
+            title: "Tools & Platforms",
+            icon: faTools, skills: [
+                {name: "Git", icon: faGit},
+                {name: "GitHub", icon: faGithub},
+                {name: "Docker", icon: faDocker},
+                {name: "Visual Studio", icon: faMicrosoft},
+                {name: "Roblox Studio", icon: faGamepad}
+            ]
+        }, {
+            title: "Collaboration",
+            icon: faUsers,
+            skills: [
+                {name: "Figma", icon: faFigma},
+                {name: "Slack", icon: faSlack},
+                {name: "Trello", icon: faTrello},
+                {name: "Discord API", icon: faDiscord}
+            ]
+        }
+    ];
 
-// Exporting Skills component
+    return (
+        <div className="skills-container">
+            <h2 className="section-title">
+                <span className="gradient-text">Skills & Expertise</span>
+            </h2>
+            <p className="section-subtitle">
+                My technical toolkit and areas of expertise in software development.
+            </p>
+
+            <div className="skills-grid">
+                {skillCategories.map((category, index) => (
+                    <SkillCard
+                        key={index}
+                        title={category.title}
+                        skills={category.skills}
+                        icon={category.icon}
+                    />
+                ))}
+            </div>
+        </div>
+    );
+}
+
 export default Skills;
