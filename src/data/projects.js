@@ -30,14 +30,17 @@ export const projects = [{
 }, {
     id: 'ssh-keygen',
     title: "SSH Key Generator",
-    description: "A Python GUI tool for generating SSH key pairs. Supports different algorithms and key lengths with an easy-to-use interface.",
+    description: "A desktop application built with Python and PyQt6 that simplifies the process of generating SSH keys. Features a clean, user-friendly interface for creating secure SSH key pairs with multiple algorithms and key lengths.",
     features: [
-        "Multiple algorithms",
-        "Custom key lengths",
-        "Key export options",
-        "Passphrase protection"
+        "ED25519, RSA, and ECDSA key support",
+        "Multiple key size options",
+        "Default ~/.ssh or custom output location",
+        "Optional passphrase protection",
+        "Quick copy and file access",
+        "Public key content display",
+        "Fingerprint generation and display"
     ],
-    techStack: ["Python", "Tkinter", "Cryptography"],
+    techStack: ["Python", "PyQt6", "cryptography", "PyInstaller"],
     githubUrl: "https://github.com/haseebn19/ssh-keygen",
     liveUrl: null,
     faIcon: "faKey",
