@@ -36,9 +36,6 @@ export const projects = [{
         "Multiple key size options",
         "Default ~/.ssh or custom output location",
         "Optional passphrase protection",
-        "Quick copy and file access",
-        "Public key content display",
-        "Fingerprint generation and display"
     ],
     techStack: ["Python", "PyQt6", "cryptography", "PyInstaller"],
     githubUrl: "https://github.com/haseebn19/ssh-keygen",
@@ -59,27 +56,27 @@ export const projects = [{
     liveUrl: null,
     faIcon: "faUser",
 },
-{
-    id: 'calendar-bot',
-    title: "Discord Calendar Bot",
-    description: "A Discord bot that helps server members coordinate events across different timezones. Makes it easy to schedule and track events without leaving Discord.",
-    features: [
-        "Timezone management",
-        "Event scheduling",
-        "Event listings",
-        "Multi-timezone support"
-    ],
-    techStack: ["Python", "Pycord API"],
-    githubUrl: "https://github.com/haseebn19/calendar-bot",
-    liveUrl: null,
-    faIcon: "faCalendarAlt",
-    //media: {
-    //    type: "video",
-    //    url: "/assets/images/video.mp4",
-    //    alt: "Discord Calendar Bot interface",
-    //    poster: "/assets/images/image.jpg"
-    //}
-},
+//{
+//    id: 'calendar-bot',
+//    title: "Discord Calendar Bot",
+//    description: "A Discord bot that helps server members coordinate events across different timezones. Makes it easy to schedule and track events without leaving Discord.",
+//    features: [
+//        "Timezone management",
+//        "Event scheduling",
+//        "Event listings",
+//        "Multi-timezone support"
+//    ],
+//    techStack: ["Python", "Pycord API"],
+//    githubUrl: "https://github.com/haseebn19/calendar-bot",
+//    liveUrl: null,
+//    faIcon: "faCalendarAlt",
+//    //media: {
+//    //    type: "video",
+//    //    url: "/assets/images/video.mp4",
+//    //    alt: "Discord Calendar Bot interface",
+//    //    poster: "/assets/images/image.jpg"
+//    //}
+//},
 {
     id: 'roblox-games',
     title: "Roblox Development",
