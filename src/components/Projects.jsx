@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect, useMemo} from 'react';
 import {createPortal} from 'react-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   faPlay, faPause, faExpand,
   faCode, faDatabase, faGamepad, faCloud, faMobile, faRocket,
-  faCalendarAlt, faLock, faKey, faUser, faSearch
+  faCalendarAlt, faLock, faKey, faUser, faSearch, faXmark, faBook
 } from '@fortawesome/free-solid-svg-icons';
 import {projects, featuredProjectIds} from '../data/projects';
 import {ProjectLink} from './ProjectLink';
@@ -12,7 +12,7 @@ import {ProjectLink} from './ProjectLink';
 // Simple icon mapping
 const icons = {
   faCode, faDatabase, faGamepad, faCloud, faMobile, faRocket,
-  faCalendarAlt, faLock, faKey, faUser, faSearch
+  faCalendarAlt, faLock, faKey, faUser, faSearch, faBook
 };
 
 function ProjectMedia({media}) {
@@ -195,11 +195,68 @@ function ProjectCard({project}) {
 function Projects() {
   const [showAll, setShowAll] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedTags, setSelectedTags] = useState([]);
+  const hasFilters = selectedTags.length > 0;
+
+  const allTags = useMemo(() => {
+    const map = new Map();
+    projects.forEach((project) => {
+      (project.techStack || []).forEach((tag) => {
+        const key = tag.toLowerCase();
+        if (!map.has(key)) {
+          map.set(key, tag);
+        }
+      });
+    });
+    return Array.from(map.values());
+  }, []);
 
   // Get featured projects or all projects based on state
-  const displayProjects = showAll
+  const baseProjects = hasFilters
     ? projects
-    : projects.filter(project => featuredProjectIds.includes(project.id));
+    : showAll
+      ? projects
+      : projects.filter(project => featuredProjectIds.includes(project.id));
+
+  const filteredProjects = baseProjects.filter((project) => {
+    const projectTags = (project.techStack || []).map(tag => tag.toLowerCase());
+    const requiredTags = selectedTags.map(tag => tag.toLowerCase());
+    const tagsMatch = requiredTags.every(tag => projectTags.includes(tag));
+    return tagsMatch;
+  });
+
+  const filteredSuggestions = useMemo(() => {
+    const normalized = searchTerm.trim().toLowerCase();
+    if (!normalized) return [];
+    return allTags
+      .filter((tag) => tag.toLowerCase().includes(normalized))
+      .filter((tag) => !selectedTags.some(sel => sel.toLowerCase() === tag.toLowerCase()))
+      .slice(0, 6);
+  }, [searchTerm, allTags, selectedTags]);
+
+  const addTag = (tag) => {
+    const normalized = tag.trim();
+    if (!normalized) return;
+    const exists = selectedTags.some(sel => sel.toLowerCase() === normalized.toLowerCase());
+    if (exists) {
+      setSearchTerm('');
+      return;
+    }
+    setSelectedTags([...selectedTags, normalized]);
+    setSearchTerm('');
+  };
+
+  const removeTag = (tag) => {
+    setSelectedTags(selectedTags.filter(sel => sel !== tag));
+  };
+
+  const handleSearchKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === 'Tab') {
+      e.preventDefault();
+      addTag(searchTerm);
+    }
+  };
 
   const handleToggle = () => {
     setIsTransitioning(true);
@@ -228,21 +285,69 @@ function Projects() {
         }
       </p>
 
-      <div className={`projects-grid ${isTransitioning ? 'transitioning' : ''}`}>
-        {displayProjects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
+        <div className="projects-filter">
+          <div className="project-search">
+            <FontAwesomeIcon icon={faSearch} className="search-icon" />
+            <input
+              type="search"
+              placeholder='Search by tech stack or keyword (e.g., TypeScript, PyQt)'
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+                onKeyDown={handleSearchKeyDown}
+              aria-label="Search projects by technology or keyword"
+            />
+              {filteredSuggestions.length > 0 && (
+                <ul className="project-suggestions">
+                  {filteredSuggestions.map((suggestion) => (
+                    <li key={suggestion}>
+                      <button type="button" onClick={() => addTag(suggestion)}>
+                        {suggestion}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              )}
+          </div>
 
-      <div className="projects-actions">
-        <button
-          className="view-toggle-button"
-          onClick={handleToggle}
-          disabled={isTransitioning}
-        >
-          {showAll ? 'Show Featured Only' : `View All Projects (${projects.length})`}
-        </button>
-      </div>
+          <div className="project-tags">
+            {selectedTags.length === 0 && (
+              <span className="tag-hint">Add tags to filter projects (e.g., React, TypeScript, PyQt)</span>
+            )}
+            {selectedTags.map((tag) => (
+              <button
+                key={tag}
+                className="tag-chip"
+                onClick={() => removeTag(tag)}
+                type="button"
+              >
+                {tag}
+                <FontAwesomeIcon icon={faXmark} className="tag-chip-icon" />
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="projects-actions">
+          <button
+            className="view-toggle-button"
+            onClick={handleToggle}
+            disabled={isTransitioning}
+          >
+            {showAll ? 'Show Featured Only' : `View All Projects (${projects.length})`}
+          </button>
+        </div>
+
+        {filteredProjects.length === 0 ? (
+          <div className="projects-empty">
+            No projects match that query. Try searching for a tech like React, TypeScript, or PyQt.
+          </div>
+        ) : (
+          <div className={`projects-grid ${isTransitioning ? 'transitioning' : ''}`}>
+            {filteredProjects.map((project) => (
+              <ProjectCard key={project.id} project={project} />
+            ))}
+          </div>
+        )}
     </div>
   );
 }

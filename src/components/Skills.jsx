@@ -1,11 +1,12 @@
-import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
     faGithub, faPython, faJava, faJs, faReact, faHtml5, faCss3Alt,
-    faGit, faFigma, faSlack, faTrello, faDocker, faDiscord, faNode, faMicrosoft
+    faGit, faFigma, faDocker, faNode, faMicrosoft
 } from '@fortawesome/free-brands-svg-icons';
 import {
-    faDatabase, faCode, faTools, faTerminal, faGamepad, faUsers, faMicrochip
+    faDatabase, faCode, faTools, faTerminal, faGamepad,
+    faMicrochip, faCircleCheck, faDesktop, faGears, faVial, faFlask,
+    faBolt, faWind
 } from '@fortawesome/free-solid-svg-icons';
 
 function SkillCard({title, skills, icon}) {
@@ -17,9 +18,10 @@ function SkillCard({title, skills, icon}) {
             </div>
             <div className="skills-list">
                 {skills.map((skill, index) => (
-                    <div key={index} className="skill-item">                        <div className="skill-icon">
-                        <FontAwesomeIcon icon={skill.icon || faCode} />
-                    </div>
+                    <div key={index} className="skill-item">
+                        <div className="skill-icon">
+                            <FontAwesomeIcon icon={skill.icon || faCode} />
+                        </div>
                         <span className="skill-name">{skill.name}</span>
                     </div>
                 ))}
@@ -31,10 +33,12 @@ function SkillCard({title, skills, icon}) {
 function Skills() {
     const skillCategories = [
         {
-            title: "Programming Languages",
-            icon: faCode, skills: [
+            title: "Languages",
+            icon: faCode,
+            skills: [
                 {name: "Python", icon: faPython},
                 {name: "JavaScript", icon: faJs},
+                {name: "TypeScript", icon: faCode},
                 {name: "Java", icon: faJava},
                 {name: "C", icon: faMicrochip},
                 {name: "C#", icon: faMicrosoft},
@@ -43,31 +47,47 @@ function Skills() {
             ]
         },
         {
-            title: "Web Technologies",
+            title: "Web Development",
             icon: faReact,
             skills: [
                 {name: "React.js", icon: faReact},
+                {name: "Node.js", icon: faNode},
                 {name: "HTML5", icon: faHtml5},
                 {name: "CSS3", icon: faCss3Alt},
-                {name: "Node.js", icon: faNode}
+                {name: "TailwindCSS", icon: faWind},
+                {name: "Framer Motion", icon: faCode},
+                {name: "Vite", icon: faBolt}
             ]
-        }, {
-            title: "Tools & Platforms",
-            icon: faTools, skills: [
+        },
+        {
+            title: "Desktop & Game Dev",
+            icon: faDesktop,
+            skills: [
+                {name: "PyQt6", icon: faPython},
+                {name: "Windows Forms", icon: faMicrosoft},
+                {name: "Roblox Studio", icon: faGamepad}
+            ]
+        },
+        {
+            title: "Tools & DevOps",
+            icon: faTools,
+            skills: [
                 {name: "Git", icon: faGit},
                 {name: "GitHub", icon: faGithub},
+                {name: "GitHub Actions", icon: faGears},
                 {name: "Docker", icon: faDocker},
                 {name: "Visual Studio", icon: faMicrosoft},
-                {name: "Roblox Studio", icon: faGamepad},
-                {name: "Discord API", icon: faDiscord}
+                {name: "Figma", icon: faFigma}
             ]
-        }, {
-            title: "Collaboration",
-            icon: faUsers,
+        },
+        {
+            title: "Testing",
+            icon: faCircleCheck,
             skills: [
-                {name: "Figma", icon: faFigma},
-                {name: "Slack", icon: faSlack},
-                {name: "Trello", icon: faTrello}
+                {name: "pytest", icon: faPython},
+                {name: "Vitest", icon: faVial},
+                {name: "React Testing Library", icon: faReact},
+                {name: "Jest DOM", icon: faFlask}
             ]
         }
     ];

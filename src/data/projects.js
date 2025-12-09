@@ -4,14 +4,33 @@ export const projects = [{
     description: "A modern web application for detecting and cleaning hidden Unicode characters in text. Supports multiple file formats with real-time analysis and privacy-focused local processing.", features: [
         "Real-time Unicode detection & highlighting",
         "PDF & DOCX file support",
+        "Markdown & TXT file support",
         "Drag & drop interface",
+        "Detailed character statistics & insights",
         "Privacy-focused local processing",
-        "One-click text cleaning"
+        "One-click text cleaning with clipboard copy"
     ],
     techStack: ["React", "TypeScript", "PDF.js", "Mammoth.js", "CSS3"],
     githubUrl: "https://github.com/haseebn19/unidetect",
     liveUrl: "https://haseebn19.github.io/unidetect/",
     faIcon: "faSearch",
+},
+{
+    id: 'requizle',
+    title: "ReQuizle",
+    description: "A spaced-repetition study app with mastery tracking, multiple question types, and offline-friendly data storage.",
+    features: [
+        "Mastery tracking with include/exclude mastered toggle",
+        "Multiple question types (MCQ, multi-answer, T/F, keywords, matching, word bank)",
+        "Custom JSON import for subjects and questions",
+        "Local storage persistence for profiles and progress",
+        "Dark mode and responsive UI",
+        "Privacy-focused: all data stays in-browser"
+    ],
+    techStack: ["React", "TypeScript", "TailwindCSS", "Zustand", "Framer Motion", "Vite"],
+    githubUrl: "https://github.com/haseebn19/requizle",
+    liveUrl: "https://haseebn19.github.io/requizle/",
+    faIcon: "faBook",
 },
 {
     id: 'password-generator',
@@ -20,6 +39,7 @@ export const projects = [{
     features: [
         "Custom character sets",
         "Adjustable length",
+        "Unique character count control",
         "Password strength meter",
         "Copy to clipboard"
     ],
@@ -36,6 +56,8 @@ export const projects = [{
         "Multiple key size options",
         "Default ~/.ssh or custom output location",
         "Optional passphrase protection",
+        "Quick copy & file access",
+        "Fingerprint generation and display"
     ],
     techStack: ["Python", "PyQt6", "cryptography", "PyInstaller"],
     githubUrl: "https://github.com/haseebn19/ssh-keygen",
@@ -48,35 +70,15 @@ export const projects = [{
     features: [
         "Mobile-friendly design",
         "Smooth animations",
-        "Project showcase",
+        "Project filtering by tech stack",
+        "Project showcase with media support",
         "Skills overview"
     ],
-    techStack: ["React", "CSS3", "JavaScript"],
+    techStack: ["React", "JavaScript", "CSS3", "Vite"],
     githubUrl: "https://github.com/haseebn19/portfolio",
     liveUrl: null,
     faIcon: "faUser",
 },
-//{
-//    id: 'calendar-bot',
-//    title: "Discord Calendar Bot",
-//    description: "A Discord bot that helps server members coordinate events across different timezones. Makes it easy to schedule and track events without leaving Discord.",
-//    features: [
-//        "Timezone management",
-//        "Event scheduling",
-//        "Event listings",
-//        "Multi-timezone support"
-//    ],
-//    techStack: ["Python", "Pycord API"],
-//    githubUrl: "https://github.com/haseebn19/calendar-bot",
-//    liveUrl: null,
-//    faIcon: "faCalendarAlt",
-//    //media: {
-//    //    type: "video",
-//    //    url: "/assets/images/video.mp4",
-//    //    alt: "Discord Calendar Bot interface",
-//    //    poster: "/assets/images/image.jpg"
-//    //}
-//},
 {
     id: 'roblox-games',
     title: "Roblox Development",
@@ -96,6 +98,6 @@ export const projects = [{
 
 export const featuredProjectIds = [
     'unidetect',
+    'requizle',
     'ssh-keygen',
-    'password-generator',
 ];
