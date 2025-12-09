@@ -1,5 +1,5 @@
-import {defineConfig} from 'vite'
-import react from '@vitejs/plugin-react'
+import {defineConfig} from 'vite';
+import react from '@vitejs/plugin-react';
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -13,4 +13,16 @@ export default defineConfig({
         port: 3000,
         open: true,
     },
+    test: {
+        environment: 'jsdom',
+        globals: true,
+        setupFiles: './src/tests/setupTests.js',
+        coverage: {
+            provider: 'v8',
+            reportsDirectory: 'coverage',
+            reporter: ['text', 'html', 'lcov'],
+            exclude: ['**/node_modules/**', '**/dist/**', '**/coverage/**', 'src/tests/**'],
+        },
+    },
 })
+    ;

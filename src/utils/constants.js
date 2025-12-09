@@ -18,17 +18,3 @@ export const scrollToSection = (sectionId) => {
     }
 };
 
-// Link variants for consistent styling
-export const LINK_VARIANTS = {
-    github: {
-        className: 'social-link github',
-        backgroundColor: '#24292e'
-    },
-    linkedin: {
-        className: 'social-link linkedin',
-        backgroundColor: '#0a66c2'
-    },
-    email: {
-        className: 'social-link email'
-    }
-};

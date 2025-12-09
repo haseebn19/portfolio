@@ -1,4 +1,3 @@
-import React from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faLinkedin, faGithub} from '@fortawesome/free-brands-svg-icons';
 import {faEnvelope, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
@@ -15,7 +14,7 @@ function AboutMe() {
             <div className="hero-grid">
                 <div className="hero-content">
                     <h1 className="glowing-text">
-                        <span className="gradient-text">Hello, I'm Haseeb</span>
+                        <span className="gradient-text">Hello, I&apos;m Haseeb</span>
                     </h1>
 
                     <h2 className="hero-subtitle">
@@ -77,12 +76,6 @@ function AboutMe() {
                 </div>
             </div>
 
-            <div className="scroll-indicator">
-                <div className="mouse">
-                    <div className="wheel"></div>
-                </div>
-                <div className="arrow"></div>
-            </div>
         </div>
     );
 }
