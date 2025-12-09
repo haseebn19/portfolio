@@ -1,7 +1,8 @@
 export const projects = [{
     id: 'unidetect',
     title: "UniDetect",
-    description: "A modern web application for detecting and cleaning hidden Unicode characters in text. Supports multiple file formats with real-time analysis and privacy-focused local processing.", features: [
+    description: "A modern web application for detecting and cleaning hidden Unicode characters in text. Supports multiple file formats with real-time analysis and privacy-focused local processing.",
+    features: [
         "Real-time Unicode detection & highlighting",
         "PDF & DOCX file support",
         "Markdown & TXT file support",
@@ -10,7 +11,7 @@ export const projects = [{
         "Privacy-focused local processing",
         "One-click text cleaning with clipboard copy"
     ],
-    techStack: ["React", "TypeScript", "PDF.js", "Mammoth.js", "CSS3"],
+    techStack: ["React", "TypeScript", "Vite", "Vitest", "PDF.js", "Mammoth.js"],
     githubUrl: "https://github.com/haseebn19/unidetect",
     liveUrl: "https://haseebn19.github.io/unidetect/",
     faIcon: "faSearch",
