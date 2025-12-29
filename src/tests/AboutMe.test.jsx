@@ -8,7 +8,7 @@ describe('AboutMe', () => {
 
         expect(screen.getByText(/Hello, I.*m Haseeb/i)).toBeInTheDocument();
         expect(screen.getByRole('heading', {name: /Software Engineer/i, level: 2})).toBeInTheDocument();
-        expect(screen.queryByText(/Available for hire/i)).not.toBeInTheDocument();
+        expect(screen.getByText(/Available for hire/i)).toBeInTheDocument();
 
         const githubLink = screen.getByRole('link', {name: /GitHub/i});
         const linkedinLink = screen.getByRole('link', {name: /LinkedIn/i});
