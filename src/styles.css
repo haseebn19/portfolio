@@ -366,17 +366,10 @@ video {
     border-radius: var(--radius-full);
     font-size: 0.875rem;
     font-weight: 500;
-    cursor: pointer;
     transition: var(--transition);
     background-color: rgba(16, 185, 129, 0.1);
     border: 1px solid rgba(16, 185, 129, 0.2);
     color: var(--secondary);
-}
-
-.status-badge:hover {
-    background-color: rgba(16, 185, 129, 0.15);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.2);
 }
 
 .status-dot {
@@ -407,11 +400,6 @@ video {
 
 .status-badge.unavailable .status-dot {
     background-color: var(--danger);
-}
-
-.status-badge.unavailable:hover {
-    background-color: rgba(239, 68, 68, 0.15);
-    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
 }
 
 /* Social Links */
@@ -516,7 +504,7 @@ video {
     z-index: 20;
 }
 
-.project-suggestions li + li {
+.project-suggestions li+li {
     margin-top: 4px;
 }
 
