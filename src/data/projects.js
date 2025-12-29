@@ -36,15 +36,15 @@ export const projects = [{
 {
     id: 'password-generator',
     title: "Password Generator",
-    description: "A Windows desktop app for generating secure passwords. Choose your character sets, length, and get instant password strength feedback.",
+    description: "A modern WPF password generator with real-time strength evaluation. Features a clean UI that follows your Windows theme.",
     features: [
-        "Custom character sets",
-        "Adjustable length",
-        "Unique character count control",
-        "Password strength meter",
-        "Copy to clipboard"
+        "Configurable length from 4 to 128 characters",
+        "Lowercase, uppercase, numbers, and symbols",
+        "Real-time strength evaluation with Zxcvbn",
+        "Windows dark/light theme support",
+        "One-click clipboard copy"
     ],
-    techStack: ["C#", ".NET 6.0", "Windows Forms"],
+    techStack: ["C#", ".NET 8.0", "WPF", "CommunityToolkit.Mvvm"],
     githubUrl: "https://github.com/haseebn19/passgen",
     liveUrl: null,
     faIcon: "faLock",
@@ -64,6 +64,22 @@ export const projects = [{
     githubUrl: "https://github.com/haseebn19/ssh-keygen",
     liveUrl: null,
     faIcon: "faKey",
+}, {
+    id: 'calendar-bot',
+    title: "Discord Calendar Bot",
+    description: "A Discord bot for managing personal calendar events with full timezone support. Features slash commands, privacy controls, and Discord's native timestamp formatting.",
+    features: [
+        "Calendar management with add, list, and remove commands",
+        "Full timezone support with autocomplete",
+        "Public and private privacy modes",
+        "Ephemeral responses for private mode",
+        "Discord native timestamp formatting",
+        "SQLite database with async support"
+    ],
+    techStack: ["Python", "discord.py", "aiosqlite", "pytest"],
+    githubUrl: "https://github.com/haseebn19/calendar-bot",
+    liveUrl: null,
+    faIcon: "faCalendarAlt",
 }, {
     id: 'portfolio',
     title: "Personal Portfolio",
@@ -100,5 +116,5 @@ export const projects = [{
 export const featuredProjectIds = [
     'unidetect',
     'requizle',
-    'ssh-keygen',
+    'password-generator',
 ];
