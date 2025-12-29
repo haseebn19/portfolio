@@ -5,9 +5,7 @@ import profilePic from '../assets/images/picture.jpg';
 import {SOCIAL_LINKS, EXTERNAL_LINK_PROPS} from '../utils/constants';
 
 function AboutMe() {
-    const isAvailableForHire = true; const openContactForm = () => {
-        window.open(SOCIAL_LINKS.linkedin, '_blank', 'noopener,noreferrer');
-    };
+    const isAvailableForHire = true;
 
     return (
         <div className="about-container">
@@ -31,16 +29,14 @@ function AboutMe() {
                         new technologies and building applications that make a difference.
                     </p>
 
-                    <div className="status-container">
-                        <button
-                            className={`status-badge ${isAvailableForHire ? 'available' : ''}`}
-                            onClick={openContactForm}
-                            title="Click to view contact information"
-                        >
-                            <span className="status-dot"></span>
-                            {isAvailableForHire ? 'Available for hire' : 'Currently employed'}
-                        </button>
-                    </div>                    <div className="hero-actions">
+                    {isAvailableForHire && (
+                        <div className="status-container">
+                            <div className="status-badge available">
+                                <span className="status-dot"></span>
+                                Available for hire
+                            </div>
+                        </div>
+                    )}                    <div className="hero-actions">
                         <a
                             href={SOCIAL_LINKS.github}
                             {...EXTERNAL_LINK_PROPS}
