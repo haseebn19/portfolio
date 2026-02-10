@@ -4,15 +4,16 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
   faPlay, faPause, faExpand,
   faCode, faDatabase, faGamepad, faCloud, faMobile, faRocket,
-  faCalendarAlt, faLock, faKey, faUser, faSearch, faXmark, faBook
+  faCalendarAlt, faLock, faKey, faUser, faSearch, faXmark, faBook, faCity
 } from '@fortawesome/free-solid-svg-icons';
 import {projects, featuredProjectIds} from '../data/projects';
 import {ProjectLink} from './ProjectLink';
+import Masonry from 'react-masonry-css';
 
 // Simple icon mapping
 const icons = {
   faCode, faDatabase, faGamepad, faCloud, faMobile, faRocket,
-  faCalendarAlt, faLock, faKey, faUser, faSearch, faBook
+  faCalendarAlt, faLock, faKey, faUser, faSearch, faBook, faCity
 };
 
 function ProjectMedia({media}) {
@@ -137,14 +138,14 @@ function ProjectMedia({media}) {
                 <img src={media.url} alt={media.alt || "Project preview"} />
               </div>
             )}
-            <button
-              className="close-btn"
-              onClick={() => setIsExpanded(false)}
-              title="Close (ESC)"
-            >
-              ✕
-            </button>
           </div>
+          <button
+            className="close-btn"
+            onClick={() => setIsExpanded(false)}
+            title="Close (ESC)"
+          >
+            ✕
+          </button>
         </div>,
         document.body
       )}
@@ -271,6 +272,12 @@ function Projects() {
     }, 300);
   };
 
+  const breakpointColumnsObj = {
+    default: 3,
+    1100: 2,
+    700: 1
+  };
+
   return (
     <div className="projects-container">
       <h2 className="section-title">
@@ -285,69 +292,74 @@ function Projects() {
         }
       </p>
 
-        <div className="projects-filter">
-          <div className="project-search">
-            <FontAwesomeIcon icon={faSearch} className="search-icon" />
-            <input
-              type="search"
-              placeholder='Search by tech stack or keyword (e.g., TypeScript, PyQt)'
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-                onKeyDown={handleSearchKeyDown}
-              aria-label="Search projects by technology or keyword"
-            />
-              {filteredSuggestions.length > 0 && (
-                <ul className="project-suggestions">
-                  {filteredSuggestions.map((suggestion) => (
-                    <li key={suggestion}>
-                      <button type="button" onClick={() => addTag(suggestion)}>
-                        {suggestion}
-                      </button>
-                    </li>
-                  ))}
-                </ul>
-              )}
-          </div>
-
-          <div className="project-tags">
-            {selectedTags.length === 0 && (
-              <span className="tag-hint">Add tags to filter projects (e.g., React, TypeScript, PyQt)</span>
-            )}
-            {selectedTags.map((tag) => (
-              <button
-                key={tag}
-                className="tag-chip"
-                onClick={() => removeTag(tag)}
-                type="button"
-              >
-                {tag}
-                <FontAwesomeIcon icon={faXmark} className="tag-chip-icon" />
-              </button>
-            ))}
-          </div>
+      <div className="projects-filter">
+        <div className="project-search">
+          <FontAwesomeIcon icon={faSearch} className="search-icon" />
+          <input
+            type="search"
+            placeholder='Search by tech stack or keyword (e.g., TypeScript, PyQt)'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            onKeyDown={handleSearchKeyDown}
+            aria-label="Search projects by technology or keyword"
+          />
+          {filteredSuggestions.length > 0 && (
+            <ul className="project-suggestions">
+              {filteredSuggestions.map((suggestion) => (
+                <li key={suggestion}>
+                  <button type="button" onClick={() => addTag(suggestion)}>
+                    {suggestion}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
-        <div className="projects-actions">
-          <button
-            className="view-toggle-button"
-            onClick={handleToggle}
-            disabled={isTransitioning}
-          >
-            {showAll ? 'Show Featured Only' : `View All Projects (${projects.length})`}
-          </button>
+        <div className="project-tags">
+          {selectedTags.length === 0 && (
+            <span className="tag-hint">Add tags to filter projects (e.g., React, TypeScript, PyQt)</span>
+          )}
+          {selectedTags.map((tag) => (
+            <button
+              key={tag}
+              className="tag-chip"
+              onClick={() => removeTag(tag)}
+              type="button"
+            >
+              {tag}
+              <FontAwesomeIcon icon={faXmark} className="tag-chip-icon" />
+            </button>
+          ))}
         </div>
+      </div>
 
-        {filteredProjects.length === 0 ? (
-          <div className="projects-empty">
-            No projects match that query. Try searching for a tech like React, TypeScript, or PyQt.
-          </div>
-        ) : (
-          <div className={`projects-grid ${isTransitioning ? 'transitioning' : ''}`}>
-            {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
-            ))}
-          </div>
-        )}
+      <div className="projects-actions">
+        <button
+          className="view-toggle-button"
+          onClick={handleToggle}
+          disabled={isTransitioning}
+        >
+          {showAll ? 'Show Featured Only' : `View All Projects (${projects.length})`}
+        </button>
+      </div>
+
+      {filteredProjects.length === 0 ? (
+        <div className="projects-empty">
+          No projects match that query. Try searching for a tech like React, TypeScript, or PyQt.
+        </div>
+      ) : (
+        <Masonry
+          breakpointCols={breakpointColumnsObj}
+          className="masonry-grid"
+          columnClassName="masonry-grid_column"
+          style={{opacity: isTransitioning ? 0 : 1, transition: 'opacity 0.3s ease'}}
+        >
+          {filteredProjects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </Masonry>
+      )}
     </div>
   );
 }

@@ -5,8 +5,8 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import {
     faDatabase, faCode, faTools, faTerminal, faGamepad,
-    faMicrochip, faCircleCheck, faDesktop, faGears, faVial, faFlask,
-    faBolt, faWind
+    faMicrochip, faCircleCheck, faDesktop, faGears, faVial,
+    faBolt, faWind, faMobile, faDiagramProject
 } from '@fortawesome/free-solid-svg-icons';
 
 function SkillCard({title, skills, icon}) {
@@ -42,21 +42,34 @@ function Skills() {
                 {name: "Java", icon: faJava},
                 {name: "C", icon: faMicrochip},
                 {name: "C#", icon: faMicrosoft},
-                {name: "SQL", icon: faDatabase},
                 {name: "Lua", icon: faTerminal}
             ]
         },
         {
-            title: "Web Development",
+            title: "Frontend Development",
             icon: faReact,
             skills: [
-                {name: "React.js", icon: faReact},
-                {name: "Node.js", icon: faNode},
+                {name: "React", icon: faReact},
                 {name: "HTML5", icon: faHtml5},
                 {name: "CSS3", icon: faCss3Alt},
                 {name: "TailwindCSS", icon: faWind},
+                {name: "Zustand", icon: faBolt},
                 {name: "Framer Motion", icon: faCode},
+                {name: "PWA", icon: faMobile},
                 {name: "Vite", icon: faBolt}
+            ]
+        },
+        {
+            title: "Backend & Services",
+            icon: faDatabase,
+            skills: [
+                {name: "Spring Boot", icon: faJava},
+                {name: "Node.js", icon: faNode},
+                {name: "discord.py", icon: faPython},
+                {name: "PostgreSQL", icon: faDatabase},
+                {name: "MariaDB", icon: faDatabase},
+                {name: "SQLite", icon: faDatabase},
+                {name: "SQL", icon: faDatabase}
             ]
         },
         {
@@ -64,7 +77,10 @@ function Skills() {
             icon: faDesktop,
             skills: [
                 {name: "PyQt6", icon: faPython},
+                {name: ".NET", icon: faMicrosoft},
+                {name: "WPF", icon: faMicrosoft},
                 {name: "Windows Forms", icon: faMicrosoft},
+                {name: "MVVM", icon: faDiagramProject},
                 {name: "Roblox Studio", icon: faGamepad}
             ]
         },
@@ -76,7 +92,7 @@ function Skills() {
                 {name: "GitHub", icon: faGithub},
                 {name: "GitHub Actions", icon: faGears},
                 {name: "Docker", icon: faDocker},
-                {name: "Visual Studio", icon: faMicrosoft},
+                {name: "Linux", icon: faTerminal},
                 {name: "Figma", icon: faFigma}
             ]
         },
@@ -85,9 +101,9 @@ function Skills() {
             icon: faCircleCheck,
             skills: [
                 {name: "pytest", icon: faPython},
+                {name: "xUnit", icon: faMicrosoft},
                 {name: "Vitest", icon: faVial},
-                {name: "React Testing Library", icon: faReact},
-                {name: "Jest DOM", icon: faFlask}
+                {name: "React Testing Library", icon: faReact}
             ]
         }
     ];
