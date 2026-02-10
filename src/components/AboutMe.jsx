@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faLinkedin, faGithub} from '@fortawesome/free-brands-svg-icons';
 import {faEnvelope, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
-import profilePic from '../assets/images/picture.jpg';
+import profilePic from '../assets/images/picture.png';
 import {SOCIAL_LINKS, EXTERNAL_LINK_PROPS} from '../utils/constants';
 
 function AboutMe() {
