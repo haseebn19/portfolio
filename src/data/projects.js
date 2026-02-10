@@ -11,10 +11,32 @@ export const projects = [{
         "Privacy-focused local processing",
         "One-click text cleaning with clipboard copy"
     ],
-    techStack: ["React", "TypeScript", "Vite", "Vitest", "PDF.js", "Mammoth.js"],
+    techStack: ["React", "TypeScript", "Vite", "Vitest", "PDF.js", "Mammoth.js", "Docker"],
     githubUrl: "https://github.com/haseebn19/unidetect",
     liveUrl: "https://haseebn19.github.io/unidetect/",
     faIcon: "faSearch",
+    icon: "https://raw.githubusercontent.com/haseebn19/unidetect/main/public/logo.svg",
+},
+{
+    id: 'urban-housing-demand',
+    title: "Urban Housing Demand",
+    description: "A full-stack web application for visualizing housing and labour market data. Features interactive charts, real-time data analysis, and dark mode support.",
+    features: [
+        "Housing Data Visualization",
+        "Completion Ratios Analysis",
+        "Labour Market Analysis",
+        "Immigration Trends Monitoring",
+        "Dark/Light Theme Toggle"
+    ],
+    techStack: ["Java", "Spring Boot", "TypeScript", "React", "Vite", "Vitest", "Docker", "MariaDB", "Chart.js"],
+    githubUrl: "https://github.com/haseebn19/urban-housing-demand",
+    liveUrl: null,
+    faIcon: "faCity",
+    media: {
+        type: 'image',
+        url: 'https://raw.githubusercontent.com/haseebn19/urban-housing-demand/main/docs/screenshot-home.jpeg',
+        alt: 'Urban Housing Demand Dashboard'
+    }
 },
 {
     id: 'requizle',
@@ -28,10 +50,11 @@ export const projects = [{
         "Dark mode and responsive UI",
         "Privacy-focused: all data stays in-browser"
     ],
-    techStack: ["React", "TypeScript", "TailwindCSS", "Zustand", "Framer Motion", "Vite"],
-    githubUrl: "https://github.com/haseebn19/requizle",
-    liveUrl: "https://haseebn19.github.io/requizle/",
+    techStack: ["React", "TypeScript", "TailwindCSS", "Zustand", "Framer Motion", "Vite", "Vitest", "PWA"],
+    githubUrl: "https://github.com/ReQuizle/requizle-web",
+    liveUrl: "https://requizle.github.io/requizle-web/",
     faIcon: "faBook",
+    icon: "https://raw.githubusercontent.com/ReQuizle/requizle-web/refs/heads/main/public/icon.svg",
 },
 {
     id: 'password-generator',
@@ -44,10 +67,16 @@ export const projects = [{
         "Windows dark/light theme support",
         "One-click clipboard copy"
     ],
-    techStack: ["C#", ".NET 8.0", "WPF", "CommunityToolkit.Mvvm"],
+    techStack: ["C#", ".NET 8.0", "WPF", "CommunityToolkit.Mvvm", "xUnit"],
     githubUrl: "https://github.com/haseebn19/passgen",
     liveUrl: null,
     faIcon: "faLock",
+    icon: "https://raw.githubusercontent.com/haseebn19/passgen/master/logo.svg",
+    media: {
+        type: 'image',
+        url: 'https://raw.githubusercontent.com/haseebn19/passgen/master/docs/screenshot-window.png',
+        alt: 'Password Generator UI'
+    }
 }, {
     id: 'ssh-keygen',
     title: "SSH Key Generator",
@@ -60,10 +89,16 @@ export const projects = [{
         "Quick copy & file access",
         "Fingerprint generation and display"
     ],
-    techStack: ["Python", "PyQt6", "cryptography", "PyInstaller"],
+    techStack: ["Python", "PyQt6", "cryptography", "PyInstaller", "pytest", "Ruff"],
     githubUrl: "https://github.com/haseebn19/ssh-keygen",
     liveUrl: null,
     faIcon: "faKey",
+    icon: "https://raw.githubusercontent.com/haseebn19/ssh-keygen/main/resources/logo.svg",
+    media: {
+        type: 'image',
+        url: 'https://raw.githubusercontent.com/haseebn19/ssh-keygen/main/resources/screenshot-window.png',
+        alt: 'SSH Key Generator UI'
+    }
 }, {
     id: 'calendar-bot',
     title: "Discord Calendar Bot",
@@ -76,10 +111,11 @@ export const projects = [{
         "Discord native timestamp formatting",
         "SQLite database with async support"
     ],
-    techStack: ["Python", "discord.py", "aiosqlite", "pytest"],
+    techStack: ["Python", "discord.py", "aiosqlite", "pytest", "Ruff"],
     githubUrl: "https://github.com/haseebn19/calendar-bot",
     liveUrl: null,
     faIcon: "faCalendarAlt",
+    icon: "https://raw.githubusercontent.com/haseebn19/calendar-bot/main/docs/logo.svg",
 }, {
     id: 'portfolio',
     title: "Personal Portfolio",
@@ -91,7 +127,7 @@ export const projects = [{
         "Project showcase with media support",
         "Skills overview"
     ],
-    techStack: ["React", "JavaScript", "CSS3", "Vite"],
+    techStack: ["React", "JavaScript", "CSS3", "Vite", "Vitest"],
     githubUrl: "https://github.com/haseebn19/portfolio",
     liveUrl: null,
     faIcon: "faUser",
@@ -116,5 +152,5 @@ export const projects = [{
 export const featuredProjectIds = [
     'unidetect',
     'requizle',
-    'password-generator',
+    'urban-housing-demand'
 ];

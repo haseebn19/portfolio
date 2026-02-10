@@ -561,26 +561,20 @@ video {
     text-align: center;
 }
 
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(320px, calc(100vw - 4rem)), 1fr));
+
+/* Masonry Grid Layout */
+.masonry-grid {
+    display: flex;
+    width: auto;
     gap: var(--space-xl);
     margin-top: var(--space-xl);
-    justify-content: center;
     max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
-    width: 100%;
-    padding: 0;
-    box-sizing: border-box;
-    opacity: 1;
-    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
-    transform: translateY(0);
 }
 
-.projects-grid.transitioning {
-    opacity: 0;
-    transform: translateY(10px);
+.masonry-grid_column {
+    background-clip: padding-box;
 }
 
 .projects-empty {
@@ -593,7 +587,7 @@ video {
     color: var(--text-muted);
 }
 
-/* Project Cards with Media Support */
+/* Project Card with Masonry */
 .project-card {
     background-color: var(--surface);
     border-radius: var(--radius-lg);
@@ -602,14 +596,11 @@ video {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
-    max-width: 420px;
-    min-height: 500px;
     position: relative;
     width: 100%;
     box-sizing: border-box;
-    opacity: 1;
-    transform: translateY(0);
-    animation: fadeInUp 0.5s ease-out;
+    margin-bottom: var(--space-xl);
+    height: auto;
 }
 
 @keyframes fadeInUp {
@@ -720,10 +711,10 @@ video {
 }
 
 .close-btn {
-    position: absolute;
-    top: -40px;
-    right: 0;
-    background: rgba(255, 255, 255, 0.1);
+    position: fixed;
+    top: 2rem;
+    right: 2rem;
+    background: rgba(0, 0, 0, 0.5);
     border: none;
     color: white;
     width: 32px;
@@ -982,10 +973,6 @@ video {
     box-sizing: border-box;
 }
 
-.skill-category {
-    /* Inherits from card-base */
-}
-
 .category-header {
     display: flex;
     align-items: center;
@@ -1166,13 +1153,8 @@ video {
         word-wrap: break-word;
     }
 
-    .projects-grid {
-        grid-template-columns: 1fr;
+    .masonry-grid {
         gap: var(--space-lg);
-        padding: 0;
-        width: 100%;
-        max-width: 100vw;
-        box-sizing: border-box;
     }
 
     .skills-grid {
@@ -1336,8 +1318,7 @@ video {
 
 /* Tablet responsiveness */
 @media (min-width: 769px) and (max-width: 1200px) {
-    .projects-grid {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 350px));
+    .masonry-grid {
         gap: var(--space-lg);
     }
 }
