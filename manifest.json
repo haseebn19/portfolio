@@ -1,6 +1,6 @@
 {
-    "short_name": "Haseeb's Portfolio",
-    "name": "Haseeb Niazi's Project Portfolio",
+    "short_name": "Haseeb Niazi",
+    "name": "Haseeb Niazi - Software Engineer",
     "icons": [
         {
             "src": "logo.jpg",
@@ -10,6 +10,6 @@
     ],
     "start_url": ".",
     "display": "standalone",
-    "theme_color": "#121212",
-    "background_color": "#121212"
+    "theme_color": "#0d0f0b",
+    "background_color": "#0d0f0b"
 }
