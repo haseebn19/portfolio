@@ -4,7 +4,6 @@ export const projects = [
         title: 'UniDetect',
         types: ['Frontend'],
         focus: 'Hidden Unicode detection',
-        status: 'Live',
         featured: true,
         summary:
             'A local-first inspection tool for finding and cleaning invisible Unicode characters before they break code reviews, documents, or submissions.',
@@ -29,7 +28,6 @@ export const projects = [
         title: 'ReQuizle',
         types: ['Frontend'],
         focus: 'Spaced repetition',
-        status: 'Live',
         featured: true,
         summary:
             'A study app for mastery tracking, custom question imports, and repeated review without sending study data to a server.',
@@ -52,9 +50,8 @@ export const projects = [
     {
         id: 'urban-housing-demand',
         title: 'Urban Housing Demand',
-        types: ['Frontend', 'Backend'],
+        types: ['Fullstack', 'Frontend', 'Backend'],
         focus: 'Housing and labour data',
-        status: 'Repository',
         featured: true,
         summary:
             'A full-stack dashboard for exploring housing completions, labour indicators, immigration trends, and regional supply signals.',
@@ -83,7 +80,6 @@ export const projects = [
         title: 'Password Generator',
         types: ['Desktop'],
         focus: 'Secure generation',
-        status: 'Repository',
         summary:
             'A WPF password generator with theme-aware UI, clipboard flow, and real-time strength scoring.',
         narrative:
@@ -112,7 +108,6 @@ export const projects = [
         title: 'SSH Key Generator',
         types: ['Desktop'],
         focus: 'Key management',
-        status: 'Repository',
         summary:
             'A PyQt6 utility for creating SSH key pairs with algorithm choices, passphrase support, and quick access to generated files.',
         narrative:
@@ -141,7 +136,6 @@ export const projects = [
         title: 'Discord Calendar Bot',
         types: ['Backend', 'Bot'],
         focus: 'Timezone-aware events',
-        status: 'Repository',
         summary:
             'A Discord bot for personal calendar events with slash commands, timezone autocomplete, privacy modes, and SQLite persistence.',
         narrative:
@@ -165,7 +159,6 @@ export const projects = [
         title: 'Personal Portfolio',
         types: ['Frontend'],
         focus: 'Identity and case-study design',
-        status: 'Live site',
         summary:
             'This website! A clean, responsive portfolio built with React to showcase my projects and skills.',
         narrative:
@@ -189,7 +182,6 @@ export const projects = [
         title: 'Roblox Scripting',
         types: ['Game'],
         focus: 'Lua scripting',
-        status: 'Archived',
         summary:
             'Lua and Roblox Studio work focused on gameplay loops, UI systems, player-facing mechanics, and quick iteration on interactive ideas.',
         narrative:

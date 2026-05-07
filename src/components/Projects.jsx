@@ -80,7 +80,6 @@ const ProjectCard = forwardRef(({project}, ref) => {
                     {project.types.map((type) => (
                         <span key={type}>{type}</span>
                     ))}
-                    <span>{project.status}</span>
                 </div>
 
                 <h3>{project.title}</h3>
@@ -176,7 +175,6 @@ function Projects() {
                 project.title,
                 ...project.types,
                 project.focus,
-                project.status,
                 project.summary,
                 project.narrative,
                 ...project.highlights,
