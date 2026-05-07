@@ -167,14 +167,15 @@ export const projects = [
         focus: 'Identity and case-study design',
         status: 'Live site',
         summary:
-            'A rebuilt portfolio that replaces generic portfolio tropes with a clearer story about practical shipped software.',
+            'This website! A clean, responsive portfolio built with React to showcase my projects and skills.',
         narrative:
             'The work here is content strategy as much as CSS: fewer decorative widgets, stronger project hierarchy, and more evidence per section.',
         highlights: [
-            'Project-led information architecture',
-            'Responsive editorial layout',
-            'Accessible navigation and contact paths',
-            'Vitest coverage for the main rendering paths'
+            'Mobile-friendly design',
+            'Smooth animations',
+            'Project filtering by tech stack',
+            'Project showcase with media support',
+            'Skills overview'
         ],
         techStack: ['React', 'JavaScript', 'CSS', 'Vite', 'Vitest'],
         links: {
