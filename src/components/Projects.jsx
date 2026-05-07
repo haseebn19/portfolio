@@ -1,367 +1,365 @@
-import {useState, useEffect, useMemo} from 'react';
-import {createPortal} from 'react-dom';
+import {useMemo, useState, useRef, forwardRef, useLayoutEffect} from 'react';
+import {motion, AnimatePresence} from 'framer-motion';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {
-  faPlay, faPause, faExpand,
-  faCode, faDatabase, faGamepad, faCloud, faMobile, faRocket,
-  faCalendarAlt, faLock, faKey, faUser, faSearch, faXmark, faBook, faCity
+    faBook,
+    faCalendarAlt,
+    faCity,
+    faCode,
+    faFilter,
+    faGamepad,
+    faKey,
+    faLock,
+    faSearch,
+    faUser,
+    faXmark
 } from '@fortawesome/free-solid-svg-icons';
-import {projects, featuredProjectIds} from '../data/projects';
+import {getFeaturedProjects, getProjectStats, getProjectTypes, projects} from '../data/projects';
 import {ProjectLink} from './ProjectLink';
-import Masonry from 'react-masonry-css';
 
-// Simple icon mapping
 const icons = {
-  faCode, faDatabase, faGamepad, faCloud, faMobile, faRocket,
-  faCalendarAlt, faLock, faKey, faUser, faSearch, faBook, faCity
+    faBook,
+    faCalendarAlt,
+    faCity,
+    faCode,
+    faGamepad,
+    faKey,
+    faLock,
+    faSearch,
+    faUser
 };
 
-function ProjectMedia({media}) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+const normalize = (value) => value.toLowerCase().trim();
 
-  // ESC key handler for closing expanded media
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.keyCode === 27 && isExpanded) {
-        setIsExpanded(false);
-      }
-    };
-
-    if (isExpanded) {
-      document.addEventListener('keydown', handleEsc, false);
-      document.body.style.overflow = 'hidden'; // Prevent background scrolling
+function ProjectVisual({project}) {
+    if (project.media?.type === 'image') {
+        return (
+            <div className="project-visual project-visual-image">
+                <img src={project.media.url} alt={project.media.alt} loading="lazy" />
+            </div>
+        );
     }
 
-    return () => {
-      document.removeEventListener('keydown', handleEsc, false);
-      document.body.style.overflow = 'unset';
-    };
-  }, [isExpanded]);
-
-  if (!media) return null;
-
-  const handleVideoControl = (e, action) => {
-    e.stopPropagation();
-    const video = e.target.closest('.project-media').querySelector('video');
-    if (video) {
-      if (action === 'play') {
-        video.play();
-        setIsPlaying(true);
-      } else {
-        video.pause();
-        setIsPlaying(false);
-      }
-    }
-  };
-
-  const toggleExpanded = (e) => {
-    e.stopPropagation();
-    setIsExpanded(!isExpanded);
-  };
-
-  const closeExpanded = (e) => {
-    // Only close if clicking on the overlay background
-    if (e.target.classList.contains('expanded-overlay')) {
-      setIsExpanded(false);
-    }
-  };
-
-  const renderMedia = () => {
-    if (media.type === 'video') {
-      return (
-        <div className="video-container">
-          <video
-            src={media.url}
-            poster={media.poster}
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
-            onEnded={() => setIsPlaying(false)}
-          />
-          <div className="video-controls">
-            <button
-              className="control-btn"
-              onClick={(e) => handleVideoControl(e, isPlaying ? 'pause' : 'play')}
-            >
-              <FontAwesomeIcon icon={isPlaying ? faPause : faPlay} />
-            </button>
-            <button
-              className="control-btn expand-btn"
-              onClick={toggleExpanded}
-            >
-              <FontAwesomeIcon icon={faExpand} />
-            </button>
-          </div>
-        </div>
-      );
-    } else if (media.type === 'image') {
-      return (
-        <div className="image-container">
-          <img src={media.url} alt={media.alt || "Project preview"} />
-          <button
-            className="control-btn expand-btn"
-            onClick={toggleExpanded}
-          >
-            <FontAwesomeIcon icon={faExpand} />
-          </button>
-        </div>
-      );
-    }
-    return null;
-  };
-
-  return (
-    <>
-      <div className="project-media">
-        {renderMedia()}
-      </div>
-      {isExpanded && createPortal(
-        <div
-          className="expanded-overlay"
-          onClick={closeExpanded}
-        >
-          <div
-            className="expanded-content"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {media.type === 'video' ? (
-              <div className="expanded-video">
-                <video
-                  src={media.url}
-                  poster={media.poster}
-                  controls
-                  autoPlay={isPlaying}
-                />
-              </div>
+    return (
+        <div className="project-visual project-visual-icon" aria-hidden="true">
+            {project.icon ? (
+                <img src={project.icon} alt="" loading="lazy" />
             ) : (
-              <div className="expanded-image">
-                <img src={media.url} alt={media.alt || "Project preview"} />
-              </div>
+                <FontAwesomeIcon icon={icons[project.faIcon] || faCode} />
             )}
-          </div>
-          <button
-            className="close-btn"
-            onClick={() => setIsExpanded(false)}
-            title="Close (ESC)"
-          >
-            ✕
-          </button>
-        </div>,
-        document.body
-      )}
-    </>
-  );
+        </div>
+    );
 }
 
-function ProjectCard({project}) {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (<div
-    className={`project-card card-base ${isHovered ? 'hovered' : ''}`}
-    onMouseEnter={() => setIsHovered(true)}
-    onMouseLeave={() => setIsHovered(false)}
-  >
-    <div className="project-header">
-      {project.icon ? (
-        <img src={project.icon} alt="" className="project-icon" />) : (
-        <div className="project-icon">
-          <FontAwesomeIcon icon={icons[project.faIcon] || faCode} />
-        </div>
-      )}
-      <h3 className="project-title">{project.title}</h3>
-    </div>
-
-    {project.media && <ProjectMedia media={project.media} />}
-
-    <p className="project-description">{project.description}</p>      <div className="project-features">
-      {project.features.map((feature, index) => (
-        <div key={index} className="feature-item">
-          <span>{feature}</span>
-        </div>
-      ))}
-    </div>
-
-    <div className="tech-stack">
-      {project.techStack.map((tech, index) => (
-        <span key={index} className="tech-tag">{tech}</span>
-      ))}
-    </div>      <div className="project-links">
-      <ProjectLink url={project.githubUrl} type="github" />
-      <ProjectLink url={project.liveUrl} type="demo" />
-    </div>
-  </div>
-  );
+function TechList({items}) {
+    return (
+        <ul className="tech-list" aria-label="Technology stack">
+            {items.map((tech) => (
+                <li key={tech}>{tech}</li>
+            ))}
+        </ul>
+    );
 }
+
+const ProjectCard = forwardRef(({project}, ref) => {
+    return (
+        <motion.article
+            ref={ref}
+            layout
+            transition={{ 
+                duration: 0.4,
+                ease: [0.4, 0, 0.2, 1]
+            }}
+            whileHover={{ y: -6 }}
+            className={`project-card ${project.featured ? 'project-card-featured' : ''}`}
+        >
+            <ProjectVisual project={project} />
+
+            <div className="project-card-body">
+                <div className="project-kicker">
+                    {project.types.map((type) => (
+                        <span key={type}>{type}</span>
+                    ))}
+                    <span>{project.status}</span>
+                </div>
+
+                <h3>{project.title}</h3>
+                <p className="project-summary">{project.summary}</p>
+
+                <ul className="project-highlights">
+                    {project.highlights.slice(0, 3).map((highlight) => (
+                        <li key={highlight}>{highlight}</li>
+                    ))}
+                </ul>
+
+                <TechList items={project.techStack} />
+
+                <div className="project-links">
+                    <ProjectLink url={project.links.github} type="github" variant="compact" />
+                    <ProjectLink url={project.links.live} type="live" variant="compact" />
+                </div>
+            </div>
+        </motion.article>
+    );
+});
+
+ProjectCard.displayName = 'ProjectCard';
 
 function Projects() {
-  const [showAll, setShowAll] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [selectedTags, setSelectedTags] = useState([]);
-  const hasFilters = selectedTags.length > 0;
+    const [searchTags, setSearchTags] = useState([]);
+    const [query, setQuery] = useState('');
+    const [activeType, setActiveType] = useState('All');
+    const [displayLimit, setDisplayLimit] = useState(6);
+    const inputRef = useRef(null);
+    const footerRef = useRef(null);
+    const scrollCapture = useRef(null);
 
-  const allTags = useMemo(() => {
-    const map = new Map();
-    projects.forEach((project) => {
-      (project.techStack || []).forEach((tag) => {
-        const key = tag.toLowerCase();
-        if (!map.has(key)) {
-          map.set(key, tag);
+    const projectTypes = useMemo(() => getProjectTypes(), []);
+    const stats = useMemo(() => getProjectStats(), []);
+    const featuredCount = useMemo(() => getFeaturedProjects().length, []);
+    const allTechTags = useMemo(() => {
+        return Array.from(new Set(projects.flatMap((p) => p.techStack))).sort((a, b) => a.localeCompare(b));
+    }, []);
+
+    const addSearchTag = (tag) => {
+        const trimmed = tag.trim();
+        if (trimmed && !searchTags.some(t => normalize(t) === normalize(trimmed))) {
+            setSearchTags([...searchTags, trimmed]);
         }
-      });
-    });
-    return Array.from(map.values());
-  }, []);
+        setQuery('');
+    };
 
-  // Get featured projects or all projects based on state
-  const baseProjects = hasFilters
-    ? projects
-    : showAll
-      ? projects
-      : projects.filter(project => featuredProjectIds.includes(project.id));
+    const removeSearchTag = (indexToRemove) => {
+        setSearchTags(searchTags.filter((_, index) => index !== indexToRemove));
+    };
 
-  const filteredProjects = baseProjects.filter((project) => {
-    const projectTags = (project.techStack || []).map(tag => tag.toLowerCase());
-    const requiredTags = selectedTags.map(tag => tag.toLowerCase());
-    const tagsMatch = requiredTags.every(tag => projectTags.includes(tag));
-    return tagsMatch;
-  });
-
-  const filteredSuggestions = useMemo(() => {
-    const normalized = searchTerm.trim().toLowerCase();
-    if (!normalized) return [];
-    return allTags
-      .filter((tag) => tag.toLowerCase().includes(normalized))
-      .filter((tag) => !selectedTags.some(sel => sel.toLowerCase() === tag.toLowerCase()))
-      .slice(0, 6);
-  }, [searchTerm, allTags, selectedTags]);
-
-  const addTag = (tag) => {
-    const normalized = tag.trim();
-    if (!normalized) return;
-    const exists = selectedTags.some(sel => sel.toLowerCase() === normalized.toLowerCase());
-    if (exists) {
-      setSearchTerm('');
-      return;
-    }
-    setSelectedTags([...selectedTags, normalized]);
-    setSearchTerm('');
-  };
-
-  const removeTag = (tag) => {
-    setSelectedTags(selectedTags.filter(sel => sel !== tag));
-  };
-
-  const handleSearchKeyDown = (e) => {
-    if (e.key === 'Enter' || e.key === 'Tab') {
-      e.preventDefault();
-      addTag(searchTerm);
-    }
-  };
-
-  const handleToggle = () => {
-    setIsTransitioning(true);
-
-    // Wait for fade out animation
-    setTimeout(() => {
-      setShowAll(!showAll);
-      // Wait a bit more then fade in
-      setTimeout(() => {
-        setIsTransitioning(false);
-      }, 50);
-    }, 300);
-  };
-
-  const breakpointColumnsObj = {
-    default: 3,
-    1100: 2,
-    700: 1
-  };
-
-  return (
-    <div className="projects-container">
-      <h2 className="section-title">
-        <span className="gradient-text">
-          {showAll ? 'All Projects' : 'Featured Projects'}
-        </span>
-      </h2>
-      <p className="section-subtitle">
-        {showAll
-          ? 'Explore all my projects across different technologies and domains.'
-          : 'Here are some of my notable projects that showcase my technical skills and problem-solving abilities.'
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' || e.key === ',') {
+            e.preventDefault();
+            addSearchTag(query);
+        } else if (e.key === 'Backspace' && query === '' && searchTags.length > 0) {
+            removeSearchTag(searchTags.length - 1);
         }
-      </p>
+    };
 
-      <div className="projects-filter">
-        <div className="project-search">
-          <FontAwesomeIcon icon={faSearch} className="search-icon" />
-          <input
-            type="search"
-            placeholder='Search by tech stack or keyword (e.g., TypeScript, PyQt)'
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyDown={handleSearchKeyDown}
-            aria-label="Search projects by technology or keyword"
-          />
-          {filteredSuggestions.length > 0 && (
-            <ul className="project-suggestions">
-              {filteredSuggestions.map((suggestion) => (
-                <li key={suggestion}>
-                  <button type="button" onClick={() => addTag(suggestion)}>
-                    {suggestion}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+    const handleInputChange = (e) => {
+        const val = e.target.value;
+        if (allTechTags.includes(val)) {
+            addSearchTag(val);
+        } else {
+            setQuery(val);
+        }
+    };
 
-        <div className="project-tags">
-          {selectedTags.length === 0 && (
-            <span className="tag-hint">Add tags to filter projects (e.g., React, TypeScript, PyQt)</span>
-          )}
-          {selectedTags.map((tag) => (
-            <button
-              key={tag}
-              className="tag-chip"
-              onClick={() => removeTag(tag)}
-              type="button"
+    useLayoutEffect(() => {
+        if (scrollCapture.current && footerRef.current) {
+            const newPos = footerRef.current.getBoundingClientRect().top;
+            const diff = newPos - scrollCapture.current;
+            window.scrollBy(0, diff);
+            scrollCapture.current = null;
+        }
+    }, [displayLimit]);
+
+    const handleShowLess = () => {
+        if (footerRef.current) {
+            scrollCapture.current = footerRef.current.getBoundingClientRect().top;
+        }
+        setDisplayLimit(6);
+    };
+
+    const filteredProjects = useMemo(() => {
+        const normalizedQuery = normalize(query);
+
+        return projects.filter((project) => {
+            const matchesType = activeType === 'All' || project.types.includes(activeType);
+            const searchableText = [
+                project.title,
+                ...project.types,
+                project.focus,
+                project.status,
+                project.summary,
+                project.narrative,
+                ...project.highlights,
+                ...project.techStack
+            ].join(' ');
+            const normalizedSearchableText = normalize(searchableText);
+            
+            const matchesTags = searchTags.length === 0 || searchTags.every((tag) => normalizedSearchableText.includes(normalize(tag)));
+            const matchesQuery = !normalizedQuery || normalizedSearchableText.includes(normalizedQuery);
+
+            return matchesType && matchesTags && matchesQuery;
+        });
+    }, [activeType, searchTags, query]);
+
+    const resetFilters = () => {
+        setSearchTags([]);
+        setQuery('');
+        setActiveType('All');
+        setDisplayLimit(6);
+    };
+
+    return (
+        <div className="projects-container">
+            <div className="section-heading project-heading">
+                <p className="eyebrow">Project browser</p>
+                <h2>Selected software and shipped projects.</h2>
+                <p>
+                    A collection of tools, dashboards, and utilities focused on solving specific
+                    problems with reliable, maintainable code.
+                </p>
+            </div>
+
+            <div className="project-toolbar" aria-label="Project browsing controls">
+                <div className="project-search" onClick={() => inputRef.current?.focus()}>
+                    <FontAwesomeIcon icon={faSearch} />
+                    <div className="search-tokens-container">
+                        <AnimatePresence>
+                            {searchTags.map((tag, index) => (
+                                <motion.span
+                                    key={tag}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.8 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    className="search-token"
+                                >
+                                    {tag}
+                                    <button
+                                        type="button"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            removeSearchTag(index);
+                                        }}
+                                        aria-label={`Remove ${tag}`}
+                                    >
+                                        ×
+                                    </button>
+                                </motion.span>
+                            ))}
+                        </AnimatePresence>
+                        <input
+                            ref={inputRef}
+                            type="search"
+                            className="search-input"
+                            value={query}
+                            onChange={handleInputChange}
+                            onKeyDown={handleKeyDown}
+                            placeholder={searchTags.length === 0 ? "Search projects, tech, or keywords" : ""}
+                            aria-label="Search projects"
+                            list="tech-tags"
+                        />
+                    </div>
+                    <datalist id="tech-tags">
+                        {allTechTags.map((tag) => (
+                            <option key={tag} value={tag} />
+                        ))}
+                    </datalist>
+                    {(query || searchTags.length > 0) && (
+                        <button
+                            type="button"
+                            className="clear-search"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setSearchTags([]);
+                                setQuery('');
+                            }}
+                            aria-label="Clear project search"
+                        >
+                            <FontAwesomeIcon icon={faXmark} />
+                        </button>
+                    )}
+                </div>
+
+                <div className="project-filter-group" aria-label="Filter projects by type">
+                    <span>
+                        <FontAwesomeIcon icon={faFilter} />
+                        Type
+                    </span>
+                    {['All', ...projectTypes].map((type) => (
+                        <button
+                            key={type}
+                            type="button"
+                            className={`filter-chip ${activeType === type ? 'active' : ''}`}
+                            onClick={() => setActiveType(type)}
+                        >
+                            {type}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div className="project-stats" aria-label="Project counts">
+                <div>
+                    <strong>{stats.total}</strong>
+                    <span>Total projects</span>
+                </div>
+                <div>
+                    <strong>{featuredCount}</strong>
+                    <span>Featured</span>
+                </div>
+                <div>
+                    <strong>{stats.live}</strong>
+                    <span>Live demos</span>
+                </div>
+                <div>
+                    <strong>{stats.types}</strong>
+                    <span>Types</span>
+                </div>
+            </div>
+
+            <div className="project-results-bar">
+                <p>
+                    Showing <strong>{filteredProjects.length}</strong> of <strong>{projects.length}</strong>
+                </p>
+                {(query || searchTags.length > 0 || activeType !== 'All') && (
+                    <button type="button" onClick={resetFilters}>
+                        Reset filters
+                    </button>
+                )}
+            </div>
+            <motion.div 
+                layout 
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                style={{ overflow: 'hidden' }}
             >
-              {tag}
-              <FontAwesomeIcon icon={faXmark} className="tag-chip-icon" />
-            </button>
-          ))}
-        </div>
-      </div>
+                {filteredProjects.length > 0 ? (
+                    <>
+                        <div className="project-grid" aria-label="Projects">
+                            {filteredProjects.slice(0, displayLimit).map((project) => (
+                                <ProjectCard key={project.id} project={project} />
+                            ))}
+                        </div>
 
-      <div className="projects-actions">
-        <button
-          className="view-toggle-button"
-          onClick={handleToggle}
-          disabled={isTransitioning}
-        >
-          {showAll ? 'Show Featured Only' : `View All Projects (${projects.length})`}
-        </button>
-      </div>
-
-      {filteredProjects.length === 0 ? (
-        <div className="projects-empty">
-          No projects match that query. Try searching for a tech like React, TypeScript, or PyQt.
+                        {filteredProjects.length > 6 && (
+                            <div className="project-footer" ref={footerRef}>
+                                {displayLimit < filteredProjects.length ? (
+                                    <button
+                                        type="button"
+                                        className="action-link"
+                                        onClick={() => setDisplayLimit(filteredProjects.length)}
+                                    >
+                                        Show all projects ({filteredProjects.length})
+                                    </button>
+                                ) : (
+                                    <button
+                                        type="button"
+                                        className="action-link"
+                                        onClick={handleShowLess}
+                                    >
+                                        Show less
+                                    </button>
+                                )}
+                            </div>
+                        )}
+                    </>
+                ) : (
+                    <div className="projects-empty">
+                        No projects match that filter. Try a technology like React, Python, Java, WPF, or Docker.
+                    </div>
+                )}
+            </motion.div>
         </div>
-      ) : (
-        <Masonry
-          breakpointCols={breakpointColumnsObj}
-          className="masonry-grid"
-          columnClassName="masonry-grid_column"
-          style={{opacity: isTransitioning ? 0 : 1, transition: 'opacity 0.3s ease'}}
-        >
-          {filteredProjects.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </Masonry>
-      )}
-    </div>
-  );
+    );
 }
 
 export default Projects;

@@ -1,17 +1,25 @@
-import {render, screen} from '@testing-library/react';
+import {render, screen, within} from '@testing-library/react';
 import {act} from 'react';
 import App from '../App';
+import {profile} from '../data/profile';
 
 describe('App', () => {
-    test('renders navigation and sections', () => {
+    test('renders navigation and redesigned sections', () => {
         render(<App />);
 
-        expect(screen.getByRole('navigation')).toBeInTheDocument();
-        expect(screen.getByText('Haseeb Niazi')).toBeInTheDocument();
-        expect(screen.getByText(/Hello, I.*m Haseeb/i)).toBeInTheDocument();
-        const projectButtons = screen.getAllByRole('button', {name: /Projects/i});
-        expect(projectButtons.length).toBeGreaterThan(0);
-        expect(screen.getByRole('button', {name: /Skills/i})).toBeInTheDocument();
+        const navigation = screen.getByRole('navigation', {name: /primary/i});
+
+        expect(navigation).toBeInTheDocument();
+        expect(screen.getByRole('button', {name: /Back to introduction/i})).toBeInTheDocument();
+        expect(screen.getByRole('heading', {name: profile.headline, level: 1})).toBeInTheDocument();
+        expect(within(navigation).getByRole('button', {name: /Work/i})).toBeInTheDocument();
+        expect(within(navigation).getByRole('button', {name: /Capabilities/i})).toBeInTheDocument();
+        expect(within(navigation).getByRole('button', {name: /About/i})).toBeInTheDocument();
+        expect(within(navigation).getByRole('button', {name: /Contact/i})).toBeInTheDocument();
+        expect(screen.getAllByText('Haseeb Niazi').length).toBeGreaterThan(0);
+        expect(screen.queryByText('HN')).not.toBeInTheDocument();
+        expect(screen.getByRole('heading', {name: /Selected software and shipped projects/i})).toBeInTheDocument();
+        expect(screen.getByRole('heading', {name: /Technical expertise and core capabilities/i})).toBeInTheDocument();
     });
 
     test('shows back to top button when scrolled', () => {
