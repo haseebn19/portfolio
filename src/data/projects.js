@@ -1,156 +1,220 @@
-export const projects = [{
-    id: 'unidetect',
-    title: "UniDetect",
-    description: "A modern web application for detecting and cleaning hidden Unicode characters in text. Supports multiple file formats with real-time analysis and privacy-focused local processing.",
-    features: [
-        "Real-time Unicode detection & highlighting",
-        "PDF & DOCX file support",
-        "Markdown & TXT file support",
-        "Drag & drop interface",
-        "Detailed character statistics & insights",
-        "Privacy-focused local processing",
-        "One-click text cleaning with clipboard copy"
-    ],
-    techStack: ["React", "TypeScript", "Vite", "Vitest", "PDF.js", "Mammoth.js", "Docker"],
-    githubUrl: "https://github.com/haseebn19/unidetect",
-    liveUrl: "https://haseebn19.github.io/unidetect/",
-    faIcon: "faSearch",
-    icon: "https://raw.githubusercontent.com/haseebn19/unidetect/main/public/logo.svg",
-},
-{
-    id: 'urban-housing-demand',
-    title: "Urban Housing Demand",
-    description: "A full-stack web application for visualizing housing and labour market data. Features interactive charts, real-time data analysis, and dark mode support.",
-    features: [
-        "Housing Data Visualization",
-        "Completion Ratios Analysis",
-        "Labour Market Analysis",
-        "Immigration Trends Monitoring",
-        "Dark/Light Theme Toggle"
-    ],
-    techStack: ["Java", "Spring Boot", "TypeScript", "React", "Vite", "Vitest", "Docker", "MariaDB", "Chart.js"],
-    githubUrl: "https://github.com/haseebn19/urban-housing-demand",
-    liveUrl: null,
-    faIcon: "faCity",
-    media: {
-        type: 'image',
-        url: 'https://raw.githubusercontent.com/haseebn19/urban-housing-demand/main/docs/screenshot-home.jpeg',
-        alt: 'Urban Housing Demand Dashboard'
+export const projects = [
+    {
+        id: 'unidetect',
+        title: 'UniDetect',
+        types: ['Frontend'],
+        focus: 'Hidden Unicode detection',
+        status: 'Live',
+        featured: true,
+        summary:
+            'A local-first inspection tool for finding and cleaning invisible Unicode characters before they break code reviews, documents, or submissions.',
+        narrative:
+            'The project is strongest as a trust and clarity story: it handles messy input formats, explains what it found, and keeps the sensitive text in the browser.',
+        highlights: [
+            'Real-time detection and highlighting for invisible characters',
+            'PDF, DOCX, Markdown, and TXT import paths',
+            'Privacy-focused processing with one-click cleaning',
+            'Vitest coverage and Docker-friendly packaging'
+        ],
+        techStack: ['React', 'TypeScript', 'Vite', 'Vitest', 'PDF.js', 'Mammoth.js', 'Docker'],
+        links: {
+            github: 'https://github.com/haseebn19/unidetect',
+            live: 'https://haseebn19.github.io/unidetect/'
+        },
+        faIcon: 'faSearch',
+        icon: 'https://raw.githubusercontent.com/haseebn19/unidetect/main/public/logo.svg'
+    },
+    {
+        id: 'requizle',
+        title: 'ReQuizle',
+        types: ['Frontend'],
+        focus: 'Spaced repetition',
+        status: 'Live',
+        featured: true,
+        summary:
+            'A study app for mastery tracking, custom question imports, and repeated review without sending study data to a server.',
+        narrative:
+            'This one shows product thinking: question variety, review state, local persistence, and import/export mechanics all support a real study workflow.',
+        highlights: [
+            'Multiple question types including matching, word bank, and multi-answer',
+            'Mastery tracking with include/exclude mastered controls',
+            'Custom JSON import for reusable subjects and question sets',
+            'Offline-friendly browser storage with a PWA foundation'
+        ],
+        techStack: ['React', 'TypeScript', 'TailwindCSS', 'Zustand', 'Framer Motion', 'Vite', 'Vitest', 'PWA'],
+        links: {
+            github: 'https://github.com/ReQuizle/requizle-web',
+            live: 'https://requizle.github.io/requizle-web/'
+        },
+        faIcon: 'faBook',
+        icon: 'https://raw.githubusercontent.com/ReQuizle/requizle-web/refs/heads/main/public/icon.svg'
+    },
+    {
+        id: 'urban-housing-demand',
+        title: 'Urban Housing Demand',
+        types: ['Frontend', 'Backend'],
+        focus: 'Housing and labour data',
+        status: 'Repository',
+        featured: true,
+        summary:
+            'A full-stack dashboard for exploring housing completions, labour indicators, immigration trends, and regional supply signals.',
+        narrative:
+            'The value here is in connecting several public-interest datasets into one navigable interface instead of leaving the analysis trapped in spreadsheets.',
+        highlights: [
+            'Spring Boot API backed by MariaDB',
+            'Interactive React dashboard with Chart.js visualizations',
+            'Housing, labour, and immigration views with dark/light themes',
+            'Containerized local setup for repeatable development'
+        ],
+        techStack: ['Java', 'Spring Boot', 'TypeScript', 'React', 'Vite', 'Vitest', 'Docker', 'MariaDB', 'Chart.js'],
+        links: {
+            github: 'https://github.com/haseebn19/urban-housing-demand',
+            live: null
+        },
+        faIcon: 'faCity',
+        media: {
+            type: 'image',
+            url: 'https://raw.githubusercontent.com/haseebn19/urban-housing-demand/main/docs/screenshot-home.jpeg',
+            alt: 'Urban Housing Demand dashboard screenshot'
+        }
+    },
+    {
+        id: 'password-generator',
+        title: 'Password Generator',
+        types: ['Desktop'],
+        focus: 'Secure generation',
+        status: 'Repository',
+        summary:
+            'A WPF password generator with theme-aware UI, clipboard flow, and real-time strength scoring.',
+        narrative:
+            'A compact native app that demonstrates Windows UI polish, MVVM structure, and security-conscious feedback loops.',
+        highlights: [
+            'Configurable length and character sets',
+            'Zxcvbn-backed strength evaluation',
+            'Windows dark/light theme integration',
+            'xUnit tests around core generation behavior'
+        ],
+        techStack: ['C#', '.NET 8', 'WPF', 'CommunityToolkit.Mvvm', 'xUnit'],
+        links: {
+            github: 'https://github.com/haseebn19/passgen',
+            live: null
+        },
+        faIcon: 'faLock',
+        icon: 'https://raw.githubusercontent.com/haseebn19/passgen/master/logo.svg',
+        media: {
+            type: 'image',
+            url: 'https://raw.githubusercontent.com/haseebn19/passgen/master/docs/screenshot-window.png',
+            alt: 'Password Generator desktop app screenshot'
+        }
+    },
+    {
+        id: 'ssh-keygen',
+        title: 'SSH Key Generator',
+        types: ['Desktop'],
+        focus: 'Key management',
+        status: 'Repository',
+        summary:
+            'A PyQt6 utility for creating SSH key pairs with algorithm choices, passphrase support, and quick access to generated files.',
+        narrative:
+            'This project turns a command-line security task into a guided desktop workflow while preserving practical defaults.',
+        highlights: [
+            'ED25519, RSA, and ECDSA key support',
+            'Custom output paths and optional passphrases',
+            'Fingerprint display and quick copy actions',
+            'Ruff and pytest-backed Python workflow'
+        ],
+        techStack: ['Python', 'PyQt6', 'cryptography', 'PyInstaller', 'pytest', 'Ruff'],
+        links: {
+            github: 'https://github.com/haseebn19/ssh-keygen',
+            live: null
+        },
+        faIcon: 'faKey',
+        icon: 'https://raw.githubusercontent.com/haseebn19/ssh-keygen/main/resources/logo.svg',
+        media: {
+            type: 'image',
+            url: 'https://raw.githubusercontent.com/haseebn19/ssh-keygen/main/resources/screenshot-window.png',
+            alt: 'SSH Key Generator desktop app screenshot'
+        }
+    },
+    {
+        id: 'calendar-bot',
+        title: 'Discord Calendar Bot',
+        types: ['Backend', 'Bot'],
+        focus: 'Timezone-aware events',
+        status: 'Repository',
+        summary:
+            'A Discord bot for personal calendar events with slash commands, timezone autocomplete, privacy modes, and SQLite persistence.',
+        narrative:
+            'A service-oriented build that handles user intent, data persistence, and Discord-native presentation in a small surface area.',
+        highlights: [
+            'Add, list, and remove calendar commands',
+            'Timezone autocomplete and native Discord timestamps',
+            'Public and private response modes',
+            'Async SQLite storage with pytest coverage'
+        ],
+        techStack: ['Python', 'discord.py', 'aiosqlite', 'SQLite', 'pytest', 'Ruff'],
+        links: {
+            github: 'https://github.com/haseebn19/calendar-bot',
+            live: null
+        },
+        faIcon: 'faCalendarAlt',
+        icon: 'https://raw.githubusercontent.com/haseebn19/calendar-bot/main/docs/logo.svg'
+    },
+    {
+        id: 'portfolio',
+        title: 'Personal Portfolio',
+        types: ['Frontend'],
+        focus: 'Identity and case-study design',
+        status: 'Live site',
+        summary:
+            'A rebuilt portfolio that replaces generic portfolio tropes with a clearer story about practical shipped software.',
+        narrative:
+            'The work here is content strategy as much as CSS: fewer decorative widgets, stronger project hierarchy, and more evidence per section.',
+        highlights: [
+            'Project-led information architecture',
+            'Responsive editorial layout',
+            'Accessible navigation and contact paths',
+            'Vitest coverage for the main rendering paths'
+        ],
+        techStack: ['React', 'JavaScript', 'CSS', 'Vite', 'Vitest'],
+        links: {
+            github: 'https://github.com/haseebn19/portfolio',
+            live: null
+        },
+        faIcon: 'faUser'
+    },
+    {
+        id: 'roblox-games',
+        title: 'Roblox Scripting',
+        types: ['Game'],
+        focus: 'Lua scripting',
+        status: 'Archived',
+        summary:
+            'Lua and Roblox Studio work focused on gameplay loops, UI systems, player-facing mechanics, and quick iteration on interactive ideas.',
+        narrative:
+            'Kept as part of the project archive because it reflects earlier hands-on scripting and game systems work, even without a public repository attached.',
+        highlights: [
+            'Gameplay mechanics and player systems',
+            'Roblox Studio UI workflows',
+            'Performance-minded Lua scripting',
+            'Fast iteration on interactive experiences'
+        ],
+        techStack: ['Lua', 'Roblox Studio'],
+        links: {
+            github: null,
+            live: null
+        },
+        faIcon: 'faGamepad'
     }
-},
-{
-    id: 'requizle',
-    title: "ReQuizle",
-    description: "A spaced-repetition study app with mastery tracking, multiple question types, and offline-friendly data storage.",
-    features: [
-        "Mastery tracking with include/exclude mastered toggle",
-        "Multiple question types (MCQ, multi-answer, T/F, keywords, matching, word bank)",
-        "Custom JSON import for subjects and questions",
-        "Local storage persistence for profiles and progress",
-        "Dark mode and responsive UI",
-        "Privacy-focused: all data stays in-browser"
-    ],
-    techStack: ["React", "TypeScript", "TailwindCSS", "Zustand", "Framer Motion", "Vite", "Vitest", "PWA"],
-    githubUrl: "https://github.com/ReQuizle/requizle-web",
-    liveUrl: "https://requizle.github.io/requizle-web/",
-    faIcon: "faBook",
-    icon: "https://raw.githubusercontent.com/ReQuizle/requizle-web/refs/heads/main/public/icon.svg",
-},
-{
-    id: 'password-generator',
-    title: "Password Generator",
-    description: "A modern WPF password generator with real-time strength evaluation. Features a clean UI that follows your Windows theme.",
-    features: [
-        "Configurable length from 4 to 128 characters",
-        "Lowercase, uppercase, numbers, and symbols",
-        "Real-time strength evaluation with Zxcvbn",
-        "Windows dark/light theme support",
-        "One-click clipboard copy"
-    ],
-    techStack: ["C#", ".NET 8.0", "WPF", "CommunityToolkit.Mvvm", "xUnit"],
-    githubUrl: "https://github.com/haseebn19/passgen",
-    liveUrl: null,
-    faIcon: "faLock",
-    icon: "https://raw.githubusercontent.com/haseebn19/passgen/master/logo.svg",
-    media: {
-        type: 'image',
-        url: 'https://raw.githubusercontent.com/haseebn19/passgen/master/docs/screenshot-window.png',
-        alt: 'Password Generator UI'
-    }
-}, {
-    id: 'ssh-keygen',
-    title: "SSH Key Generator",
-    description: "A desktop application built with Python and PyQt6 that simplifies the process of generating SSH keys. Features a clean, user-friendly interface for creating secure SSH key pairs with multiple algorithms and key lengths.",
-    features: [
-        "ED25519, RSA, and ECDSA key support",
-        "Multiple key size options",
-        "Default ~/.ssh or custom output location",
-        "Optional passphrase protection",
-        "Quick copy & file access",
-        "Fingerprint generation and display"
-    ],
-    techStack: ["Python", "PyQt6", "cryptography", "PyInstaller", "pytest", "Ruff"],
-    githubUrl: "https://github.com/haseebn19/ssh-keygen",
-    liveUrl: null,
-    faIcon: "faKey",
-    icon: "https://raw.githubusercontent.com/haseebn19/ssh-keygen/main/resources/logo.svg",
-    media: {
-        type: 'image',
-        url: 'https://raw.githubusercontent.com/haseebn19/ssh-keygen/main/resources/screenshot-window.png',
-        alt: 'SSH Key Generator UI'
-    }
-}, {
-    id: 'calendar-bot',
-    title: "Discord Calendar Bot",
-    description: "A Discord bot for managing personal calendar events with full timezone support. Features slash commands, privacy controls, and Discord's native timestamp formatting.",
-    features: [
-        "Calendar management with add, list, and remove commands",
-        "Full timezone support with autocomplete",
-        "Public and private privacy modes",
-        "Ephemeral responses for private mode",
-        "Discord native timestamp formatting",
-        "SQLite database with async support"
-    ],
-    techStack: ["Python", "discord.py", "aiosqlite", "pytest", "Ruff"],
-    githubUrl: "https://github.com/haseebn19/calendar-bot",
-    liveUrl: null,
-    faIcon: "faCalendarAlt",
-    icon: "https://raw.githubusercontent.com/haseebn19/calendar-bot/main/docs/logo.svg",
-}, {
-    id: 'portfolio',
-    title: "Personal Portfolio",
-    description: "This website! A clean, responsive portfolio built with React to showcase my projects and skills.",
-    features: [
-        "Mobile-friendly design",
-        "Smooth animations",
-        "Project filtering by tech stack",
-        "Project showcase with media support",
-        "Skills overview"
-    ],
-    techStack: ["React", "JavaScript", "CSS3", "Vite", "Vitest"],
-    githubUrl: "https://github.com/haseebn19/portfolio",
-    liveUrl: null,
-    faIcon: "faUser",
-},
-{
-    id: 'roblox-games',
-    title: "Roblox Development",
-    description: "Built games and experiences on Roblox using Lua scripting. Focused on creating engaging gameplay and smooth user experiences.",
-    features: [
-        "Game mechanics",
-        "UI design",
-        "Player systems",
-        "Performance optimization"
-    ],
-    techStack: ["Lua", "Roblox Studio"],
-    githubUrl: null,
-    liveUrl: null,
-    faIcon: "faGamepad"
-}
 ];
 
-export const featuredProjectIds = [
-    'unidetect',
-    'requizle',
-    'urban-housing-demand'
-];
+export const getFeaturedProjects = () => projects.filter((project) => project.featured);
+
+export const getProjectTypes = () =>
+    Array.from(new Set(projects.flatMap((project) => project.types))).sort((a, b) => a.localeCompare(b));
+
+export const getProjectStats = () => ({
+    total: projects.length,
+    live: projects.filter((project) => project.links.live).length,
+    types: getProjectTypes().length
+});

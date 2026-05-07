@@ -1,77 +1,89 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faLinkedin, faGithub} from '@fortawesome/free-brands-svg-icons';
-import {faEnvelope, faMapMarkerAlt} from '@fortawesome/free-solid-svg-icons';
+import {faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons';
+import {
+    faArrowDown,
+    faBriefcase,
+    faEnvelope,
+    faMapMarkerAlt
+} from '@fortawesome/free-solid-svg-icons';
 import profilePic from '../assets/images/picture.jpg';
-import {SOCIAL_LINKS, EXTERNAL_LINK_PROPS} from '../utils/constants';
+import {profile} from '../data/profile';
+import {getProjectStats} from '../data/projects';
+import {EXTERNAL_LINK_PROPS, SOCIAL_LINKS, scrollToSection} from '../utils/constants';
+
+const socialLinks = [
+    {label: 'GitHub', href: SOCIAL_LINKS.github, icon: faGithub, external: true},
+    {label: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: faLinkedin, external: true},
+    {label: 'Email', href: SOCIAL_LINKS.email, icon: faEnvelope, external: false}
+];
 
 function AboutMe() {
-    const isAvailableForHire = true;
+    const projectStats = getProjectStats();
+    const proofPoints = [
+        {value: projectStats.total, label: 'projects'},
+        {value: projectStats.types, label: 'project types'},
+        {value: projectStats.live, label: 'live demos'}
+    ];
 
     return (
-        <div className="about-container">
-            <div className="hero-grid">
-                <div className="hero-content">
-                    <h1 className="glowing-text">
-                        <span className="gradient-text">Hello, I&apos;m Haseeb</span>
-                    </h1>
+        <div className="hero-layout">
+            <div className="hero-copy">
+                <p className="eyebrow">
+                    <FontAwesomeIcon icon={faBriefcase} />
+                    {profile.availability}
+                </p>
 
-                    <h2 className="hero-subtitle">
-                        Software Engineer
-                        <span className="hero-location">
-                            <FontAwesomeIcon icon={faMapMarkerAlt} />
-                            Ontario, Canada
-                        </span>
-                    </h2>
+                <h1>{profile.headline}</h1>
 
-                    <p className="hero-text">
-                        Passionate software engineer with expertise in full-stack development,
-                        problem-solving, and creating innovative solutions. I love exploring
-                        new technologies and building applications that make a difference.
-                    </p>
+                <p className="hero-intro">{profile.intro}</p>
 
-                    {isAvailableForHire && (
-                        <div className="status-container">
-                            <div className="status-badge available">
-                                <span className="status-dot"></span>
-                                Available for hire
-                            </div>
-                        </div>
-                    )}                    <div className="hero-actions">
-                        <a
-                            href={SOCIAL_LINKS.github}
-                            {...EXTERNAL_LINK_PROPS}
-                            className="social-link github"
-                        >
-                            <FontAwesomeIcon icon={faGithub} />
-                            <span>GitHub</span>
-                        </a>
-                        <a
-                            href={SOCIAL_LINKS.linkedin}
-                            {...EXTERNAL_LINK_PROPS}
-                            className="social-link linkedin"
-                        >
-                            <FontAwesomeIcon icon={faLinkedin} />
-                            <span>LinkedIn</span>
-                        </a>
-                        <a
-                            href={SOCIAL_LINKS.email}
-                            className="social-link email"
-                        >
-                            <FontAwesomeIcon icon={faEnvelope} />
-                            <span>Email</span>
-                        </a>
-                    </div>
+                <div className="hero-meta" aria-label="Personal details">
+                    <span>{profile.name}</span>
+                    <span>{profile.role}</span>
+                    <span>
+                        <FontAwesomeIcon icon={faMapMarkerAlt} />
+                        {profile.location}
+                    </span>
                 </div>
 
-                <div className="hero-image">
-                    <div className="image-container">
-                        <img src={profilePic} alt="Haseeb Niazi" />
-                    </div>
-                    <div className="background-pattern"></div>
-                    <div className="background-glow"></div>
+                <div className="hero-actions" aria-label="Contact and profile links">
+                    {socialLinks.map(({label, href, icon, external}) => (
+                        <a
+                            key={label}
+                            href={href}
+                            {...(external ? EXTERNAL_LINK_PROPS : {})}
+                            className="action-link"
+                        >
+                            <FontAwesomeIcon icon={icon} />
+                            <span>{label}</span>
+                        </a>
+                    ))}
                 </div>
             </div>
 
+            <aside className="hero-panel" aria-label="Portfolio snapshot">
+                <div className="portrait-frame">
+                    <img src={profilePic} alt="Haseeb Niazi" />
+                </div>
+
+                <div className="proof-grid">
+                    {proofPoints.map((point) => (
+                        <div className="proof-item" key={point.label}>
+                            <strong>{point.value}</strong>
+                            <span>{point.label}</span>
+                        </div>
+                    ))}
+                </div>
+
+                <button
+                    type="button"
+                    className="work-jump"
+                    onClick={() => scrollToSection('work')}
+                >
+                    <FontAwesomeIcon icon={faArrowDown} />
+                    <span>Browse projects</span>
+                </button>
+            </aside>
         </div>
     );
 }
