@@ -1,43 +1,54 @@
-import {useState, useEffect} from 'react';
+import {useState, useEffect, useCallback} from 'react';
 
-// Custom hook for scroll position tracking
+// Custom hook for scroll position tracking (throttled via rAF)
 export const useScrollPosition = () => {
-    const [scrollPosition, setScrollPosition] = useState(0);
     const [isScrolled, setIsScrolled] = useState(false);
 
     useEffect(() => {
+        let ticking = false;
         const handleScroll = () => {
-            const position = window.pageYOffset;
-            setScrollPosition(position);
-            setIsScrolled(position > 50);
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    setIsScrolled(window.scrollY > 50);
+                    ticking = false;
+                });
+                ticking = true;
+            }
         };
 
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener('scroll', handleScroll, {passive: true});
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    return {scrollPosition, isScrolled};
+    return {isScrolled};
 };
 
-// Custom hook for back to top visibility
+// Custom hook for back to top visibility (throttled via rAF)
 export const useBackToTop = (threshold = 300) => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
+        let ticking = false;
         const toggleVisibility = () => {
-            setIsVisible(window.pageYOffset > threshold);
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    setIsVisible(window.scrollY > threshold);
+                    ticking = false;
+                });
+                ticking = true;
+            }
         };
 
-        window.addEventListener('scroll', toggleVisibility);
+        window.addEventListener('scroll', toggleVisibility, {passive: true});
         return () => window.removeEventListener('scroll', toggleVisibility);
     }, [threshold]);
 
-    const scrollToTop = () => {
+    const scrollToTop = useCallback(() => {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
         });
-    };
+    }, []);
 
     return {isVisible, scrollToTop};
 };

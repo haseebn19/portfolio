@@ -61,11 +61,10 @@ function AboutSection() {
     return (
         <div className="about-detail">
             <div className="section-heading">
-                <p className="eyebrow">About the way I work</p>
-                <h2>Practical software built for reliability.</h2>
+                <p className="eyebrow">About me</p>
+                <h2>From game scripting to full-stack engineering.</h2>
                 <p>
-                    I focus on the edge cases and implementation details that make tools actually
-                    useful in real production environments.
+                    How I got here, and what kind of work I want to do next.
                 </p>
             </div>
 
@@ -145,9 +144,13 @@ function App() {
 
     return (
         <div className="app">
+            <a href="#main-content" className="skip-to-content">
+                Skip to main content
+            </a>
+
             <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
 
-            <main>
+            <main id="main-content">
                 <section id="intro" className="page-section hero-section">
                     <AboutMe />
                 </section>
