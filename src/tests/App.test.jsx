@@ -22,15 +22,25 @@ describe('App', () => {
         expect(screen.getByRole('heading', {name: /Technical expertise and core capabilities/i})).toBeInTheDocument();
     });
 
-    test('shows back to top button when scrolled', () => {
+    test('renders skip-to-content link', () => {
+        render(<App />);
+
+        const skipLink = screen.getByRole('link', {name: /skip to main content/i});
+        expect(skipLink).toBeInTheDocument();
+        expect(skipLink).toHaveAttribute('href', '#main-content');
+    });
+
+    test('shows back to top button when scrolled', async () => {
         render(<App />);
 
         const backToTop = screen.getByRole('button', {name: /back to top/i});
         expect(backToTop.classList.contains('visible')).toBe(false);
 
-        act(() => {
-            window.pageYOffset = 500;
+        await act(async () => {
+            Object.defineProperty(window, 'scrollY', {value: 500, writable: true, configurable: true});
             window.dispatchEvent(new Event('scroll'));
+            // Flush rAF-throttled handler
+            await new Promise((resolve) => requestAnimationFrame(resolve));
         });
 
         expect(backToTop.classList.contains('visible')).toBe(true);

@@ -7,8 +7,6 @@ export const projects = [
         featured: true,
         summary:
             'A local-first inspection tool for finding and cleaning invisible Unicode characters before they break code reviews, documents, or submissions.',
-        narrative:
-            'The project is strongest as a trust and clarity story: it handles messy input formats, explains what it found, and keeps the sensitive text in the browser.',
         highlights: [
             'Real-time detection and highlighting for invisible characters',
             'PDF, DOCX, Markdown, and TXT import paths',
@@ -31,8 +29,6 @@ export const projects = [
         featured: true,
         summary:
             'A study app for mastery tracking, custom question imports, and repeated review without sending study data to a server.',
-        narrative:
-            'This one shows product thinking: question variety, review state, local persistence, and import/export mechanics all support a real study workflow.',
         highlights: [
             'Multiple question types including matching, word bank, and multi-answer',
             'Mastery tracking with include/exclude mastered controls',
@@ -55,8 +51,6 @@ export const projects = [
         featured: true,
         summary:
             'A full-stack dashboard for exploring housing completions, labour indicators, immigration trends, and regional supply signals.',
-        narrative:
-            'The value here is in connecting several public-interest datasets into one navigable interface instead of leaving the analysis trapped in spreadsheets.',
         highlights: [
             'Spring Boot API backed by MariaDB',
             'Interactive React dashboard with Chart.js visualizations',
@@ -82,8 +76,6 @@ export const projects = [
         focus: 'Secure generation',
         summary:
             'A WPF password generator with theme-aware UI, clipboard flow, and real-time strength scoring.',
-        narrative:
-            'A compact native app that demonstrates Windows UI polish, MVVM structure, and security-conscious feedback loops.',
         highlights: [
             'Configurable length and character sets',
             'Zxcvbn-backed strength evaluation',
@@ -110,8 +102,6 @@ export const projects = [
         focus: 'Key management',
         summary:
             'A PyQt6 utility for creating SSH key pairs with algorithm choices, passphrase support, and quick access to generated files.',
-        narrative:
-            'This project turns a command-line security task into a guided desktop workflow while preserving practical defaults.',
         highlights: [
             'ED25519, RSA, and ECDSA key support',
             'Custom output paths and optional passphrases',
@@ -138,8 +128,6 @@ export const projects = [
         focus: 'Timezone-aware events',
         summary:
             'A Discord bot for personal calendar events with slash commands, timezone autocomplete, privacy modes, and SQLite persistence.',
-        narrative:
-            'A service-oriented build that handles user intent, data persistence, and Discord-native presentation in a small surface area.',
         highlights: [
             'Add, list, and remove calendar commands',
             'Timezone autocomplete and native Discord timestamps',
@@ -161,8 +149,6 @@ export const projects = [
         focus: 'Identity and case-study design',
         summary:
             'This website! A clean, responsive portfolio built with React to showcase my projects and skills.',
-        narrative:
-            'The work here is content strategy as much as CSS: fewer decorative widgets, stronger project hierarchy, and more evidence per section.',
         highlights: [
             'Mobile-friendly design',
             'Smooth animations',
@@ -184,8 +170,6 @@ export const projects = [
         focus: 'Lua scripting',
         summary:
             'Lua and Roblox Studio work focused on gameplay loops, UI systems, player-facing mechanics, and quick iteration on interactive ideas.',
-        narrative:
-            'Kept as part of the project archive because it reflects earlier hands-on scripting and game systems work, even without a public repository attached.',
         highlights: [
             'Gameplay mechanics and player systems',
             'Roblox Studio UI workflows',

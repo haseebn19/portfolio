@@ -8,7 +8,6 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import profilePic from '../assets/images/picture.jpg';
 import {profile} from '../data/profile';
-import {getProjectStats} from '../data/projects';
 import {EXTERNAL_LINK_PROPS, SOCIAL_LINKS, scrollToSection} from '../utils/constants';
 
 const socialLinks = [
@@ -18,13 +17,6 @@ const socialLinks = [
 ];
 
 function AboutMe() {
-    const projectStats = getProjectStats();
-    const proofPoints = [
-        {value: projectStats.total, label: 'projects'},
-        {value: projectStats.types, label: 'project types'},
-        {value: projectStats.live, label: 'live demos'}
-    ];
-
     return (
         <div className="hero-layout">
             <div className="hero-copy">
@@ -64,15 +56,6 @@ function AboutMe() {
             <aside className="hero-panel" aria-label="Portfolio snapshot">
                 <div className="portrait-frame">
                     <img src={profilePic} alt="Haseeb Niazi" />
-                </div>
-
-                <div className="proof-grid">
-                    {proofPoints.map((point) => (
-                        <div className="proof-item" key={point.label}>
-                            <strong>{point.value}</strong>
-                            <span>{point.label}</span>
-                        </div>
-                    ))}
                 </div>
 
                 <button

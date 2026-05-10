@@ -48,4 +48,44 @@ describe('Projects', () => {
             expect(screen.queryByRole('heading', {name: 'ReQuizle'})).not.toBeInTheDocument();
         });
     });
+
+    test('shows empty state when no projects match', () => {
+        render(<Projects />);
+
+        fireEvent.change(screen.getByRole('combobox', {name: /Search projects/i}), {
+            target: {value: 'xyznonexistent123'}
+        });
+
+        expect(screen.getByText(/No projects match that filter/i)).toBeInTheDocument();
+    });
+
+    test('adds search tags via exact tech match and removes them', async () => {
+        render(<Projects />);
+
+        const searchInput = screen.getByRole('combobox', {name: /Search projects/i});
+
+        // Typing an exact tech tag auto-adds it as a search token
+        fireEvent.change(searchInput, {target: {value: 'Docker'}});
+
+        expect(screen.getByRole('button', {name: /Remove Docker/i})).toBeInTheDocument();
+
+        // Remove the tag
+        fireEvent.click(screen.getByRole('button', {name: /Remove Docker/i}));
+
+        // AnimatePresence exit animation may delay DOM removal
+        await waitFor(() => {
+            expect(screen.queryByRole('button', {name: /Remove Docker/i})).not.toBeInTheDocument();
+        });
+    });
+
+    test('adds search tags via Enter key', () => {
+        render(<Projects />);
+
+        const searchInput = screen.getByRole('combobox', {name: /Search projects/i});
+
+        fireEvent.change(searchInput, {target: {value: 'discord'}});
+        fireEvent.keyDown(searchInput, {key: 'Enter'});
+
+        expect(screen.getByRole('button', {name: /Remove discord/i})).toBeInTheDocument();
+    });
 });

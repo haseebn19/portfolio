@@ -31,6 +31,12 @@ const icons = {
 
 const normalize = (value) => value.toLowerCase().trim();
 
+const cardVariants = {
+    hidden: {opacity: 0, y: 16, scale: 0.97},
+    visible: {opacity: 1, y: 0, scale: 1},
+    exit: {opacity: 0, scale: 0.95}
+};
+
 function ProjectVisual({project}) {
     if (project.media?.type === 'image') {
         return (
@@ -61,16 +67,20 @@ function TechList({items}) {
     );
 }
 
-const ProjectCard = forwardRef(({project}, ref) => {
+const ProjectCard = forwardRef(function ProjectCard({project}, ref) {
     return (
         <motion.article
             ref={ref}
             layout
-            transition={{ 
-                duration: 0.4,
+            variants={cardVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={{
+                duration: 0.35,
                 ease: [0.4, 0, 0.2, 1]
             }}
-            whileHover={{ y: -6 }}
+            whileHover={{y: -6}}
             className={`project-card ${project.featured ? 'project-card-featured' : ''}`}
         >
             <ProjectVisual project={project} />
@@ -83,6 +93,7 @@ const ProjectCard = forwardRef(({project}, ref) => {
                 </div>
 
                 <h3>{project.title}</h3>
+                {project.focus && <span className="project-focus">{project.focus}</span>}
                 <p className="project-summary">{project.summary}</p>
 
                 <ul className="project-highlights">
@@ -102,7 +113,6 @@ const ProjectCard = forwardRef(({project}, ref) => {
     );
 });
 
-ProjectCard.displayName = 'ProjectCard';
 
 function Projects() {
     const [searchTags, setSearchTags] = useState([]);
@@ -176,7 +186,6 @@ function Projects() {
                 ...project.types,
                 project.focus,
                 project.summary,
-                project.narrative,
                 ...project.highlights,
                 ...project.techStack
             ].join(' ');
@@ -216,9 +225,9 @@ function Projects() {
                                 <motion.span
                                     key={tag}
                                     layout
-                                    initial={{ opacity: 0, scale: 0.8 }}
-                                    animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.8 }}
+                                    initial={{opacity: 0, scale: 0.8}}
+                                    animate={{opacity: 1, scale: 1}}
+                                    exit={{opacity: 0, scale: 0.8}}
                                     className="search-token"
                                 >
                                     {tag}
@@ -317,15 +326,17 @@ function Projects() {
             </div>
             <motion.div 
                 layout 
-                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
-                style={{ overflow: 'hidden' }}
+                transition={{duration: 0.5, ease: [0.4, 0, 0.2, 1]}}
+                style={{overflow: 'hidden'}}
             >
                 {filteredProjects.length > 0 ? (
                     <>
                         <div className="project-grid" aria-label="Projects">
-                            {filteredProjects.slice(0, displayLimit).map((project) => (
-                                <ProjectCard key={project.id} project={project} />
-                            ))}
+                            <AnimatePresence mode="popLayout">
+                                {filteredProjects.slice(0, displayLimit).map((project) => (
+                                    <ProjectCard key={project.id} project={project} />
+                                ))}
+                            </AnimatePresence>
                         </div>
 
                         {filteredProjects.length > 6 && (

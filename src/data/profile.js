@@ -2,12 +2,11 @@ export const profile = {
     name: 'Haseeb Niazi',
     role: 'Software Engineer',
     location: 'Ontario, Canada',
-    email: 'mailto:haseeb.kn@outlook.com',
     availability: 'Available for software engineering roles',
     headline:
         'I build practical software that turns rough workflows into clear, reliable tools.',
     intro:
-        'My best work sits at the intersection of product judgment and implementation: local-first utilities, full-stack dashboards, desktop tooling, and automation built to handle the complex edge cases of real-world use.',
+        'I like building local-first utilities, full-stack dashboards, desktop tooling, and automation that handles real edge cases, not just the happy path.',
     socials: {
         github: 'https://github.com/haseebn19',
         linkedin: 'https://www.linkedin.com/in/haseebn/',
@@ -22,13 +21,13 @@ export const capabilities = [
         title: 'Frontend engineering',
         summary:
             'Responsive React interfaces with clear state, accessible controls, and workflows that stay understandable as features grow.',
-        tools: ['React', 'Vite', 'TailwindCSS', 'Framer Motion', 'Zustand', 'HTML5', 'CSS3', 'PWA']
+        tools: ['React', 'Vite', 'TailwindCSS', 'Framer Motion', 'Zustand', 'Chart.js', 'HTML5', 'CSS3', 'PWA']
     },
     {
         title: 'Backend and data',
         summary:
             'APIs, relational data, and system architecture built for production reliability and long-term scalability.',
-        tools: ['Spring Boot', 'Node.js', 'MariaDB', 'PostgreSQL', 'SQLite', 'Chart.js', 'Docker', 'Redis']
+        tools: ['Spring Boot', 'Node.js', 'MariaDB', 'PostgreSQL', 'SQLite', 'Docker', 'Redis']
     },
     {
         title: 'Desktop software',
@@ -45,7 +44,7 @@ export const capabilities = [
 ];
 
 export const workingStyle = [
-    'I focus on building cohesive systems where the UI, data architecture, and testing strategy are tightly integrated.',
-    'I prioritize software reliability, ensuring that edge cases and error states are handled with the same care as the main workflow.',
-    'I value clean implementation and structured development as the foundation for maintainable, long-term software.'
+    'I got into programming through Roblox, writing Lua scripts for game mechanics and player systems. That early work taught me to think about how real people interact with software, not just how the code runs.',
+    'Since then I\'ve built across the stack: React frontends, Java APIs, Python desktop tools, and Discord bots. What connects all of it is a preference for shipping things that handle messy real-world input instead of only working under ideal conditions.',
+    'I\'m looking for a team where code quality and user experience are taken equally seriously, and where getting the edge cases right matters as much as hitting the deadline.'
 ];
