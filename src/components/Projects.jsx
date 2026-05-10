@@ -14,7 +14,7 @@ import {
     faUser,
     faXmark
 } from '@fortawesome/free-solid-svg-icons';
-import {getFeaturedProjects, getProjectStats, getProjectTypes, projects} from '../data/projects';
+import {getProjectTypes, projects} from '../data/projects';
 import {ProjectLink} from './ProjectLink';
 
 const icons = {
@@ -124,8 +124,6 @@ function Projects() {
     const scrollCapture = useRef(null);
 
     const projectTypes = useMemo(() => getProjectTypes(), []);
-    const stats = useMemo(() => getProjectStats(), []);
-    const featuredCount = useMemo(() => getFeaturedProjects().length, []);
     const allTechTags = useMemo(() => {
         return Array.from(new Set(projects.flatMap((p) => p.techStack))).sort((a, b) => a.localeCompare(b));
     }, []);
@@ -292,25 +290,6 @@ function Projects() {
                             {type}
                         </button>
                     ))}
-                </div>
-            </div>
-
-            <div className="project-stats" aria-label="Project counts">
-                <div>
-                    <strong>{stats.total}</strong>
-                    <span>Total projects</span>
-                </div>
-                <div>
-                    <strong>{featuredCount}</strong>
-                    <span>Featured</span>
-                </div>
-                <div>
-                    <strong>{stats.live}</strong>
-                    <span>Live demos</span>
-                </div>
-                <div>
-                    <strong>{stats.types}</strong>
-                    <span>Types</span>
                 </div>
             </div>
 
