@@ -185,13 +185,5 @@ export const projects = [
     }
 ];
 
-export const getFeaturedProjects = () => projects.filter((project) => project.featured);
-
 export const getProjectTypes = () =>
     Array.from(new Set(projects.flatMap((project) => project.types))).sort((a, b) => a.localeCompare(b));
-
-export const getProjectStats = () => ({
-    total: projects.length,
-    live: projects.filter((project) => project.links.live).length,
-    types: getProjectTypes().length
-});
