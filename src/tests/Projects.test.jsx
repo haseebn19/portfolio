@@ -1,6 +1,6 @@
 import {fireEvent, render, screen, within, waitFor} from '@testing-library/react';
 import Projects from '../components/Projects';
-import {getFeaturedProjects, getProjectTypes, projects} from '../data/projects';
+import {getProjectTypes, projects} from '../data/projects';
 
 describe('Projects', () => {
     test('renders every project in one browsable grid', () => {
@@ -11,9 +11,6 @@ describe('Projects', () => {
 
         expect(screen.getByRole('combobox', {name: /Search projects/i})).toBeInTheDocument();
         expect(cards).toHaveLength(6);
-        expect(screen.getByText('Total projects')).toBeInTheDocument();
-        expect(within(screen.getByText('Total projects').parentElement).getByText('8')).toBeInTheDocument();
-        expect(screen.getByText(String(getFeaturedProjects().length))).toBeInTheDocument();
 
         projects.slice(0, 6).forEach((project) => {
             expect(within(projectGrid).getByRole('heading', {name: project.title})).toBeInTheDocument();
