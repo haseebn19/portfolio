@@ -12,7 +12,8 @@ import {
     faLock,
     faSearch,
     faUser,
-    faXmark
+    faXmark,
+    faChess
 } from '@fortawesome/free-solid-svg-icons';
 import {getProjectTypes, projects} from '../data/projects';
 import {ProjectLink} from './ProjectLink';
@@ -26,7 +27,8 @@ const icons = {
     faKey,
     faLock,
     faSearch,
-    faUser
+    faUser,
+    faChess
 };
 
 const normalize = (value) => value.toLowerCase().trim();
