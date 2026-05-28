@@ -1,27 +1,5 @@
 export const projects = [
     {
-        id: 'unidetect',
-        title: 'UniDetect',
-        types: ['Frontend'],
-        focus: 'Hidden Unicode detection',
-        featured: true,
-        summary:
-            'A local-first inspection tool for finding and cleaning invisible Unicode characters before they break code reviews, documents, or submissions.',
-        highlights: [
-            'Real-time detection and highlighting for invisible characters',
-            'PDF, DOCX, Markdown, and TXT import paths',
-            'Privacy-focused processing with one-click cleaning',
-            'Vitest coverage and Docker-friendly packaging'
-        ],
-        techStack: ['React', 'TypeScript', 'Vite', 'Vitest', 'PDF.js', 'Mammoth.js', 'Docker'],
-        links: {
-            github: 'https://github.com/haseebn19/unidetect',
-            live: 'https://haseebn19.github.io/unidetect/'
-        },
-        faIcon: 'faSearch',
-        icon: 'https://raw.githubusercontent.com/haseebn19/unidetect/main/public/logo.svg'
-    },
-    {
         id: 'requizle',
         title: 'ReQuizle',
         types: ['Frontend'],
@@ -42,6 +20,28 @@ export const projects = [
         },
         faIcon: 'faBook',
         icon: 'https://raw.githubusercontent.com/ReQuizle/requizle-web/refs/heads/main/public/icon.svg'
+    },
+    {
+        id: 'unidetect',
+        title: 'UniDetect',
+        types: ['Frontend'],
+        focus: 'Hidden Unicode detection',
+        featured: true,
+        summary:
+            'A local-first inspection tool for finding and cleaning invisible Unicode characters before they break code reviews, documents, or submissions.',
+        highlights: [
+            'Real-time detection and highlighting for invisible characters',
+            'PDF, DOCX, Markdown, and TXT import paths',
+            'Privacy-focused processing with one-click cleaning',
+            'Vitest coverage and Docker-friendly packaging'
+        ],
+        techStack: ['React', 'TypeScript', 'Vite', 'Vitest', 'PDF.js', 'Mammoth.js', 'Docker'],
+        links: {
+            github: 'https://github.com/haseebn19/unidetect',
+            live: 'https://haseebn19.github.io/unidetect/'
+        },
+        faIcon: 'faSearch',
+        icon: 'https://raw.githubusercontent.com/haseebn19/unidetect/main/public/logo.svg'
     },
     {
         id: 'urban-housing-demand',
@@ -67,6 +67,33 @@ export const projects = [
             type: 'image',
             url: 'https://raw.githubusercontent.com/haseebn19/urban-housing-demand/main/docs/screenshot-home.jpeg',
             alt: 'Urban Housing Demand dashboard screenshot'
+        }
+    },
+    {
+        id: 'hostage-chess',
+        title: 'Hostage Chess',
+        types: ['Fullstack', 'Game'],
+        focus: 'Web-based multiplayer chess variant',
+        featured: true,
+        summary:
+            'A multiplayer web-based implementation of Hostage Chess with full rules enforcement, real-time timers, and game history.',
+        highlights: [
+            'Server-side move validation and custom engine',
+            'Real-time multiplayer via polling architecture',
+            'Prison, airfield, and hostage exchange mechanics',
+            'Clean dark UI and interactive game history'
+        ],
+        techStack: ['Python', 'JavaScript', 'SQLite', 'chessboard.js', 'pytest', 'Ruff'],
+        links: {
+            github: 'https://github.com/haseebn19/hostage-chess',
+            live: null
+        },
+        faIcon: 'faChess',
+        icon: 'https://raw.githubusercontent.com/haseebn19/hostage-chess/main/docs/logo.svg',
+        media: {
+            type: 'image',
+            url: 'https://raw.githubusercontent.com/haseebn19/hostage-chess/main/docs/screenshot-gameboard.jpeg',
+            alt: 'Hostage Chess gameplay screenshot'
         }
     },
     {
