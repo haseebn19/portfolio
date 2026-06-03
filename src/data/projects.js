@@ -57,7 +57,7 @@ export const projects = [
             'Housing, labour, and immigration views with dark/light themes',
             'Containerized local setup for repeatable development'
         ],
-        techStack: ['Java', 'Spring Boot', 'TypeScript', 'React', 'Vite', 'Vitest', 'Docker', 'MariaDB', 'Chart.js'],
+        techStack: ['Java', 'Spring Boot', 'Python', 'TypeScript', 'React', 'Vite', 'Vitest', 'Docker', 'MariaDB', 'Chart.js'],
         links: {
             github: 'https://github.com/haseebn19/urban-housing-demand',
             live: null
@@ -94,6 +94,33 @@ export const projects = [
             type: 'image',
             url: 'https://raw.githubusercontent.com/haseebn19/hostage-chess/main/docs/screenshot-gameboard.jpeg',
             alt: 'Hostage Chess gameplay screenshot'
+        }
+    },
+    {
+        id: 'paradux',
+        title: 'Paradux',
+        types: ['Desktop', 'Game'],
+        focus: 'Strategic board game',
+        featured: true,
+        summary:
+            'A strategic two-player board game where the objective is to align four tokens in a row on a hexagonal grid.',
+        highlights: [
+            'Dual interfaces: console terminal and modern PyQt5 GUI',
+            'Complex hexagonal movement with strict rule enforcement',
+            'JSON-based save and load system for persisting game state',
+            'Clean MVP architecture backed by a full test suite'
+        ],
+        techStack: ['Python', 'PyQt5', 'pytest', 'Ruff'],
+        links: {
+            github: 'https://github.com/haseebn19/paradux',
+            live: null
+        },
+        faIcon: 'faGamepad',
+        icon: 'https://raw.githubusercontent.com/haseebn19/paradux/main/src/paradux/assets/logo.svg',
+        media: {
+            type: 'image',
+            url: 'https://raw.githubusercontent.com/haseebn19/paradux/main/docs/gui_successful_move.png',
+            alt: 'Paradux GUI gameplay screenshot'
         }
     },
     {
