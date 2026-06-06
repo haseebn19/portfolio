@@ -32,10 +32,9 @@ export const projects = [
         highlights: [
             'Real-time detection and highlighting for invisible characters',
             'PDF, DOCX, Markdown, and TXT import paths',
-            'Privacy-focused processing with one-click cleaning',
-            'Vitest coverage and Docker-friendly packaging'
+            'Local processing with one-click cleaning'
         ],
-        techStack: ['React', 'TypeScript', 'Vite', 'Vitest', 'PDF.js', 'Mammoth.js', 'Docker'],
+        techStack: ['React', 'TypeScript', 'Vite', 'Vitest', 'PDF.js', 'Mammoth.js'],
         links: {
             github: 'https://github.com/haseebn19/unidetect',
             live: 'https://haseebn19.github.io/unidetect/'
