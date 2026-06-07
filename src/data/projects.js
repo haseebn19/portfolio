@@ -56,7 +56,7 @@ export const projects = [
             'Housing, labour, and immigration views with dark/light themes',
             'Containerized local setup for repeatable development'
         ],
-        techStack: ['Java', 'Spring Boot', 'Python', 'TypeScript', 'React', 'Vite', 'Vitest', 'Docker', 'MariaDB', 'Chart.js'],
+        techStack: ['Java', 'Spring Boot', 'Python', 'TypeScript', 'React', 'Vite', 'Vitest', 'Docker', 'MariaDB', 'SQL', 'Chart.js'],
         links: {
             github: 'https://github.com/haseebn19/urban-housing-demand',
             live: null
@@ -71,7 +71,7 @@ export const projects = [
     {
         id: 'hostage-chess',
         title: 'Hostage Chess',
-        types: ['Fullstack', 'Game'],
+        types: ['Fullstack', 'Frontend', 'Backend', 'Game'],
         focus: 'Web-based multiplayer chess variant',
         featured: true,
         summary:
@@ -82,7 +82,7 @@ export const projects = [
             'Prison, airfield, and hostage exchange mechanics',
             'Clean dark UI and interactive game history'
         ],
-        techStack: ['Python', 'JavaScript', 'SQLite', 'chessboard.js', 'pytest', 'Ruff'],
+        techStack: ['Python', 'JavaScript', 'SQLite', 'SQL', 'chessboard.js', 'pytest', 'Ruff'],
         links: {
             github: 'https://github.com/haseebn19/hostage-chess',
             live: null
@@ -187,7 +187,7 @@ export const projects = [
             'Public and private response modes',
             'Async SQLite storage with pytest coverage'
         ],
-        techStack: ['Python', 'discord.py', 'aiosqlite', 'SQLite', 'pytest', 'Ruff'],
+        techStack: ['Python', 'discord.py', 'aiosqlite', 'SQLite', 'SQL', 'pytest', 'Ruff'],
         links: {
             github: 'https://github.com/haseebn19/calendar-bot',
             live: null
