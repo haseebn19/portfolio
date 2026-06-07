@@ -4,6 +4,7 @@ import {
     faArrowDown,
     faBriefcase,
     faEnvelope,
+    faFilePdf,
     faMapMarkerAlt
 } from '@fortawesome/free-solid-svg-icons';
 import profilePic from '../assets/images/picture.jpg';
@@ -13,7 +14,8 @@ import {EXTERNAL_LINK_PROPS, SOCIAL_LINKS, scrollToSection} from '../utils/const
 const socialLinks = [
     {label: 'GitHub', href: SOCIAL_LINKS.github, icon: faGithub, external: true},
     {label: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: faLinkedin, external: true},
-    {label: 'Email', href: SOCIAL_LINKS.email, icon: faEnvelope, external: false}
+    {label: 'Email', href: SOCIAL_LINKS.email, icon: faEnvelope, external: false},
+    {label: 'Resume', href: 'https://docs.google.com/document/d/1hPSZbvASgoLmqY8Cfrx61v-O5OAiZUKIrq4hfx_2bEE/export?format=pdf', icon: faFilePdf, external: true}
 ];
 
 function AboutMe() {

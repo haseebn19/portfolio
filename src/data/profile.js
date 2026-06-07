@@ -6,7 +6,7 @@ export const profile = {
     headline:
         'I build practical software that turns rough workflows into clear, reliable tools.',
     intro:
-        'I like building local-first utilities, full-stack dashboards, desktop tooling, and automation that handles real edge cases, not just the happy path.',
+        'I like building local-first utilities, full-stack dashboards, desktop tooling, and automation that holds up in the real world.',
     socials: {
         github: 'https://github.com/haseebn19',
         linkedin: 'https://www.linkedin.com/in/haseebn/',

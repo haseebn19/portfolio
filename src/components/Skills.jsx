@@ -37,8 +37,7 @@ function Skills() {
                 <p className="eyebrow">Capabilities</p>
                 <h2>Technical expertise and core capabilities.</h2>
                 <p>
-                    Specialized skills organized by domain, covering everything from interactive
-                    frontend design to robust backend architecture and delivery.
+                    The tools and frameworks I rely on to build frontends, backends, and desktop applications.
                 </p>
             </div>
 
