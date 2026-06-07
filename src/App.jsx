@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArrowUp, faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
+import {faArrowUp, faBars, faTimes, faFilePdf} from '@fortawesome/free-solid-svg-icons';
 import {faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons';
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
@@ -100,6 +100,10 @@ function ContactSection() {
                 <a href={SOCIAL_LINKS.linkedin} {...EXTERNAL_LINK_PROPS} className="icon-link">
                     <FontAwesomeIcon icon={faLinkedin} />
                     <span>LinkedIn</span>
+                </a>
+                <a href="https://docs.google.com/document/d/1hPSZbvASgoLmqY8Cfrx61v-O5OAiZUKIrq4hfx_2bEE/export?format=pdf" {...EXTERNAL_LINK_PROPS} className="icon-link">
+                    <FontAwesomeIcon icon={faFilePdf} />
+                    <span>Resume</span>
                 </a>
             </div>
         </div>
