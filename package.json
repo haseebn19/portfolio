@@ -10,6 +10,7 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
+    "sync-resume": "node scripts/sync-resume.mjs",
         "lint": "eslint .",
         "test": "vitest run",
         "test:watch": "vitest",
