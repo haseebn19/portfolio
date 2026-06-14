@@ -15,7 +15,7 @@ const socialLinks = [
     {label: 'GitHub', href: SOCIAL_LINKS.github, icon: faGithub, external: true},
     {label: 'LinkedIn', href: SOCIAL_LINKS.linkedin, icon: faLinkedin, external: true},
     {label: 'Email', href: SOCIAL_LINKS.email, icon: faEnvelope, external: false},
-    {label: 'Resume', href: 'https://docs.google.com/document/d/1hPSZbvASgoLmqY8Cfrx61v-O5OAiZUKIrq4hfx_2bEE/export?format=pdf', icon: faFilePdf, external: true}
+    {label: 'Resume', href: '/Haseeb_Niazi_Resume.pdf', icon: faFilePdf, external: true}
 ];
 
 function AboutMe() {
