@@ -6,7 +6,7 @@ import globals from 'globals';
 
 export default [
     {
-        ignores: ['dist/**', 'coverage/**'],
+        ignores: ['dist/**', 'coverage/**', '.edge-headless/**'],
     },
     {
         files: ['**/*.{js,jsx}'],

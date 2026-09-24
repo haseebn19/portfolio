@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faArrowUp, faBars, faTimes, faFilePdf} from '@fortawesome/free-solid-svg-icons';
 import {faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons';
@@ -12,6 +12,19 @@ import {useBackToTop, useScrollPosition} from './utils/hooks';
 function Navigation({activeSection, onSectionChange}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const {isScrolled} = useScrollPosition();
+    const menuToggle = useRef(null);
+
+    useEffect(() => {
+        if (!isMenuOpen) return;
+        const closeOnEscape = (event) => {
+            if (event.key === 'Escape') {
+                setIsMenuOpen(false);
+                menuToggle.current?.focus();
+            }
+        };
+        document.addEventListener('keydown', closeOnEscape);
+        return () => document.removeEventListener('keydown', closeOnEscape);
+    }, [isMenuOpen]);
 
     const handleSectionChange = (sectionId) => {
         scrollToSection(sectionId);
@@ -34,6 +47,8 @@ function Navigation({activeSection, onSectionChange}) {
             <button
                 type="button"
                 className="mobile-menu-toggle"
+                ref={menuToggle}
+                aria-controls="primary-navigation"
                 onClick={() => setIsMenuOpen((current) => !current)}
                 aria-label="Toggle navigation menu"
                 aria-expanded={isMenuOpen}
@@ -41,12 +56,13 @@ function Navigation({activeSection, onSectionChange}) {
                 <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
             </button>
 
-            <nav className={`nav-menu ${isMenuOpen ? 'nav-menu-open' : ''}`} aria-label="Primary navigation">
+            <nav id="primary-navigation" className={`nav-menu ${isMenuOpen ? 'nav-menu-open' : ''}`} aria-label="Primary navigation">
                 {NAV_ITEMS.map(({id, label}) => (
                     <button
                         type="button"
                         key={id}
                         className={`nav-link ${activeSection === id ? 'active' : ''}`}
+                        aria-current={activeSection === id ? 'location' : undefined}
                         onClick={() => handleSectionChange(id)}
                     >
                         {label}
@@ -62,9 +78,9 @@ function AboutSection() {
         <div className="about-detail">
             <div className="section-heading">
                 <p className="eyebrow">About me</p>
-                <h2>From game scripting to full-stack engineering.</h2>
+                <h2>Background</h2>
                 <p>
-                    How I got here, and what kind of work I want to do next.
+                    Programming, coursework, and independent projects.
                 </p>
             </div>
 
@@ -82,16 +98,16 @@ function ContactSection() {
         <div className="contact-panel">
             <div>
                 <p className="eyebrow">Contact</p>
-                <h2>Have a role, project, or codebase that needs careful hands?</h2>
+                <h2>Get in touch</h2>
                 <p>
-                    I am based in Ontario and interested in software engineering work where
-                    practical product sense and clean implementation both matter.
+                    For software engineering opportunities or questions about my work,
+                    you can reach me by email or on LinkedIn.
                 </p>
             </div>
 
             <div className="contact-actions">
                 <a href={SOCIAL_LINKS.email} className="action-link action-link-primary">
-                    Email Haseeb
+                    haseeb.kn@outlook.com
                 </a>
                 <a href={SOCIAL_LINKS.github} {...EXTERNAL_LINK_PROPS} className="icon-link">
                     <FontAwesomeIcon icon={faGithub} />
@@ -101,7 +117,7 @@ function ContactSection() {
                     <FontAwesomeIcon icon={faLinkedin} />
                     <span>LinkedIn</span>
                 </a>
-                <a href="https://docs.google.com/document/d/1hPSZbvASgoLmqY8Cfrx61v-O5OAiZUKIrq4hfx_2bEE/export?format=pdf" {...EXTERNAL_LINK_PROPS} className="icon-link">
+                <a href="/Haseeb_Niazi_Resume.pdf" {...EXTERNAL_LINK_PROPS} className="icon-link">
                     <FontAwesomeIcon icon={faFilePdf} />
                     <span>Resume</span>
                 </a>
@@ -126,7 +142,7 @@ function BackToTop() {
 }
 
 function App() {
-    const [activeSection, setActiveSection] = useState('work');
+    const [activeSection, setActiveSection] = useState('intro');
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -154,7 +170,7 @@ function App() {
 
             <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
 
-            <main id="main-content">
+            <main id="main-content" tabIndex={-1}>
                 <section id="intro" className="page-section hero-section">
                     <AboutMe />
                 </section>
@@ -176,6 +192,7 @@ function App() {
                 </section>
             </main>
 
+            <footer className="site-footer"><span>{profile.name}</span><a href="https://github.com/haseebn19/portfolio" {...EXTERNAL_LINK_PROPS}>Portfolio source</a></footer>
             <BackToTop />
         </div>
     );

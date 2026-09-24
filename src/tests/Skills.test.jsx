@@ -6,11 +6,11 @@ describe('Skills', () => {
     test('renders core languages and capability cards', () => {
         render(<Skills />);
 
-        expect(screen.getByRole('heading', {name: /Technical expertise and core capabilities/i})).toBeInTheDocument();
+        expect(screen.getByRole('heading', {name: /Languages and tools/i})).toBeInTheDocument();
         expect(screen.getByText('Core Languages')).toBeInTheDocument();
 
         languages.forEach((lang) => {
-            expect(screen.getByText(lang)).toBeInTheDocument();
+            expect(within(screen.getByLabelText('Core programming languages')).getByText(lang)).toBeInTheDocument();
         });
 
         capabilities.forEach((cap) => {

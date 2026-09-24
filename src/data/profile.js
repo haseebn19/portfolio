@@ -2,11 +2,10 @@ export const profile = {
     name: 'Haseeb Niazi',
     role: 'Software Engineer',
     location: 'Ontario, Canada',
-    availability: 'Available for software engineering roles',
-    headline:
-        'I build practical software that turns rough workflows into clear, reliable tools.',
+    availability: 'Open to software engineering roles',
+    headline: 'Haseeb Niazi',
     intro:
-        'I like building local-first utilities, full-stack dashboards, desktop tooling, and automation that holds up in the real world.',
+        'I develop web applications and desktop software with React, Java, Python, and C#. My work includes study tools, data dashboards, and developer utilities.',
     socials: {
         github: 'https://github.com/haseebn19',
         linkedin: 'https://www.linkedin.com/in/haseebn/',
@@ -18,33 +17,29 @@ export const languages = ['Python', 'Java', 'JavaScript', 'TypeScript', 'C#', 'C
 
 export const capabilities = [
     {
-        title: 'Frontend engineering',
-        summary:
-            'Responsive React interfaces with clear state, accessible controls, and workflows that stay understandable as features grow.',
-        tools: ['React', 'Vite', 'TailwindCSS', 'Framer Motion', 'Zustand', 'Chart.js', 'HTML5', 'CSS3', 'PWA']
+        title: 'Web development',
+        summary: 'React interfaces, application state, and interactive charts.',
+        tools: ['React', 'TypeScript', 'HTML', 'CSS', 'Tailwind CSS', 'Zustand', 'Chart.js']
     },
     {
         title: 'Backend and data',
-        summary:
-            'APIs, relational data, and system architecture built for production reliability and long-term scalability.',
-        tools: ['Spring Boot', 'Node.js', 'MariaDB', 'PostgreSQL', 'SQLite', 'Docker', 'Redis']
+        summary: 'REST APIs, relational databases, and Python automation.',
+        tools: ['Java', 'Spring Boot', 'Python', 'MariaDB', 'SQLite', 'Docker']
     },
     {
-        title: 'Desktop software',
-        summary:
-            'Native utilities for Windows and cross-platform Python workflows, focusing on performance, secure defaults, and system integration.',
-        tools: ['.NET', 'WPF', 'Windows Forms', 'PyQt6', 'Roblox Studio', 'MVVM', 'SQLite']
+        title: 'Desktop applications',
+        summary: 'Windows utilities with .NET and cross-platform interfaces with Qt.',
+        tools: ['C#', '.NET', 'WPF', 'PyQt5', 'PyQt6', 'MVVM']
     },
     {
-        title: 'Testing and delivery',
-        summary:
-            'Standardized testing, automation, and deployment strategies that ensure software remains stable and maintainable.',
-        tools: ['Vitest', 'React Testing Library', 'pytest', 'xUnit', 'Ruff', 'Git', 'GitHub', 'Linux', 'GitHub Actions']
+        title: 'Testing and development',
+        summary: 'Automated tests, linting, version control, and continuous integration.',
+        tools: ['Vitest', 'React Testing Library', 'pytest', 'xUnit', 'Ruff', 'Git', 'GitHub Actions']
     }
 ];
 
 export const workingStyle = [
-    'I got into programming through Roblox, writing Lua scripts for game mechanics and player systems. That early work taught me to think about how real people interact with software, not just how the code runs.',
-    'Since then I\'ve built across the stack: React frontends, Java APIs, Python desktop tools, and Discord bots. What connects all of it is a preference for shipping things that handle messy real-world input instead of only working under ideal conditions.',
-    'I\'m looking for a team where code quality and user experience are taken equally seriously, and where getting the edge cases right matters as much as hitting the deadline.'
+    'I started programming with Lua in Roblox and went on to work with web applications, databases, and desktop software.',
+    'My portfolio includes personal projects and university coursework. Urban Housing Demand and Paradux began as team projects, and Hostage Chess began as an assignment. I later revisited these projects to make improvements and prepare public releases.',
+    'I am based in Ontario and looking for a software engineering role where I can contribute across frontend and backend development.'
 ];

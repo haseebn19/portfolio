@@ -85,4 +85,16 @@ describe('Projects', () => {
 
         expect(screen.getByRole('button', {name: /Remove discord/i})).toBeInTheDocument();
     });
+    test('reports visible results and exposes the selected filter', () => {
+        render(<Projects />);
+        expect(screen.getByRole('status')).toHaveTextContent('Showing 6 of 8 projects');
+        fireEvent.click(screen.getByRole('button', {name: /show all projects/i}));
+        expect(screen.getByRole('status')).toHaveTextContent('Showing 8 of 8 projects');
+        fireEvent.click(screen.getByRole('button', {name: 'Desktop'}));
+        expect(screen.getByRole('button', {name: 'Desktop'})).toHaveAttribute('aria-pressed', 'true');
+        expect(screen.getByRole('status')).toHaveTextContent('Showing 3 of 3 projects');
+        fireEvent.click(screen.getByRole('button', {name: 'All'}));
+        expect(screen.getByRole('status')).toHaveTextContent('Showing 6 of 8 projects');
+    });
+
 });

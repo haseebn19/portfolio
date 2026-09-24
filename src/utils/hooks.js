@@ -46,7 +46,7 @@ export const useBackToTop = (threshold = 300) => {
     const scrollToTop = useCallback(() => {
         window.scrollTo({
             top: 0,
-            behavior: 'smooth'
+            behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
         });
     }, []);
 

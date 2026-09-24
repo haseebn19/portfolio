@@ -1,19 +1,20 @@
 export const projects = [
     {
         id: 'requizle',
+        media: {type: 'image', url: '/projects/requizle.png', alt: 'ReQuizle study interface'},
         title: 'ReQuizle',
         types: ['Frontend'],
-        focus: 'Spaced repetition',
+        focus: 'Study and review',
         featured: true,
         summary:
-            'A study app for mastery tracking, custom question imports, and repeated review without sending study data to a server.',
+            'A browser-based study app with custom question sets, progress tracking, and local data storage.',
         highlights: [
-            'Multiple question types including matching, word bank, and multi-answer',
-            'Mastery tracking with include/exclude mastered controls',
-            'Custom JSON import for reusable subjects and question sets',
+            'Multiple-choice, matching, and written-answer questions',
+            'Review controls to include or exclude mastered questions',
+            'JSON import for reusable subjects and question sets',
             'Offline-friendly browser storage with a PWA foundation'
         ],
-        techStack: ['React', 'TypeScript', 'TailwindCSS', 'Zustand', 'Framer Motion', 'Vite', 'Vitest', 'PWA'],
+        techStack: ['React', 'TypeScript', 'Zustand', 'TailwindCSS', 'Vitest'],
         links: {
             github: 'https://github.com/ReQuizle/requizle-web',
             live: 'https://requizle.github.io/requizle-web/'
@@ -23,16 +24,17 @@ export const projects = [
     },
     {
         id: 'unidetect',
+        media: {type: 'image', url: '/projects/unidetect.png', alt: 'UniDetect text inspection interface'},
         title: 'UniDetect',
         types: ['Frontend'],
         focus: 'Hidden Unicode detection',
         featured: true,
         summary:
-            'A local-first inspection tool for finding and cleaning invisible Unicode characters before they break code reviews, documents, or submissions.',
+            'A browser tool that identifies invisible Unicode characters in text and documents, with an option to remove them.',
         highlights: [
             'Real-time detection and highlighting for invisible characters',
-            'PDF, DOCX, Markdown, and TXT import paths',
-            'Local processing with one-click cleaning'
+            'PDF, DOCX, Markdown, and plain-text imports',
+            'Files are processed locally in the browser'
         ],
         techStack: ['React', 'TypeScript', 'Vite', 'Vitest', 'PDF.js', 'Mammoth.js'],
         links: {
@@ -47,16 +49,17 @@ export const projects = [
         title: 'Urban Housing Demand',
         types: ['Fullstack', 'Frontend', 'Backend'],
         focus: 'Housing and labour data',
+        context: 'University team project (CIS*4900). Later revised and prepared for public release.',
         featured: true,
         summary:
-            'A full-stack dashboard for exploring housing completions, labour indicators, immigration trends, and regional supply signals.',
+            'A dashboard comparing housing development, employment, and demographic data in Toronto and Hamilton.',
         highlights: [
             'Spring Boot API backed by MariaDB',
             'Interactive React dashboard with Chart.js visualizations',
-            'Housing, labour, and immigration views with dark/light themes',
+            'Python data ingestion and a Docker-based development setup',
             'Containerized local setup for repeatable development'
         ],
-        techStack: ['Java', 'Spring Boot', 'Python', 'TypeScript', 'React', 'Vite', 'Vitest', 'Docker', 'MariaDB', 'SQL', 'Chart.js'],
+        techStack: ['Java', 'Spring Boot', 'React', 'Python', 'MariaDB', 'Docker'],
         links: {
             github: 'https://github.com/haseebn19/urban-housing-demand',
             live: null
@@ -64,8 +67,10 @@ export const projects = [
         faIcon: 'faCity',
         media: {
             type: 'image',
-            url: 'https://raw.githubusercontent.com/haseebn19/urban-housing-demand/main/docs/screenshot-home.jpeg',
-            alt: 'Urban Housing Demand dashboard screenshot'
+            url: '/projects/urban-housing-demand.jpeg',
+            crop: true,
+            alt: 'Urban Housing Demand charts using the bundled sample dataset',
+            caption: 'Shown with the project’s sample dataset.'
         }
     },
     {
@@ -73,16 +78,17 @@ export const projects = [
         title: 'Hostage Chess',
         types: ['Fullstack', 'Frontend', 'Backend', 'Game'],
         focus: 'Web-based multiplayer chess variant',
+        context: 'Originally a university assignment (CIS*2750). Later revised and prepared for public release.',
         featured: true,
         summary:
-            'A multiplayer web-based implementation of Hostage Chess with full rules enforcement, real-time timers, and game history.',
+            'A web implementation of Hostage Chess with multiplayer games, server-side move validation, and game history.',
         highlights: [
             'Server-side move validation and custom engine',
-            'Real-time multiplayer via polling architecture',
+            'Multiplayer state updates through server polling',
             'Prison, airfield, and hostage exchange mechanics',
             'Clean dark UI and interactive game history'
         ],
-        techStack: ['Python', 'JavaScript', 'SQLite', 'SQL', 'chessboard.js', 'pytest', 'Ruff'],
+        techStack: ['Python', 'JavaScript', 'SQLite', 'pytest'],
         links: {
             github: 'https://github.com/haseebn19/hostage-chess',
             live: null
@@ -91,7 +97,7 @@ export const projects = [
         icon: 'https://raw.githubusercontent.com/haseebn19/hostage-chess/main/docs/logo.svg',
         media: {
             type: 'image',
-            url: 'https://raw.githubusercontent.com/haseebn19/hostage-chess/main/docs/screenshot-gameboard.jpeg',
+            url: '/projects/hostage-chess.jpeg',
             alt: 'Hostage Chess gameplay screenshot'
         }
     },
@@ -99,15 +105,16 @@ export const projects = [
         id: 'paradux',
         title: 'Paradux',
         types: ['Desktop', 'Game'],
-        focus: 'Strategic board game',
+        focus: 'Python board game',
+        context: 'University team project (CIS*3260). The published version includes fixes to the original implementation.',
         featured: true,
         summary:
-            'A strategic two-player board game where the objective is to align four tokens in a row on a hexagonal grid.',
+            'A Python implementation of Paradux, a two-player game played on a hexagonal board.',
         highlights: [
-            'Dual interfaces: console terminal and modern PyQt5 GUI',
-            'Complex hexagonal movement with strict rule enforcement',
-            'JSON-based save and load system for persisting game state',
-            'Clean MVP architecture backed by a full test suite'
+            'Terminal and PyQt5 interfaces',
+            'Move validation for adjacent pieces on a hexagonal grid',
+            'Save and restore games using JSON',
+            'Separated game logic and interfaces, with automated tests'
         ],
         techStack: ['Python', 'PyQt5', 'pytest', 'Ruff'],
         links: {
@@ -118,7 +125,7 @@ export const projects = [
         icon: 'https://raw.githubusercontent.com/haseebn19/paradux/main/src/paradux/assets/logo.svg',
         media: {
             type: 'image',
-            url: 'https://raw.githubusercontent.com/haseebn19/paradux/main/docs/gui_successful_move.png',
+            url: '/projects/paradux.png',
             alt: 'Paradux GUI gameplay screenshot'
         }
     },
@@ -128,7 +135,7 @@ export const projects = [
         types: ['Desktop'],
         focus: 'Secure generation',
         summary:
-            'A WPF password generator with theme-aware UI, clipboard flow, and real-time strength scoring.',
+            'A Windows utility for generating passwords with configurable character sets and strength estimates.',
         highlights: [
             'Configurable length and character sets',
             'Zxcvbn-backed strength evaluation',
@@ -144,7 +151,7 @@ export const projects = [
         icon: 'https://raw.githubusercontent.com/haseebn19/passgen/master/logo.svg',
         media: {
             type: 'image',
-            url: 'https://raw.githubusercontent.com/haseebn19/passgen/master/docs/screenshot-window.png',
+            url: '/projects/password-generator.png',
             alt: 'Password Generator desktop app screenshot'
         }
     },
@@ -154,7 +161,7 @@ export const projects = [
         types: ['Desktop'],
         focus: 'Key management',
         summary:
-            'A PyQt6 utility for creating SSH key pairs with algorithm choices, passphrase support, and quick access to generated files.',
+            'A desktop utility for generating SSH key pairs, setting passphrases, and managing output files.',
         highlights: [
             'ED25519, RSA, and ECDSA key support',
             'Custom output paths and optional passphrases',
@@ -170,7 +177,7 @@ export const projects = [
         icon: 'https://raw.githubusercontent.com/haseebn19/ssh-keygen/main/resources/logo.svg',
         media: {
             type: 'image',
-            url: 'https://raw.githubusercontent.com/haseebn19/ssh-keygen/main/resources/screenshot-window.png',
+            url: '/projects/ssh-keygen.png',
             alt: 'SSH Key Generator desktop app screenshot'
         }
     },
@@ -180,61 +187,20 @@ export const projects = [
         types: ['Backend', 'Bot'],
         focus: 'Timezone-aware events',
         summary:
-            'A Discord bot for personal calendar events with slash commands, timezone autocomplete, privacy modes, and SQLite persistence.',
+            'A Discord bot for creating and managing calendar events through slash commands, with timezone support and SQLite storage.',
         highlights: [
             'Add, list, and remove calendar commands',
             'Timezone autocomplete and native Discord timestamps',
             'Public and private response modes',
             'Async SQLite storage with pytest coverage'
         ],
-        techStack: ['Python', 'discord.py', 'aiosqlite', 'SQLite', 'SQL', 'pytest', 'Ruff'],
+        techStack: ['Python', 'discord.py', 'SQLite', 'pytest'],
         links: {
             github: 'https://github.com/haseebn19/calendar-bot',
             live: null
         },
         faIcon: 'faCalendarAlt',
-        icon: 'https://raw.githubusercontent.com/haseebn19/calendar-bot/main/docs/logo.svg'
-    },
-    {
-        id: 'portfolio',
-        title: 'Personal Portfolio',
-        types: ['Frontend'],
-        focus: 'Identity and case-study design',
-        summary:
-            'This website! A clean, responsive portfolio built with React to showcase my projects and skills.',
-        highlights: [
-            'Mobile-friendly design',
-            'Smooth animations',
-            'Project filtering by tech stack',
-            'Project showcase with media support',
-            'Skills overview'
-        ],
-        techStack: ['React', 'JavaScript', 'CSS', 'Vite', 'Vitest'],
-        links: {
-            github: 'https://github.com/haseebn19/portfolio',
-            live: null
-        },
-        faIcon: 'faUser'
-    },
-    {
-        id: 'roblox-games',
-        title: 'Roblox Scripting',
-        types: ['Game'],
-        focus: 'Lua scripting',
-        summary:
-            'Lua and Roblox Studio work focused on gameplay loops, UI systems, player-facing mechanics, and quick iteration on interactive ideas.',
-        highlights: [
-            'Gameplay mechanics and player systems',
-            'Roblox Studio UI workflows',
-            'Performance-minded Lua scripting',
-            'Fast iteration on interactive experiences'
-        ],
-        techStack: ['Lua', 'Roblox Studio'],
-        links: {
-            github: null,
-            live: null
-        },
-        faIcon: 'faGamepad'
+        icon: '/projects/calendar-bot.svg'
     }
 ];
 

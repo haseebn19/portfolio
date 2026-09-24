@@ -34,10 +34,10 @@ function Skills() {
     return (
         <div className="skills-container">
             <div className="section-heading">
-                <p className="eyebrow">Capabilities</p>
-                <h2>Technical expertise and core capabilities.</h2>
+                <p className="eyebrow">Technical skills</p>
+                <h2>Languages and tools</h2>
                 <p>
-                    The tools and frameworks I rely on to build frontends, backends, and desktop applications.
+                    Technologies used across my projects.
                 </p>
             </div>
 

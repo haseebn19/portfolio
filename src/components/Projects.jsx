@@ -11,12 +11,12 @@ import {
     faKey,
     faLock,
     faSearch,
-    faUser,
     faXmark,
     faChess
 } from '@fortawesome/free-solid-svg-icons';
 import {getProjectTypes, projects} from '../data/projects';
 import {ProjectLink} from './ProjectLink';
+import ImagePreview from './ImagePreview';
 
 const icons = {
     faBook,
@@ -27,7 +27,6 @@ const icons = {
     faKey,
     faLock,
     faSearch,
-    faUser,
     faChess
 };
 
@@ -39,19 +38,24 @@ const cardVariants = {
     exit: {opacity: 0, scale: 0.95}
 };
 
-function ProjectVisual({project}) {
-    if (project.media?.type === 'image') {
+function ProjectVisual({project, onPreview}) {
+    const [imageFailed, setImageFailed] = useState(false);
+    if (project.media?.type === 'image' && !imageFailed) {
         return (
-            <div className="project-visual project-visual-image">
-                <img src={project.media.url} alt={project.media.alt} loading="lazy" />
-            </div>
+            <button type="button"
+                onClick={(event) => onPreview(project, event.currentTarget)}
+                aria-label={`Enlarge ${project.title} screenshot`}
+                className={`project-visual project-visual-image ${project.media.crop ? 'project-visual-crop' : ''}`}>
+                <img src={project.media.url} alt={project.media.alt} loading="lazy" decoding="async" onError={() => setImageFailed(true)} />
+                <span className="project-visual-hint">View screenshot</span>
+            </button>
         );
     }
 
     return (
         <div className="project-visual project-visual-icon" aria-hidden="true">
-            {project.icon ? (
-                <img src={project.icon} alt="" loading="lazy" />
+            {project.icon && !imageFailed ? (
+                <img src={project.icon} alt="" loading="lazy" onError={() => setImageFailed(true)} />
             ) : (
                 <FontAwesomeIcon icon={icons[project.faIcon] || faCode} />
             )}
@@ -69,7 +73,7 @@ function TechList({items}) {
     );
 }
 
-const ProjectCard = forwardRef(function ProjectCard({project}, ref) {
+const ProjectCard = forwardRef(function ProjectCard({project, onPreview}, ref) {
     return (
         <motion.article
             ref={ref}
@@ -82,10 +86,10 @@ const ProjectCard = forwardRef(function ProjectCard({project}, ref) {
                 duration: 0.35,
                 ease: [0.4, 0, 0.2, 1]
             }}
-            whileHover={{y: -6}}
-            className={`project-card ${project.featured ? 'project-card-featured' : ''}`}
+
+            className={`project-card ${['requizle', 'unidetect'].includes(project.id) ? 'project-card-lead' : ''}`}
         >
-            <ProjectVisual project={project} />
+            <ProjectVisual project={project} onPreview={onPreview} />
 
             <div className="project-card-body">
                 <div className="project-kicker">
@@ -97,6 +101,7 @@ const ProjectCard = forwardRef(function ProjectCard({project}, ref) {
                 <h3>{project.title}</h3>
                 {project.focus && <span className="project-focus">{project.focus}</span>}
                 <p className="project-summary">{project.summary}</p>
+                {project.context && <p className="project-context">{project.context}</p>}
 
                 <ul className="project-highlights">
                     {project.highlights.slice(0, 3).map((highlight) => (
@@ -124,6 +129,17 @@ function Projects() {
     const inputRef = useRef(null);
     const footerRef = useRef(null);
     const scrollCapture = useRef(null);
+    const previewTriggerRef = useRef(null);
+    const [previewProject, setPreviewProject] = useState(null);
+
+    const closePreview = () => {
+        setPreviewProject(null);
+    };
+
+    const openPreview = (project, trigger) => {
+        previewTriggerRef.current = trigger;
+        setPreviewProject(project);
+    };
 
     const projectTypes = useMemo(() => getProjectTypes(), []);
     const allTechTags = useMemo(() => {
@@ -161,7 +177,7 @@ function Projects() {
     };
 
     useLayoutEffect(() => {
-        if (scrollCapture.current && footerRef.current) {
+        if (scrollCapture.current !== null && footerRef.current) {
             const newPos = footerRef.current.getBoundingClientRect().top;
             const diff = newPos - scrollCapture.current;
             window.scrollBy(0, diff);
@@ -186,11 +202,12 @@ function Projects() {
                 ...project.types,
                 project.focus,
                 project.summary,
+                project.context,
                 ...project.highlights,
                 ...project.techStack
             ].join(' ');
             const normalizedSearchableText = normalize(searchableText);
-            
+
             const matchesTags = searchTags.length === 0 || searchTags.every((tag) => normalizedSearchableText.includes(normalize(tag)));
             const matchesQuery = !normalizedQuery || normalizedSearchableText.includes(normalizedQuery);
 
@@ -208,11 +225,11 @@ function Projects() {
     return (
         <div className="projects-container">
             <div className="section-heading project-heading">
-                <p className="eyebrow">Project browser</p>
-                <h2>Selected software and shipped projects.</h2>
+                <p className="eyebrow">Portfolio</p>
+                <h2>Selected projects</h2>
                 <p>
-                    A collection of tools, dashboards, and utilities focused on solving specific
-                    problems with reliable, maintainable code.
+                    Web applications, desktop tools, and coursework.
+                    Source code is available for each project.
                 </p>
             </div>
 
@@ -251,7 +268,7 @@ function Projects() {
                             value={query}
                             onChange={handleInputChange}
                             onKeyDown={handleKeyDown}
-                            placeholder={searchTags.length === 0 ? "Search projects, tech, or keywords" : ""}
+                            placeholder={searchTags.length === 0 ? "Search projects or skills" : ""}
                             aria-label="Search projects"
                             list="tech-tags"
                         />
@@ -287,7 +304,8 @@ function Projects() {
                             key={type}
                             type="button"
                             className={`filter-chip ${activeType === type ? 'active' : ''}`}
-                            onClick={() => setActiveType(type)}
+                            aria-pressed={activeType === type}
+                            onClick={() => { setActiveType(type); setDisplayLimit(6); }}
                         >
                             {type}
                         </button>
@@ -296,8 +314,8 @@ function Projects() {
             </div>
 
             <div className="project-results-bar">
-                <p>
-                    Showing <strong>{filteredProjects.length}</strong> of <strong>{projects.length}</strong>
+                <p role="status" aria-live="polite">
+                    Showing <strong>{Math.min(displayLimit, filteredProjects.length)}</strong> of <strong>{filteredProjects.length}</strong> projects
                 </p>
                 {(query || searchTags.length > 0 || activeType !== 'All') && (
                     <button type="button" onClick={resetFilters}>
@@ -305,17 +323,17 @@ function Projects() {
                     </button>
                 )}
             </div>
-            <motion.div 
-                layout 
+            <motion.div
+                layout
                 transition={{duration: 0.5, ease: [0.4, 0, 0.2, 1]}}
-                style={{overflow: 'hidden'}}
+
             >
                 {filteredProjects.length > 0 ? (
                     <>
                         <div className="project-grid" aria-label="Projects">
                             <AnimatePresence mode="popLayout">
                                 {filteredProjects.slice(0, displayLimit).map((project) => (
-                                    <ProjectCard key={project.id} project={project} />
+                                    <ProjectCard key={project.id} project={project} onPreview={openPreview} />
                                 ))}
                             </AnimatePresence>
                         </div>
@@ -348,6 +366,9 @@ function Projects() {
                     </div>
                 )}
             </motion.div>
+            {previewProject && (
+                <ImagePreview project={previewProject} trigger={previewTriggerRef.current} onClose={closePreview} />
+            )}
         </div>
     );
 }
