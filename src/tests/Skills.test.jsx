@@ -7,7 +7,7 @@ describe('Skills', () => {
         render(<Skills />);
 
         expect(screen.getByRole('heading', {name: /Languages and tools/i})).toBeInTheDocument();
-        expect(screen.getByText('Core Languages')).toBeInTheDocument();
+        expect(screen.getByText('Core languages')).toBeInTheDocument();
 
         languages.forEach((lang) => {
             expect(within(screen.getByLabelText('Core programming languages')).getByText(lang)).toBeInTheDocument();
@@ -26,7 +26,7 @@ describe('Skills', () => {
             const toolList = screen.getByRole('list', {name: `${cap.title} tools`});
             expect(toolList).toBeInTheDocument();
 
-            // Use within() to scope queries - some tools appear in multiple capability cards
+            // Some tools appear in more than one card, so search within this card only
             cap.tools.forEach((tool) => {
                 expect(within(toolList).getByText(tool)).toBeInTheDocument();
             });

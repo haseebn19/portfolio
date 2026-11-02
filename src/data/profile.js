@@ -1,16 +1,15 @@
+import {faDesktop, faDiagramProject, faLayerGroup, faShieldHalved} from '@fortawesome/free-solid-svg-icons';
+
 export const profile = {
     name: 'Haseeb Niazi',
     role: 'Software Engineer',
     location: 'Ontario, Canada',
     availability: 'Open to software engineering roles',
-    headline: 'Haseeb Niazi',
-    intro:
-        'I develop web applications and desktop software with React, Java, Python, and C#. My work includes study tools, data dashboards, and developer utilities.',
-    socials: {
-        github: 'https://github.com/haseebn19',
-        linkedin: 'https://www.linkedin.com/in/haseebn/',
-        email: 'mailto:haseeb.kn@outlook.com'
-    }
+    intro: 'I develop web applications and desktop software with React, Java, Python, and C#. My work includes study tools, data dashboards, and developer utilities.',
+    email: 'haseeb.kn@outlook.com',
+    resume: '/Haseeb_Niazi_Resume.pdf',
+    github: 'https://github.com/haseebn19',
+    linkedin: 'https://www.linkedin.com/in/haseebn/'
 };
 
 export const languages = ['Python', 'Java', 'JavaScript', 'TypeScript', 'C#', 'C', 'Lua', 'SQL'];
@@ -18,21 +17,25 @@ export const languages = ['Python', 'Java', 'JavaScript', 'TypeScript', 'C#', 'C
 export const capabilities = [
     {
         title: 'Web development',
+        icon: faLayerGroup,
         summary: 'React interfaces, application state, and interactive charts.',
         tools: ['React', 'TypeScript', 'HTML', 'CSS', 'Tailwind CSS', 'Zustand', 'Chart.js']
     },
     {
         title: 'Backend and data',
+        icon: faDiagramProject,
         summary: 'REST APIs, relational databases, and Python automation.',
         tools: ['Java', 'Spring Boot', 'Python', 'MariaDB', 'SQLite', 'Docker']
     },
     {
         title: 'Desktop applications',
+        icon: faDesktop,
         summary: 'Windows utilities with .NET and cross-platform interfaces with Qt.',
         tools: ['C#', '.NET', 'WPF', 'PyQt5', 'PyQt6', 'MVVM']
     },
     {
         title: 'Testing and development',
+        icon: faShieldHalved,
         summary: 'Automated tests, linting, version control, and continuous integration.',
         tools: ['Vitest', 'React Testing Library', 'pytest', 'xUnit', 'Ruff', 'Git', 'GitHub Actions']
     }

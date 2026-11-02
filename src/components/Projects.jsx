@@ -1,36 +1,42 @@
 import {useMemo, useState, useRef, forwardRef, useLayoutEffect} from 'react';
 import {motion, AnimatePresence} from 'framer-motion';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {
-    faBook,
-    faCalendarAlt,
-    faCity,
-    faCode,
-    faFilter,
-    faGamepad,
-    faKey,
-    faLock,
-    faSearch,
-    faXmark,
-    faChess
-} from '@fortawesome/free-solid-svg-icons';
-import {getProjectTypes, projects} from '../data/projects';
-import {ProjectLink} from './ProjectLink';
+import {faSearch, faXmark} from '@fortawesome/free-solid-svg-icons';
+import {projects, projectTypes} from '../data/projects';
+import ProjectLink from './ProjectLink';
 import ImagePreview from './ImagePreview';
 
-const icons = {
-    faBook,
-    faCalendarAlt,
-    faCity,
-    faCode,
-    faGamepad,
-    faKey,
-    faLock,
-    faSearch,
-    faChess
-};
+const INITIAL_VISIBLE_COUNT = 6;
 
 const normalize = (value) => value.toLowerCase().trim();
+
+const allTechTags = Array.from(new Set(projects.flatMap((project) => project.techStack))).sort((a, b) =>
+    a.localeCompare(b)
+);
+const techTagKeys = new Set(allTechTags.map(normalize));
+
+const searchableText = (project) =>
+    normalize(
+        [
+            project.title,
+            ...project.types,
+            project.focus,
+            project.summary,
+            project.context ?? '',
+            ...project.highlights,
+            ...project.techStack
+        ].join(' ')
+    );
+
+// Technology tags match the project's stack exactly, so "Java" does not match "JavaScript".
+// Other tags and the free-text query match anywhere in the project's text.
+const matchesTerm = (project, term) => {
+    const key = normalize(term);
+    if (techTagKeys.has(key)) {
+        return project.techStack.some((tech) => normalize(tech) === key);
+    }
+    return searchableText(project).includes(key);
+};
 
 const cardVariants = {
     hidden: {opacity: 0, y: 16, scale: 0.97},
@@ -39,14 +45,17 @@ const cardVariants = {
 };
 
 function ProjectVisual({project, onPreview}) {
-    const [imageFailed, setImageFailed] = useState(false);
-    if (project.media?.type === 'image' && !imageFailed) {
+    const {screenshot} = project;
+
+    if (screenshot) {
         return (
-            <button type="button"
+            <button
+                type="button"
                 onClick={(event) => onPreview(project, event.currentTarget)}
-                aria-label={`Enlarge ${project.title} screenshot`}
-                className={`project-visual project-visual-image ${project.media.crop ? 'project-visual-crop' : ''}`}>
-                <img src={project.media.url} alt={project.media.alt} loading="lazy" decoding="async" onError={() => setImageFailed(true)} />
+                aria-label={`View screenshot of ${project.title}`}
+                className={`project-visual project-visual-image ${screenshot.crop ? 'project-visual-crop' : ''}`}
+            >
+                <img src={screenshot.src} alt={screenshot.alt} loading="lazy" decoding="async" />
                 <span className="project-visual-hint">View screenshot</span>
             </button>
         );
@@ -54,11 +63,7 @@ function ProjectVisual({project, onPreview}) {
 
     return (
         <div className="project-visual project-visual-icon" aria-hidden="true">
-            {project.icon && !imageFailed ? (
-                <img src={project.icon} alt="" loading="lazy" onError={() => setImageFailed(true)} />
-            ) : (
-                <FontAwesomeIcon icon={icons[project.faIcon] || faCode} />
-            )}
+            <img src={project.icon} alt="" loading="lazy" />
         </div>
     );
 }
@@ -82,12 +87,8 @@ const ProjectCard = forwardRef(function ProjectCard({project, onPreview}, ref) {
             initial="hidden"
             animate="visible"
             exit="exit"
-            transition={{
-                duration: 0.35,
-                ease: [0.4, 0, 0.2, 1]
-            }}
-
-            className={`project-card ${['requizle', 'unidetect'].includes(project.id) ? 'project-card-lead' : ''}`}
+            transition={{duration: 0.35, ease: [0.4, 0, 0.2, 1]}}
+            className={`project-card ${project.lead ? 'project-card-lead' : ''}`}
         >
             <ProjectVisual project={project} onPreview={onPreview} />
 
@@ -99,12 +100,12 @@ const ProjectCard = forwardRef(function ProjectCard({project, onPreview}, ref) {
                 </div>
 
                 <h3>{project.title}</h3>
-                {project.focus && <span className="project-focus">{project.focus}</span>}
+                <span className="project-focus">{project.focus}</span>
                 <p className="project-summary">{project.summary}</p>
                 {project.context && <p className="project-context">{project.context}</p>}
 
                 <ul className="project-highlights">
-                    {project.highlights.slice(0, 3).map((highlight) => (
+                    {project.highlights.map((highlight) => (
                         <li key={highlight}>{highlight}</li>
                     ))}
                 </ul>
@@ -112,43 +113,33 @@ const ProjectCard = forwardRef(function ProjectCard({project, onPreview}, ref) {
                 <TechList items={project.techStack} />
 
                 <div className="project-links">
-                    <ProjectLink url={project.links.github} type="github" variant="compact" />
-                    <ProjectLink url={project.links.live} type="live" variant="compact" />
+                    <ProjectLink url={project.links.github} type="github" />
+                    <ProjectLink url={project.links.live} type="live" />
                 </div>
             </div>
         </motion.article>
     );
 });
 
-
 function Projects() {
     const [searchTags, setSearchTags] = useState([]);
     const [query, setQuery] = useState('');
     const [activeType, setActiveType] = useState('All');
-    const [displayLimit, setDisplayLimit] = useState(6);
+    const [displayLimit, setDisplayLimit] = useState(INITIAL_VISIBLE_COUNT);
+    const [previewProject, setPreviewProject] = useState(null);
     const inputRef = useRef(null);
     const footerRef = useRef(null);
     const scrollCapture = useRef(null);
     const previewTriggerRef = useRef(null);
-    const [previewProject, setPreviewProject] = useState(null);
-
-    const closePreview = () => {
-        setPreviewProject(null);
-    };
 
     const openPreview = (project, trigger) => {
         previewTriggerRef.current = trigger;
         setPreviewProject(project);
     };
 
-    const projectTypes = useMemo(() => getProjectTypes(), []);
-    const allTechTags = useMemo(() => {
-        return Array.from(new Set(projects.flatMap((p) => p.techStack))).sort((a, b) => a.localeCompare(b));
-    }, []);
-
     const addSearchTag = (tag) => {
         const trimmed = tag.trim();
-        if (trimmed && !searchTags.some(t => normalize(t) === normalize(trimmed))) {
+        if (trimmed && !searchTags.some((existing) => normalize(existing) === normalize(trimmed))) {
             setSearchTags([...searchTags, trimmed]);
         }
         setQuery('');
@@ -158,83 +149,75 @@ function Projects() {
         setSearchTags(searchTags.filter((_, index) => index !== indexToRemove));
     };
 
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter' || e.key === ',') {
-            e.preventDefault();
+    const clearSearch = () => {
+        setSearchTags([]);
+        setQuery('');
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter' || event.key === ',') {
+            event.preventDefault();
             addSearchTag(query);
-        } else if (e.key === 'Backspace' && query === '' && searchTags.length > 0) {
+        } else if (event.key === 'Backspace' && query === '' && searchTags.length > 0) {
             removeSearchTag(searchTags.length - 1);
         }
     };
 
-    const handleInputChange = (e) => {
-        const val = e.target.value;
-        if (allTechTags.includes(val)) {
-            addSearchTag(val);
+    const handleInputChange = (event) => {
+        const {value} = event.target;
+        // Picking a suggestion from the datalist replaces the whole value. Typing does not,
+        // so "Java" stays editable on the way to "JavaScript".
+        const {inputType} = event.nativeEvent;
+        const pickedSuggestion = inputType === undefined || inputType === 'insertReplacementText';
+
+        if (pickedSuggestion && allTechTags.includes(value)) {
+            addSearchTag(value);
         } else {
-            setQuery(val);
+            setQuery(value);
         }
     };
 
+    // Keep the "Show less" button under the pointer when the grid collapses.
     useLayoutEffect(() => {
-        if (scrollCapture.current !== null && footerRef.current) {
-            const newPos = footerRef.current.getBoundingClientRect().top;
-            const diff = newPos - scrollCapture.current;
-            window.scrollBy(0, diff);
-            scrollCapture.current = null;
-        }
+        if (scrollCapture.current === null) return;
+        const newPosition = footerRef.current.getBoundingClientRect().top;
+        window.scrollBy(0, newPosition - scrollCapture.current);
+        scrollCapture.current = null;
     }, [displayLimit]);
 
     const handleShowLess = () => {
-        if (footerRef.current) {
-            scrollCapture.current = footerRef.current.getBoundingClientRect().top;
-        }
-        setDisplayLimit(6);
+        scrollCapture.current = footerRef.current.getBoundingClientRect().top;
+        setDisplayLimit(INITIAL_VISIBLE_COUNT);
     };
 
     const filteredProjects = useMemo(() => {
         const normalizedQuery = normalize(query);
-
         return projects.filter((project) => {
             const matchesType = activeType === 'All' || project.types.includes(activeType);
-            const searchableText = [
-                project.title,
-                ...project.types,
-                project.focus,
-                project.summary,
-                project.context,
-                ...project.highlights,
-                ...project.techStack
-            ].join(' ');
-            const normalizedSearchableText = normalize(searchableText);
-
-            const matchesTags = searchTags.length === 0 || searchTags.every((tag) => normalizedSearchableText.includes(normalize(tag)));
-            const matchesQuery = !normalizedQuery || normalizedSearchableText.includes(normalizedQuery);
-
+            const matchesTags = searchTags.every((tag) => matchesTerm(project, tag));
+            const matchesQuery = !normalizedQuery || searchableText(project).includes(normalizedQuery);
             return matchesType && matchesTags && matchesQuery;
         });
     }, [activeType, searchTags, query]);
 
     const resetFilters = () => {
-        setSearchTags([]);
-        setQuery('');
+        clearSearch();
         setActiveType('All');
-        setDisplayLimit(6);
+        setDisplayLimit(INITIAL_VISIBLE_COUNT);
     };
+
+    const hasSearch = query !== '' || searchTags.length > 0;
 
     return (
         <div className="projects-container">
-            <div className="section-heading project-heading">
+            <div className="section-heading">
                 <p className="eyebrow">Portfolio</p>
                 <h2>Selected projects</h2>
-                <p>
-                    Web applications, desktop tools, and coursework.
-                    Source code is available for each project.
-                </p>
+                <p>Web applications, desktop tools, and coursework. Source code is available for each project.</p>
             </div>
 
-            <div className="project-toolbar" aria-label="Project browsing controls">
-                <div className="project-search" onClick={() => inputRef.current?.focus()}>
+            <div className="project-toolbar">
+                <div className="project-search" role="search" onClick={() => inputRef.current.focus()}>
                     <FontAwesomeIcon icon={faSearch} />
                     <div className="search-tokens-container">
                         <AnimatePresence>
@@ -250,8 +233,8 @@ function Projects() {
                                     {tag}
                                     <button
                                         type="button"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
+                                        onClick={(event) => {
+                                            event.stopPropagation();
                                             removeSearchTag(index);
                                         }}
                                         aria-label={`Remove ${tag}`}
@@ -264,11 +247,10 @@ function Projects() {
                         <input
                             ref={inputRef}
                             type="search"
-                            className="search-input"
                             value={query}
                             onChange={handleInputChange}
                             onKeyDown={handleKeyDown}
-                            placeholder={searchTags.length === 0 ? "Search projects or skills" : ""}
+                            placeholder={searchTags.length === 0 ? 'Search projects or skills' : ''}
                             aria-label="Search projects"
                             list="tech-tags"
                         />
@@ -278,14 +260,13 @@ function Projects() {
                             <option key={tag} value={tag} />
                         ))}
                     </datalist>
-                    {(query || searchTags.length > 0) && (
+                    {hasSearch && (
                         <button
                             type="button"
                             className="clear-search"
-                            onClick={(e) => {
-                                e.stopPropagation();
-                                setSearchTags([]);
-                                setQuery('');
+                            onClick={(event) => {
+                                event.stopPropagation();
+                                clearSearch();
                             }}
                             aria-label="Clear project search"
                         >
@@ -294,18 +275,17 @@ function Projects() {
                     )}
                 </div>
 
-                <div className="project-filter-group" aria-label="Filter projects by type">
-                    <span>
-                        <FontAwesomeIcon icon={faFilter} />
-                        Type
-                    </span>
+                <div className="project-filter-group" role="group" aria-label="Filter projects by type">
                     {['All', ...projectTypes].map((type) => (
                         <button
                             key={type}
                             type="button"
                             className={`filter-chip ${activeType === type ? 'active' : ''}`}
                             aria-pressed={activeType === type}
-                            onClick={() => { setActiveType(type); setDisplayLimit(6); }}
+                            onClick={() => {
+                                setActiveType(type);
+                                setDisplayLimit(INITIAL_VISIBLE_COUNT);
+                            }}
                         >
                             {type}
                         </button>
@@ -315,22 +295,20 @@ function Projects() {
 
             <div className="project-results-bar">
                 <p role="status" aria-live="polite">
-                    Showing <strong>{Math.min(displayLimit, filteredProjects.length)}</strong> of <strong>{filteredProjects.length}</strong> projects
+                    Showing <strong>{Math.min(displayLimit, filteredProjects.length)}</strong> of{' '}
+                    <strong>{filteredProjects.length}</strong> {filteredProjects.length === 1 ? 'project' : 'projects'}
                 </p>
-                {(query || searchTags.length > 0 || activeType !== 'All') && (
+                {(hasSearch || activeType !== 'All') && (
                     <button type="button" onClick={resetFilters}>
                         Reset filters
                     </button>
                 )}
             </div>
-            <motion.div
-                layout
-                transition={{duration: 0.5, ease: [0.4, 0, 0.2, 1]}}
 
-            >
+            <motion.div layout transition={{duration: 0.5, ease: [0.4, 0, 0.2, 1]}}>
                 {filteredProjects.length > 0 ? (
                     <>
-                        <div className="project-grid" aria-label="Projects">
+                        <div className="project-grid" role="group" aria-label="Projects">
                             <AnimatePresence mode="popLayout">
                                 {filteredProjects.slice(0, displayLimit).map((project) => (
                                     <ProjectCard key={project.id} project={project} onPreview={openPreview} />
@@ -338,7 +316,7 @@ function Projects() {
                             </AnimatePresence>
                         </div>
 
-                        {filteredProjects.length > 6 && (
+                        {filteredProjects.length > INITIAL_VISIBLE_COUNT && (
                             <div className="project-footer" ref={footerRef}>
                                 {displayLimit < filteredProjects.length ? (
                                     <button
@@ -349,11 +327,7 @@ function Projects() {
                                         Show all projects ({filteredProjects.length})
                                     </button>
                                 ) : (
-                                    <button
-                                        type="button"
-                                        className="action-link"
-                                        onClick={handleShowLess}
-                                    >
+                                    <button type="button" className="action-link" onClick={handleShowLess}>
                                         Show less
                                     </button>
                                 )}
@@ -366,8 +340,13 @@ function Projects() {
                     </div>
                 )}
             </motion.div>
+
             {previewProject && (
-                <ImagePreview project={previewProject} trigger={previewTriggerRef.current} onClose={closePreview} />
+                <ImagePreview
+                    project={previewProject}
+                    trigger={previewTriggerRef.current}
+                    onClose={() => setPreviewProject(null)}
+                />
             )}
         </div>
     );

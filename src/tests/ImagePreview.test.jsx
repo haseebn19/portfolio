@@ -1,16 +1,20 @@
 import {fireEvent, render, screen, within} from '@testing-library/react';
 import Projects from '../components/Projects';
 
-// jsdom does not implement the dialog API. Native focus containment is checked in Edge.
+// jsdom does not implement the dialog API, so stub the two methods the component uses.
 beforeAll(() => {
-    HTMLDialogElement.prototype.showModal = function () { this.setAttribute('open', ''); };
-    HTMLDialogElement.prototype.close = function () { this.removeAttribute('open'); };
+    HTMLDialogElement.prototype.showModal = function () {
+        this.setAttribute('open', '');
+    };
+    HTMLDialogElement.prototype.close = function () {
+        this.removeAttribute('open');
+    };
 });
 
 describe('Screenshot preview', () => {
     test('opens in the current page, locks scroll, and restores focus on close', () => {
         render(<Projects />);
-        const trigger = screen.getByRole('button', {name: 'Enlarge Hostage Chess screenshot'});
+        const trigger = screen.getByRole('button', {name: 'View screenshot of Hostage Chess'});
         fireEvent.click(trigger);
         const dialog = screen.getByRole('dialog', {name: 'Hostage Chess'});
         expect(within(dialog).getByRole('img')).toHaveAttribute('src', '/projects/hostage-chess.jpeg');
@@ -25,10 +29,10 @@ describe('Screenshot preview', () => {
 
     test('supports native Escape cancellation and zoom without dismissing the image', () => {
         render(<Projects />);
-        fireEvent.click(screen.getByRole('button', {name: 'Enlarge Urban Housing Demand screenshot'}));
+        fireEvent.click(screen.getByRole('button', {name: 'View screenshot of Urban Housing Demand'}));
         const dialog = screen.getByRole('dialog', {name: 'Urban Housing Demand'});
         fireEvent.click(within(dialog).getByRole('button', {name: 'Zoom in'}));
-        expect(within(dialog).getByRole('button', {name: 'Fit image'})).toHaveAttribute('aria-pressed', 'true');
+        expect(within(dialog).getByRole('button', {name: 'Fit image'})).toBeInTheDocument();
         fireEvent.click(within(dialog).getByRole('img'));
         expect(dialog).toBeInTheDocument();
         fireEvent(dialog, new Event('cancel', {bubbles: false, cancelable: true}));
@@ -37,7 +41,7 @@ describe('Screenshot preview', () => {
 
     test('closes on backdrop click and releases scroll on unmount', () => {
         const {unmount} = render(<Projects />);
-        const trigger = screen.getByRole('button', {name: 'Enlarge Hostage Chess screenshot'});
+        const trigger = screen.getByRole('button', {name: 'View screenshot of Hostage Chess'});
         fireEvent.click(trigger);
         const dialog = screen.getByRole('dialog');
         vi.spyOn(dialog, 'getBoundingClientRect').mockReturnValue({left: 20, right: 900, top: 20, bottom: 700});

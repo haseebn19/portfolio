@@ -7,6 +7,8 @@ import './styles.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <StrictMode>
-        <MotionConfig reducedMotion="user"><App /></MotionConfig>
+        <MotionConfig reducedMotion="user">
+            <App />
+        </MotionConfig>
     </StrictMode>
 );

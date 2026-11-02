@@ -1,5 +1,5 @@
 import {render, screen} from '@testing-library/react';
-import {ProjectLink} from '../components/ProjectLink';
+import ProjectLink from '../components/ProjectLink';
 
 describe('ProjectLink', () => {
     test('renders GitHub link with default text', () => {
@@ -11,7 +11,7 @@ describe('ProjectLink', () => {
     });
 
     test('renders nothing when url is missing', () => {
-        const {container} = render(<ProjectLink url={null} type="demo" />);
+        const {container} = render(<ProjectLink url={null} type="live" />);
         expect(container).toBeEmptyDOMElement();
     });
 });

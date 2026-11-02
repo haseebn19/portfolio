@@ -1,19 +1,11 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {
-    faDesktop,
-    faDiagramProject,
-    faLayerGroup,
-    faShieldHalved
-} from '@fortawesome/free-solid-svg-icons';
 import {capabilities, languages} from '../data/profile';
 
-const capabilityIcons = [faLayerGroup, faDiagramProject, faDesktop, faShieldHalved];
-
-function CapabilityCard({capability, index}) {
+function CapabilityCard({capability}) {
     return (
         <article className="capability-card">
             <div className="capability-icon" aria-hidden="true">
-                <FontAwesomeIcon icon={capabilityIcons[index] || faLayerGroup} />
+                <FontAwesomeIcon icon={capability.icon} />
             </div>
 
             <div className="capability-copy">
@@ -36,27 +28,21 @@ function Skills() {
             <div className="section-heading">
                 <p className="eyebrow">Technical skills</p>
                 <h2>Languages and tools</h2>
-                <p>
-                    Technologies used across my projects.
-                </p>
+                <p>Technologies used across my projects.</p>
             </div>
 
-            <div className="languages-bar" aria-label="Core programming languages">
-                <p className="eyebrow">Core Languages</p>
+            <div className="languages-bar" role="group" aria-label="Core programming languages">
+                <p className="eyebrow">Core languages</p>
                 <div className="languages-list">
                     {languages.map((lang) => (
-                        <span key={lang} className="language-chip">{lang}</span>
+                        <span key={lang}>{lang}</span>
                     ))}
                 </div>
             </div>
 
             <div className="capability-grid">
-                {capabilities.map((capability, index) => (
-                    <CapabilityCard
-                        capability={capability}
-                        index={index}
-                        key={capability.title}
-                    />
+                {capabilities.map((capability) => (
+                    <CapabilityCard capability={capability} key={capability.title} />
                 ))}
             </div>
         </div>

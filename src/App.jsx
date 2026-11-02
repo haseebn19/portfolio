@@ -1,17 +1,19 @@
 import {useEffect, useRef, useState} from 'react';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
-import {faArrowUp, faBars, faTimes, faFilePdf} from '@fortawesome/free-solid-svg-icons';
+import {faArrowUp, faBars, faFilePdf, faXmark} from '@fortawesome/free-solid-svg-icons';
 import {faGithub, faLinkedin} from '@fortawesome/free-brands-svg-icons';
 import AboutMe from './components/AboutMe';
 import Projects from './components/Projects';
 import Skills from './components/Skills';
 import {profile, workingStyle} from './data/profile';
-import {EXTERNAL_LINK_PROPS, NAV_ITEMS, SOCIAL_LINKS, scrollToSection} from './utils/constants';
-import {useBackToTop, useScrollPosition} from './utils/hooks';
+import {EXTERNAL_LINK_PROPS, NAV_ITEMS} from './utils/constants';
+import {useActiveSection, useScrolledPast} from './utils/hooks';
 
-function Navigation({activeSection, onSectionChange}) {
+const SECTION_IDS = ['intro', ...NAV_ITEMS.map(({id}) => id)];
+
+function Navigation() {
+    const activeSection = useActiveSection(SECTION_IDS);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const {isScrolled} = useScrollPosition();
     const menuToggle = useRef(null);
 
     useEffect(() => {
@@ -19,30 +21,21 @@ function Navigation({activeSection, onSectionChange}) {
         const closeOnEscape = (event) => {
             if (event.key === 'Escape') {
                 setIsMenuOpen(false);
-                menuToggle.current?.focus();
+                menuToggle.current.focus();
             }
         };
         document.addEventListener('keydown', closeOnEscape);
         return () => document.removeEventListener('keydown', closeOnEscape);
     }, [isMenuOpen]);
 
-    const handleSectionChange = (sectionId) => {
-        scrollToSection(sectionId);
-        setIsMenuOpen(false);
-        onSectionChange(sectionId);
-    };
+    const closeMenu = () => setIsMenuOpen(false);
 
     return (
-        <header className={`topbar ${isScrolled ? 'topbar-scrolled' : ''}`}>
-            <button
-                type="button"
-                className="brand-mark"
-                onClick={() => handleSectionChange('intro')}
-                aria-label="Back to introduction"
-            >
+        <header className="topbar">
+            <a href="#intro" className="brand-mark" onClick={closeMenu}>
                 <strong>{profile.name}</strong>
                 <span>{profile.role}</span>
-            </button>
+            </a>
 
             <button
                 type="button"
@@ -53,20 +46,24 @@ function Navigation({activeSection, onSectionChange}) {
                 aria-label="Toggle navigation menu"
                 aria-expanded={isMenuOpen}
             >
-                <FontAwesomeIcon icon={isMenuOpen ? faTimes : faBars} />
+                <FontAwesomeIcon icon={isMenuOpen ? faXmark : faBars} />
             </button>
 
-            <nav id="primary-navigation" className={`nav-menu ${isMenuOpen ? 'nav-menu-open' : ''}`} aria-label="Primary navigation">
+            <nav
+                id="primary-navigation"
+                className={`nav-menu ${isMenuOpen ? 'nav-menu-open' : ''}`}
+                aria-label="Primary navigation"
+            >
                 {NAV_ITEMS.map(({id, label}) => (
-                    <button
-                        type="button"
+                    <a
                         key={id}
+                        href={`#${id}`}
                         className={`nav-link ${activeSection === id ? 'active' : ''}`}
                         aria-current={activeSection === id ? 'location' : undefined}
-                        onClick={() => handleSectionChange(id)}
+                        onClick={closeMenu}
                     >
                         {label}
-                    </button>
+                    </a>
                 ))}
             </nav>
         </header>
@@ -79,9 +76,7 @@ function AboutSection() {
             <div className="section-heading">
                 <p className="eyebrow">About me</p>
                 <h2>Background</h2>
-                <p>
-                    Programming, coursework, and independent projects.
-                </p>
+                <p>Programming, coursework, and independent projects.</p>
             </div>
 
             <div className="principles">
@@ -100,24 +95,24 @@ function ContactSection() {
                 <p className="eyebrow">Contact</p>
                 <h2>Get in touch</h2>
                 <p>
-                    For software engineering opportunities or questions about my work,
-                    you can reach me by email or on LinkedIn.
+                    For software engineering opportunities or questions about my work, you can reach me by email or on
+                    LinkedIn.
                 </p>
             </div>
 
             <div className="contact-actions">
-                <a href={SOCIAL_LINKS.email} className="action-link action-link-primary">
-                    haseeb.kn@outlook.com
+                <a href={`mailto:${profile.email}`} className="action-link action-link-primary">
+                    {profile.email}
                 </a>
-                <a href={SOCIAL_LINKS.github} {...EXTERNAL_LINK_PROPS} className="icon-link">
+                <a href={profile.github} {...EXTERNAL_LINK_PROPS} className="icon-link">
                     <FontAwesomeIcon icon={faGithub} />
                     <span>GitHub</span>
                 </a>
-                <a href={SOCIAL_LINKS.linkedin} {...EXTERNAL_LINK_PROPS} className="icon-link">
+                <a href={profile.linkedin} {...EXTERNAL_LINK_PROPS} className="icon-link">
                     <FontAwesomeIcon icon={faLinkedin} />
                     <span>LinkedIn</span>
                 </a>
-                <a href="/Haseeb_Niazi_Resume.pdf" {...EXTERNAL_LINK_PROPS} className="icon-link">
+                <a href={profile.resume} {...EXTERNAL_LINK_PROPS} className="icon-link">
                     <FontAwesomeIcon icon={faFilePdf} />
                     <span>Resume</span>
                 </a>
@@ -127,59 +122,34 @@ function ContactSection() {
 }
 
 function BackToTop() {
-    const {isVisible, scrollToTop} = useBackToTop();
+    const isVisible = useScrolledPast(300);
 
     return (
-        <button
-            className={`back-to-top ${isVisible ? 'visible' : ''}`}
-            onClick={scrollToTop}
-            type="button"
-            aria-label="Back to top"
-        >
+        <a href="#intro" className={`back-to-top ${isVisible ? 'visible' : ''}`} aria-label="Back to top">
             <FontAwesomeIcon icon={faArrowUp} />
-        </button>
+        </a>
     );
 }
 
 function App() {
-    const [activeSection, setActiveSection] = useState('intro');
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(entry.target.id);
-                    }
-                });
-            },
-            {rootMargin: '-35% 0px -50% 0px', threshold: 0}
-        );
-
-        const sections = document.querySelectorAll('section[id]');
-        sections.forEach((section) => observer.observe(section));
-
-        return () => observer.disconnect();
-    }, []);
-
     return (
-        <div className="app">
+        <>
             <a href="#main-content" className="skip-to-content">
                 Skip to main content
             </a>
 
-            <Navigation activeSection={activeSection} onSectionChange={setActiveSection} />
+            <Navigation />
 
             <main id="main-content" tabIndex={-1}>
                 <section id="intro" className="page-section hero-section">
                     <AboutMe />
                 </section>
 
-                <section id="work" className="page-section work-section">
+                <section id="projects" className="page-section projects-section">
                     <Projects />
                 </section>
 
-                <section id="capabilities" className="page-section capability-section">
+                <section id="skills" className="page-section">
                     <Skills />
                 </section>
 
@@ -187,14 +157,19 @@ function App() {
                     <AboutSection />
                 </section>
 
-                <section id="contact" className="page-section contact-section">
+                <section id="contact" className="page-section">
                     <ContactSection />
                 </section>
             </main>
 
-            <footer className="site-footer"><span>{profile.name}</span><a href="https://github.com/haseebn19/portfolio" {...EXTERNAL_LINK_PROPS}>Portfolio source</a></footer>
-            <BackToTop />
-        </div>
+            <footer className="site-footer">
+                <span>{profile.name}</span>
+                <a href="https://github.com/haseebn19/portfolio" {...EXTERNAL_LINK_PROPS}>
+                    Portfolio source
+                </a>
+                <BackToTop />
+            </footer>
+        </>
     );
 }
 
