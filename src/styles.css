@@ -266,7 +266,8 @@ h3 {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    /* The phone layout crops the portrait to a square, so keep the top of the head */
+    object-position: top;
 }
 .portrait-caption {
     display: grid;

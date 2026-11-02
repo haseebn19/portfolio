@@ -38,7 +38,7 @@ function AboutMe() {
             </div>
             <aside className="hero-panel" aria-label="Profile">
                 <div className="portrait-frame">
-                    <img src={profilePic} alt={profile.name} width="512" height="512" />
+                    <img src={profilePic} alt={profile.name} width="896" height="1120" />
                 </div>
                 <div className="portrait-caption">
                     <span>
