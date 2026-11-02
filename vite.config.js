@@ -1,27 +1,21 @@
 import {defineConfig} from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vite.dev/config/
 export default defineConfig({
     plugins: [react()],
-    base: '/',
     build: {
-        outDir: 'dist',
-        sourcemap: true,
+        sourcemap: true
     },
     server: {
-        port: 3000,
-        open: false,
+        port: 3000
     },
     test: {
         environment: 'jsdom',
         globals: true,
         setupFiles: './src/tests/setupTests.js',
         coverage: {
-            provider: 'v8',
-            reportsDirectory: 'coverage',
-            reporter: ['text', 'html', 'lcov', 'json-summary'],
-            exclude: ['**/node_modules/**', '**/dist/**', '**/coverage/**', 'src/tests/**'],
-        },
-    },
+            reporter: ['text', 'html', 'json-summary'],
+            exclude: ['src/tests/**']
+        }
+    }
 });

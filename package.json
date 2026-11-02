@@ -10,11 +10,13 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "sync-resume": "node scripts/sync-resume.mjs",
         "lint": "eslint .",
+        "format": "prettier --write .",
+        "format:check": "prettier --check .",
         "test": "vitest run",
         "test:watch": "vitest",
-        "coverage": "vitest run --coverage",
+        "test:coverage": "vitest run --coverage",
+        "sync-resume": "node scripts/sync-resume.mjs",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d dist"
     },
@@ -32,10 +34,8 @@
         "@testing-library/dom": "^10.4.2",
         "@testing-library/jest-dom": "^6.6.3",
         "@testing-library/react": "^16.1.0",
-        "@testing-library/user-event": "^14.5.2",
         "@vitejs/plugin-react": "^6.0.2",
-        "@vitest/coverage-v8": "^4.0.18",
-        "@vitest/ui": "^4.0.18",
+        "@vitest/coverage-v8": "^4.1.12",
         "eslint": "^9.16.0",
         "eslint-plugin-react": "^7.37.2",
         "eslint-plugin-react-hooks": "^5.1.0",
@@ -43,7 +43,8 @@
         "gh-pages": "^6.1.1",
         "globals": "^15.13.0",
         "jsdom": "^25.0.1",
+        "prettier": "^3.9.10",
         "vite": "^8.0.16",
-        "vitest": "^4.0.18"
+        "vitest": "^4.1.12"
     }
 }
