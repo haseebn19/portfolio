@@ -16,7 +16,6 @@
         "test": "vitest run",
         "test:watch": "vitest",
         "test:coverage": "vitest run --coverage",
-        "sync-resume": "node scripts/sync-resume.mjs",
         "predeploy": "npm run build",
         "deploy": "gh-pages -d dist"
     },

@@ -36,13 +36,7 @@ To add a project, add an entry to `src/data/projects.js` and put its screenshot 
 
 ## Updating the Resume
 
-To download the latest PDF from the source Google document, run:
-
-```bash
-npm run sync-resume
-```
-
-The script replaces `public/Haseeb_Niazi_Resume.pdf`, which is the file linked from the site.
+Replace `public/Haseeb_Niazi_Resume.pdf` with the new PDF. That file is the one linked from the site.
 
 ## Deployment
 
